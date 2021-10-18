@@ -1,9 +1,8 @@
 ﻿namespace WonderlandBooks.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

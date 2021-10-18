@@ -16,6 +16,10 @@
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        public string ImageId { get; set; }
+
+        public Image Image { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

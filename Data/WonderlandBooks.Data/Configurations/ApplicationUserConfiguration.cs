@@ -1,8 +1,8 @@
 ﻿namespace WonderlandBooks.Data.Configurations
 {
-    using WonderlandBooks.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using WonderlandBooks.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

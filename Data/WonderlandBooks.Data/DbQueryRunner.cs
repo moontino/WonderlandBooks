@@ -3,18 +3,17 @@
     using System;
     using System.Threading.Tasks;
 
-    using WonderlandBooks.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using WonderlandBooks.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {
-        public DbQueryRunner(ApplicationDbContext context)
+        public DbQueryRunner(WonderlandDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public ApplicationDbContext Context { get; set; }
+        public WonderlandDbContext Context { get; set; }
 
         public Task RunQueryAsync(string query, params object[] parameters)
         {

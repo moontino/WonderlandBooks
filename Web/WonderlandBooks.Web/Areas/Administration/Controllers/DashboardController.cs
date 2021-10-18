@@ -1,9 +1,8 @@
 ﻿namespace WonderlandBooks.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using WonderlandBooks.Services.Data;
     using WonderlandBooks.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

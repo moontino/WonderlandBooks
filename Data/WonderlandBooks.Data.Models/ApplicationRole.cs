@@ -1,11 +1,9 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace WonderlandBooks.Data.Models
+﻿namespace WonderlandBooks.Data.Models
 {
     using System;
 
-    using WonderlandBooks.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using WonderlandBooks.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

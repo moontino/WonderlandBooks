@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace WonderlandBooks.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(WonderlandDbContext))]
     [Migration("20201121114920_InitialCreate")]
     partial class InitialCreate
     {

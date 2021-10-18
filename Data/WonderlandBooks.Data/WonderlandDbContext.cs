@@ -6,25 +6,52 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
     using WonderlandBooks.Data.Common.Models;
     using WonderlandBooks.Data.Models;
 
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class WonderlandDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
-            typeof(ApplicationDbContext).GetMethod(
+            typeof(WonderlandDbContext).GetMethod(
                 nameof(SetIsDeletedQueryFilter),
                 BindingFlags.NonPublic | BindingFlags.Static);
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public WonderlandDbContext(DbContextOptions<WonderlandDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<BookSeries> BookSeries { get; set; }
+
+        public DbSet<Chapter> Chapters { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<CreativeWriting> CreativeWritings { get; set; }
+
+        public DbSet<Discussion> Discussions { get; set; }
+
+        public DbSet<EditionLanguage> EditionLanguages { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Quiz> Quizzes { get; set; }
+
+        public DbSet<Story> Stories { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

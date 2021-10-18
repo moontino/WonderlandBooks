@@ -4,14 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using WonderlandBooks.Data.Common.Repositories;
-
     using Microsoft.EntityFrameworkCore;
+    using WonderlandBooks.Data.Common.Repositories;
 
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        public EfRepository(ApplicationDbContext context)
+        public EfRepository(WonderlandDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
             this.DbSet = this.Context.Set<TEntity>();
@@ -19,7 +18,7 @@
 
         protected DbSet<TEntity> DbSet { get; set; }
 
-        protected ApplicationDbContext Context { get; set; }
+        protected WonderlandDbContext Context { get; set; }
 
         public virtual IQueryable<TEntity> All() => this.DbSet;
 

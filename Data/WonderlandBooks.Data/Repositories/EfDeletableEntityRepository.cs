@@ -3,15 +3,14 @@
     using System;
     using System.Linq;
 
+    using Microsoft.EntityFrameworkCore;
     using WonderlandBooks.Data.Common.Models;
     using WonderlandBooks.Data.Common.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
-        public EfDeletableEntityRepository(ApplicationDbContext context)
+        public EfDeletableEntityRepository(WonderlandDbContext context)
             : base(context)
         {
         }

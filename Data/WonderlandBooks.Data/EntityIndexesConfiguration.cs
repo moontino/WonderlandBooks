@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using WonderlandBooks.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using WonderlandBooks.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

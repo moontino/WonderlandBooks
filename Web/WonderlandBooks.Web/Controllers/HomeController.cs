@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using WonderlandBooks.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using WonderlandBooks.Web.ViewModels;
 
     public class HomeController : BaseController
     {
