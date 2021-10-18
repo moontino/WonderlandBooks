@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace WonderlandBooks.Data.Models
+﻿namespace WonderlandBooks.Data.Models
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +21,6 @@ namespace WonderlandBooks.Data.Models
 
         public DateTime? ModifiedOn { get; set; }
 
-        // Deletable entity
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
