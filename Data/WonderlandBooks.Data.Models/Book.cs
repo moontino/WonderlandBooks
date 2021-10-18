@@ -21,9 +21,9 @@
 
         public int Pages { get; set; }
 
-        public string Published { get; set; }
-
         public string DownloadBookExtension { get; set; } // TODO: lib for pdf
+
+        public int NumberOfSet { get; set; }
 
         public int BookSeriesId { get; set; }
 
