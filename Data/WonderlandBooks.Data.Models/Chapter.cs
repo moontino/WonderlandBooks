@@ -1,6 +1,7 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class Chapter : BaseDeletableModel<int>
@@ -10,6 +11,7 @@
             this.Comments = new HashSet<Comment>();
         }
 
+        [Required]
         public string Name { get; set; }
 
         public int CharactersCount { get; set; }

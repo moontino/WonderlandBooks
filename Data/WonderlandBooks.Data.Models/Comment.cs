@@ -4,6 +4,7 @@
 
     public class Comment : BaseDeletableModel<int>
     {
+        // TODO: check this
         public string Content { get; set; }
 
         public string UserId { get; set; }

@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class Author : BaseModel<int>
@@ -14,12 +14,15 @@
             this.Genres = new HashSet<Genre>();
         }
 
+        [Required]
         public string Name { get; set; }
 
         public string Website { get; set; }
 
+        [Required]
         public string Biography { get; set; }
 
+        [Required]
         public string ImageId { get; set; }
 
         public Image Image { get; set; }

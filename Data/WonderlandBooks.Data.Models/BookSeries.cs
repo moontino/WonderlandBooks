@@ -1,7 +1,7 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class BookSeries : BaseModel<int>
@@ -11,6 +11,7 @@
             this.Books = new HashSet<Book>();
         }
 
+        [Required]
         public string Name { get; set; }
 
         public int AuthorId { get; set; }

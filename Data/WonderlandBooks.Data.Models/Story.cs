@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class Story : BaseDeletableModel<int>
@@ -13,8 +14,10 @@
             this.Genres = new HashSet<Genre>();
         }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         public virtual ICollection<Chapter> Chapters { get; set; }
