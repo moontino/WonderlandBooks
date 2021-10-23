@@ -1,9 +1,11 @@
 ﻿namespace WonderlandBooks.Services
 {
-    using System.Threading.Tasks;
+    using System.Collections.Concurrent;
+
+    using WonderlandBooks.Services.Models;
 
     public interface IGoodreadsScraperService
     {
-        Task ImportAuthorsWithBookAsync();
+        ConcurrentBag<AuthorBooksDto> ConcurrentBag(int fromId, int toId);
     }
 }

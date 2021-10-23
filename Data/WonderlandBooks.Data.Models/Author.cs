@@ -19,10 +19,8 @@
 
         public string Website { get; set; }
 
-        [Required]
         public string Biography { get; set; }
 
-        [Required]
         public string ImageId { get; set; }
 
         public Image Image { get; set; }

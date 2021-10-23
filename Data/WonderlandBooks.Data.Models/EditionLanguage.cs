@@ -1,7 +1,6 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
     using System.Collections.Generic;
-
     using WonderlandBooks.Data.Common.Models;
 
     public class EditionLanguage : BaseModel<int>

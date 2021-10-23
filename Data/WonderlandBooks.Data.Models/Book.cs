@@ -17,7 +17,6 @@
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
         public int? Pages { get; set; }
@@ -33,7 +32,6 @@
 
         public BookSeries BookSeries { get; set; }
 
-        [Required]
         public string ImageId { get; set; }
 
         public Image Image { get; set; }

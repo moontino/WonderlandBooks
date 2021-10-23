@@ -16,6 +16,7 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Data.Repositories;
     using WonderlandBooks.Data.Seeding;
+    using WonderlandBooks.Services;
     using WonderlandBooks.Services.Data;
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Services.Messaging;
@@ -64,6 +65,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IGoodreadsScraperService, GoodreadsScraperService>();
+            services.AddTransient<IGoodreadsDataService, GoodreadsDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

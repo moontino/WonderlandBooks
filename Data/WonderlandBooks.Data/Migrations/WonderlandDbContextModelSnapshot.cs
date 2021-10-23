@@ -9,7 +9,7 @@ using WonderlandBooks.Data;
 namespace WonderlandBooks.Data.Migrations
 {
     [DbContext(typeof(WonderlandDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class WonderlandDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -335,14 +335,12 @@ namespace WonderlandBooks.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -380,7 +378,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DownloadBookExtension")
@@ -390,7 +387,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -690,6 +686,9 @@ namespace WonderlandBooks.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1001,9 +1000,7 @@ namespace WonderlandBooks.Data.Migrations
                 {
                     b.HasOne("WonderlandBooks.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });
@@ -1022,9 +1019,7 @@ namespace WonderlandBooks.Data.Migrations
 
                     b.HasOne("WonderlandBooks.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("BookSeries");
 
