@@ -18,6 +18,8 @@
     using WonderlandBooks.Data.Seeding;
     using WonderlandBooks.Services;
     using WonderlandBooks.Services.Data;
+    using WonderlandBooks.Services.Data.ControllerServiceData;
+    using WonderlandBooks.Services.Data.ViewModelServiceData;
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Services.Messaging;
     using WonderlandBooks.Web.ViewModels;
@@ -67,6 +69,10 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IGoodreadsScraperService, GoodreadsScraperService>();
             services.AddTransient<IGoodreadsDataService, GoodreadsDataService>();
+            services.AddTransient<ITopTenAuthorsByBookCountService, TopTenAuthorsByBookCountService>();
+            services.AddTransient<IAuthorsAndBooksPresentationService, AuthorsAndBooksPresentationService>();
+            services.AddTransient<IAuthorBiographyCutLengthService, AuthorBiographyCutLengthService>();
+            services.AddTransient<IGetAuthorById, GetAuthorById>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

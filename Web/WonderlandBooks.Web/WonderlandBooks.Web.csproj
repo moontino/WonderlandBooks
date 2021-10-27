@@ -36,4 +36,6 @@
     <ProjectReference Include="..\WonderlandBooks.Web.Infrastructure\WonderlandBooks.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\WonderlandBooks.Web.ViewModels\WonderlandBooks.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

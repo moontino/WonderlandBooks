@@ -1,9 +1,12 @@
 ﻿@using WonderlandBooks.Common
 @{
-    this.ViewData["Title"] = "Home Page";
+    this.ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron">
+    <h1 class="display-4">Hello, dear readers and lovers of fantasy worlds!</h1>
+    <p class="lead">I want to introduce you to our world of magic and sorcery. Come and find out some of the most exciting stories and works by famous authors.</p>
+    <hr class="my-4">
+    <p>If you want to be a part of our story, join our adventures.</p>
+    <a class="btn btn-primary btn-lg" role="button" asp-controller="Home" asp-action="Welcome">Learn more</a>
 </div>

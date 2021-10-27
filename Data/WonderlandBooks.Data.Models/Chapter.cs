@@ -14,6 +14,9 @@
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
         public int CharactersCount { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

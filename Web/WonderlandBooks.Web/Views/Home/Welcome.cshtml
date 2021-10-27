@@ -1,0 +1,37 @@
+﻿@model WonderlandBooks.Web.ViewModels.WelcomePage.AuthorsAndBooksPresentationListViewModel
+@{
+    this.ViewData["Title"] = "Welcome";
+}
+
+@for (int i = 0; i < Model.Authors.Count(); i += 3)
+{
+
+    <div class="card-deck">
+        <div class="card">
+            <img class="card-img-top" src="@Model.Authors[i].ImageUrl">
+            <div class="card-body">
+                <a class="card-title" asp-controller="Authors" asp-action="GetAuthor" asp-route-id="@Model.Authors[i].Id">@Model.Authors[i].Name</a>
+                <p class="card-text"><small class="text-muted">Website: @Model.Authors[i].Website</small></p>
+                <p class="card-text"><small class="text-muted">Books: @Model.Authors[i].Books</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="@Model.Authors[i+1].ImageUrl">
+            <div class="card-body">
+                <a class="card-title" asp-controller="Authors" asp-action="GetAuthor" asp-route-id="@Model.Authors[i+1].Id">@Model.Authors[i + 1].Name</a>
+                <p class="card-text"><small class="text-muted">Website: @Model.Authors[i + 1].Website</small></p>
+                <p class="card-text"><small class="text-muted">Books: @Model.Authors[i + 1].Books</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="@Model.Authors[i+2].ImageUrl">
+            <div class="card-body">
+                <a class="card-title" asp-controller="Authors" asp-action="GetAuthor" asp-route-id="@Model.Authors[i + 2].Id">@Model.Authors[i + 2].Name</a>
+                <p class="card-text"><small class="text-muted">Website: @Model.Authors[i + 2].Website</small></p>
+                <p class="card-text"><small class="text-muted">Books: @Model.Authors[i + 2].Books</small></p>
+            </div>
+        </div>
+    </div>
+}
+
+
