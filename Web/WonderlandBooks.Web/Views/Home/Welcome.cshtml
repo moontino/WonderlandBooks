@@ -33,5 +33,27 @@
         </div>
     </div>
 }
-
-
+<section class="carousel">
+    <div class="reel">
+        @foreach (var book in Model.Book)
+        {
+            <article>
+                <a class="image featured"asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"><img src="@book.ImageExtension" alt="" /></a>
+                <header>
+                    <h3><a href="#">@book.Name</a></h3>
+                </header>
+                <p>@book.EditionLanguageName</p>
+            </article>
+        }
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.dropotron.min.js"></script>
+    <script src="~/js/jquery.scrolly.min.js"></script>
+    <script src="~/js/jquery.scrollex.min.js"></script>
+    <script src="~/js/browser.min.js"></script>
+    <script src="~/js/breakpoints.min.js"></script>
+    <script src="~/js/util.js"></script>
+    <script src="~/js/main.js"></script>
+}
