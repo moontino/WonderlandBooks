@@ -1,6 +1,6 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerServiceData
 {
-    using WonderlandBooks.Services.Data.ViewModelData;
+    using WonderlandBooks.Web.ViewModels.Authors;
 
     public interface IGetAuthorById
     {

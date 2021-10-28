@@ -2,7 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public class AuthorBooksViewModel
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
+    public class AuthorBooksViewModel : IMapFrom<Book>
     {
         public int Id { get; set; }
 
@@ -14,12 +17,12 @@
 
         public string BookUrl { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string ImageExtension { get; set; }
 
         public string EditionLanguageName { get; set; }
 
-        public IList<string> Genres { get; set; }
+        public string Genres { get; set; }
 
-        public IList<string> Characters { get; set; }
+        public string Characters { get; set; }
     }
 }

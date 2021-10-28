@@ -1,1 +1,64 @@
-﻿<h1>AUTHOR</h1>
+﻿@model WonderlandBooks.Web.ViewModels.Authors.AuthorViewModel
+@{
+    this.ViewData["Title"] = "Author";
+}
+<div class="wrapper style1">
+    <div class="container">
+        <article id="main" class="special">
+            <header>
+                <h2><a href="#">@Model.Name</a></h2>
+                <p>
+                    @Model.Website
+                </p>
+            </header>
+            <div class="w-100 p-100 text-center ">
+                <img class="responsive" src="@Model.ImageUrl" style="width:50%">
+            </div>
+
+            <p>
+                @Model.Biography
+            </p>
+            <section class="col-4 col-12-mobile">
+
+                <ul class="divided">
+                    <li>
+                        <article class="tweet">
+                            @Model.Genres.ToString()
+
+                        </article>
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </div>
+</div>
+<section class="carousel">
+    <div class="reel">
+        @foreach (var book in Model.Books)
+        {
+            <article>
+                <a class="image featured" asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"><img src="@book.ImageExtension" alt="" /></a>
+                <header>
+                    <h3><a href="#">@book.Name</a></h3>
+                </header>
+                <p>@book.EditionLanguageName</p>
+            </article>
+        }
+    </div>
+</section>
+<hr />
+<div class="row">
+    @for (int i = 0; i < Model.Series.Count(); i++)
+    {
+    <article class="col-3 col-12-mobile special">
+
+        <header>
+            <h3><a href="#">@Model.Series[i].SeriesName</a></h3>
+        </header>
+        @foreach (var item in Model.Series[i].Books)
+        {
+            <a href="#" class="image featured"><img src="@item.ImageExtension" /></a>
+        }
+    </article>
+    }
+</div>

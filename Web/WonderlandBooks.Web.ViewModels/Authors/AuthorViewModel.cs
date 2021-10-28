@@ -1,10 +1,11 @@
 ﻿namespace WonderlandBooks.Web.ViewModels.Authors
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
-    public class AuthorViewModel
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
+    public class AuthorViewModel : IMapFrom<Author>
     {
         public int Id { get; set; }
 
@@ -16,8 +17,10 @@
 
         public string ImageUrl { get; set; }
 
-        public IList<string> Genres { get; set; }
+        public string Genres { get; set; }
 
         public IList<AuthorBooksViewModel> Books { get; set; }
+
+        public IList<AuthorSeriesViewModel> Series { get; set; }
     }
 }

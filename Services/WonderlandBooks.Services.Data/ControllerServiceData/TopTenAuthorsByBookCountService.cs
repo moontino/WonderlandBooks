@@ -20,7 +20,7 @@
         public IEnumerable<T> GetAuthors<T>()
         {
             return this.authorRepository.All()
-                .OrderByDescending(x => x.Books.Count())
+                .OrderBy(x => x.Books.Count())
                 .Take(10).To<T>();
         }
     }

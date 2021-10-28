@@ -21,7 +21,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\WonderlandBooks.Data.Common\WonderlandBooks.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\WonderlandBooks.Data.Models\WonderlandBooks.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\WonderlandBooks.Web.ViewModels\WonderlandBooks.Web.ViewModels.csproj" />
     <ProjectReference Include="..\WonderlandBooks.Services.Mapping\WonderlandBooks.Services.Mapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModelData\" />
   </ItemGroup>
 
 </Project>

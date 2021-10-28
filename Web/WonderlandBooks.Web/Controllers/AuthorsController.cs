@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Web.Controllers
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using WonderlandBooks.Services.Data.ControllerServiceData;
     using WonderlandBooks.Web.ViewModels.Authors;
@@ -27,10 +28,9 @@
 
         public IActionResult GetAuthor(int id)
         {
-            var view = this.getAuthor.Author(id);
+            AuthorViewModel view = this.getAuthor.Author(id);
 
             return this.View(view);
         }
-  
     }
 }
