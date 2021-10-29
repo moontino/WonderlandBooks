@@ -2,6 +2,7 @@
 {
     using System.Reflection;
 
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -40,7 +41,7 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<WonderlandDbContext>();
-
+            services.AddAutoMapper(typeof(Startup));
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -70,7 +71,8 @@
             services.AddTransient<IGoodreadsDataService, GoodreadsDataService>();
             services.AddTransient<ITopTenAuthorsByBookCountService, TopTenAuthorsByBookCountService>();
             services.AddTransient<IAuthorsAndBooksPresentationService, AuthorsAndBooksPresentationService>();
-            services.AddTransient<IGetAuthorById, GetAuthorById>();
+            services.AddTransient<IGetAuthorByIdService, GetAuthorByIdService>();
+            services.AddTransient<IGetBookByIdService, GetBookByIdService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

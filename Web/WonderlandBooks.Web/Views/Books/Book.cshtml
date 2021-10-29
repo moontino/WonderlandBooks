@@ -1,0 +1,130 @@
+﻿@model WonderlandBooks.Web.ViewModels.Books.BookViewModel
+@{
+    this.ViewData["Title"] = "Book :)";
+}
+<div class="wrapper style1">
+    <div class="container">
+        <div class="row gtr-200">
+            <div class="col-8 col-12-mobile" id="content">
+                <article id="main">
+                    <header class="text-center">
+                        <h2><a href="@Model.BookUrl">@Model.Name</a></h2>
+                        <h3><strong>@Model.SeriesName</strong> @Model.NumberOfSet</h3>
+                        @foreach (var author in Model.Author)
+                        {
+                            <p>@author.AuthorName</p>
+                        }
+
+                    </header>
+                    <div class="w-100 p-100 text-center ">
+                        <a href="@Model.BookUrl"><img class="responsive" src="@Model.ImageUrl" style="width:60%" /></a>
+                    </div>
+                    <section>
+                        <header>
+                            <h3 style="margin:4%"><strong>Description</strong></h3>
+                        </header>
+                        <h3 style="margin:4%">
+                            @Model.Description
+                        </h3>
+
+                        <div class="container">
+                            <table class="table table-responsive-md">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Pages</strong></td>
+                                        <td>@Model.Pages</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>EditionLanguage</strong></td>
+                                        <td>@Model.EditionLanguage</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Genres</strong></td>
+                                        <td>@Model.Genres</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Characters</strong></td>
+                                        <td>@Model.Characters</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </article>
+            </div>
+            <div class="col-3 col-12-mobile" id="sidebar">
+                <hr class="first" />
+                <section>
+                    <header>
+                        <h3><a href="#">Accumsan sed penatibus</a></h3><!--sidebar-->
+                    </header>
+                    <p>
+                        ТУКА МОЖЕ БИ ТРЯБВА ДА СЕ СЛОЖИ ЗА CREATING WRINING
+                    </p>
+                    <footer>
+                        <a href="#" class="button">Learn More</a>
+                    </footer>
+                </section>
+                <hr />
+                <section>
+                    <header>
+                        <h3><a href="#">Sed lorem etiam consequat</a></h3>
+                    </header>
+                    <p>
+                        Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+                    </p>
+                    <div class="row gtr-50">
+                        @foreach (var book in Model.BookRecommendationsByGenre)
+                        {
+                            <div class="col-4">
+                                <a class="image fit" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" /></a>
+                            </div>
+                            <div class="col-8">
+                                <h4>@book.Name</h4>
+                                <p>
+                                    @book.Genres
+                                </p>
+                            </div>
+                        }
+                    </div>
+                    <footer>
+                        <a href="#" class="button">Magna Adipiscing</a>
+                    </footer>
+                </section>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <article class="col-4 col-12-mobile special">
+                <a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+                <header>
+                    <h3><a href="#">Gravida aliquam penatibus</a></h3>
+                </header>
+                <p>
+                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+                </p>
+            </article>
+            <article class="col-4 col-12-mobile special">
+                <a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+                <header>
+                    <h3><a href="#">Sed quis rhoncus placerat</a></h3>
+                </header>
+                <p>
+                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+                </p>
+            </article>
+            <article class="col-4 col-12-mobile special">
+                <a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+                <header>
+                    <h3><a href="#">Magna laoreet et aliquam</a></h3>
+                </header>
+                <p>
+                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
+                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
+                </p>
+            </article>
+        </div>
+    </div>
+</div>

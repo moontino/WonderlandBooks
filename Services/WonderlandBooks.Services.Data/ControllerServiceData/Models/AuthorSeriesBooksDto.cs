@@ -1,6 +1,6 @@
-﻿namespace WonderlandBooks.Web.ViewModels.Authors
+﻿namespace WonderlandBooks.Services.Data.ControllerServiceData.Models
 {
-    public class AuthorSeriesBooksViewModel
+    public class AuthorSeriesBooksDto
     {
         public int Id { get; set; }
 

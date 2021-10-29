@@ -1,28 +1,28 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerServiceData
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
-    using WonderlandBooks.Web.ViewModels.Authors;
+    using WonderlandBooks.Services.Data.ControllerServiceData.Models;
 
-    public class GetAuthorById : IGetAuthorById
+    public class GetAuthorByIdService : IGetAuthorByIdService
     {
         private readonly IRepository<Author> repositoryAuthor;
         private readonly IRepository<BookSeries> repositorySeries;
 
-        public GetAuthorById(IRepository<Author> repositoryAuthor, IRepository<BookSeries> repositorySeries)
+        public GetAuthorByIdService(
+            IRepository<Author> repositoryAuthor,
+            IRepository<BookSeries> repositorySeries)
         {
             this.repositoryAuthor = repositoryAuthor;
             this.repositorySeries = repositorySeries;
         }
 
-        public AuthorViewModel Author(int id)
+        public AuthorDto Author(int id)
         {
             var author = this.repositoryAuthor.AllAsNoTracking()
-                  .Select(author => new AuthorViewModel
+                  .Select(author => new AuthorDto
                   {
                       Id = author.Id,
                       Name = author.Name,
@@ -30,7 +30,7 @@
                       Website = author.Website,
                       ImageUrl = author.Image.Url,
                       Genres = string.Join("/", author.Genres.Select(x => x.Name)),
-                      Books = author.Books.Select(book => new AuthorBooksViewModel
+                      Books = author.Books.Where(x => x.NumberOfSet == null).Select(book => new AuthorBooksDto
                       {
                           Id = book.Id,
                           Name = book.Name,
@@ -44,15 +44,22 @@
                       }).ToList(),
                   }).First(x => x.Id == id);
 
-            var series = this.repositorySeries.AllAsNoTracking().Where(x => x.AuthorId == id).Select(x => new AuthorSeriesViewModel
-            {
-                SeriesName = x.Name,
-                Books = x.Books.Select(s => new AuthorSeriesBooksViewModel
+            var series = this.repositorySeries.AllAsNoTracking()
+                .Where(x => x.AuthorId == id)
+                .Select(x => new AuthorSeriesDto
                 {
-                     ImageExtension = s.Image.Extension,
-                }).ToList(),
-            }).ToList();
-
+                    SeriesName = x.Name,
+                    Books = x.Books
+                    .Select(s => new AuthorSeriesBooksDto
+                    {
+                        Id = s.Id,
+                        Name = s.Name,
+                        ImageExtension = s.Image.Extension,
+                        NumberOfSet = s.NumberOfSet,
+                    }).ToList(),
+                })
+                .OrderBy(x => x.SeriesName)
+                .ToList();
             author.Series = series;
 
             return author;

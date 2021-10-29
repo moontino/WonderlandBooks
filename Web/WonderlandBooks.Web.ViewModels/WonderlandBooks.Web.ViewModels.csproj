@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\WonderlandBooks.Data.Models\WonderlandBooks.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\WonderlandBooks.Services.Mapping\WonderlandBooks.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\WonderlandBooks.Services\WonderlandBooks.Services.csproj" />
   </ItemGroup>
 
 </Project>

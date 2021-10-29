@@ -8,12 +8,17 @@
     public class AuthorsController : BaseController
     {
         private readonly ITopTenAuthorsByBookCountService authorsCountService;
-        private readonly IGetAuthorById getAuthor;
+        private readonly IGetAuthorByIdService getAuthorService;
+        private readonly IMapper mapper;
 
-        public AuthorsController(ITopTenAuthorsByBookCountService authorsCountService, IGetAuthorById getAuthor)
+        public AuthorsController(
+            ITopTenAuthorsByBookCountService authorsCountService,
+            IGetAuthorByIdService getAuthorService,
+            IMapper mapper)
         {
             this.authorsCountService = authorsCountService;
-            this.getAuthor = getAuthor;
+            this.getAuthorService = getAuthorService;
+            this.mapper = mapper;
         }
 
         public IActionResult GetTopTenAuthorsByBooksCount()
@@ -26,9 +31,9 @@
             return this.View(viewModel);
         }
 
-        public IActionResult GetAuthor(int id)
+        public IActionResult Author(int id)
         {
-            AuthorViewModel view = this.getAuthor.Author(id);
+            AuthorViewModel view = this.mapper.Map<AuthorViewModel>(this.getAuthorService.Author(id));
 
             return this.View(view);
         }
