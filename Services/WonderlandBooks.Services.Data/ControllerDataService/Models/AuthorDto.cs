@@ -1,4 +1,4 @@
-﻿namespace WonderlandBooks.Services.Data.ControllerServiceData.Models
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService.Models
 {
     using System.Collections.Generic;
 

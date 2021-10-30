@@ -2,7 +2,6 @@
 {
     using System.Reflection;
 
-    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -19,7 +18,8 @@
     using WonderlandBooks.Data.Seeding;
     using WonderlandBooks.Services;
     using WonderlandBooks.Services.Data;
-    using WonderlandBooks.Services.Data.ControllerServiceData;
+    using WonderlandBooks.Services.Data.ControllerDataService;
+    using WonderlandBooks.Services.Data.ModelDataServices;
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Services.Messaging;
     using WonderlandBooks.Web.ViewModels;
@@ -63,6 +63,7 @@
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
+            services.AddScoped<IBookRecommendationsService, BookRecommendationsService>();
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
@@ -73,6 +74,7 @@
             services.AddTransient<IAuthorsAndBooksPresentationService, AuthorsAndBooksPresentationService>();
             services.AddTransient<IGetAuthorByIdService, GetAuthorByIdService>();
             services.AddTransient<IGetBookByIdService, GetBookByIdService>();
+            services.AddTransient<IAllAuthorBooks, AllAuthorBooks>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

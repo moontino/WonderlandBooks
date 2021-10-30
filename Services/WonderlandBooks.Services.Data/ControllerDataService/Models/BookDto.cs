@@ -1,4 +1,4 @@
-﻿namespace WonderlandBooks.Services.Data.ControllerServiceData.Models
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService.Models
 {
     using System.Collections.Generic;
 
@@ -30,6 +30,8 @@
 
         public IList<BookAuthorDto> Author { get; set; }
 
-        public IList<BookRecommendationsDto> BookRecommendationsByGenre { get; set; }
+        public IList<BookRecommendationsDto> Recommendations { get; set; }
+
+        public IList<BookSeriesDto> Series { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
-    using WonderlandBooks.Services.Data.ControllerServiceData;
+    using WonderlandBooks.Services.Data.ControllerDataService;
     using WonderlandBooks.Web.ViewModels.Authors;
 
     public class AuthorsController : BaseController

@@ -1,0 +1,19 @@
+﻿@model WonderlandBooks.Web.ViewModels.Books.AllBooksListViewModel
+@{
+    this.ViewData["Title"] = "Author";
+}
+
+@foreach (var book in Model.Books)
+{
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="card card-custom mx-2 mb-3" style="width: 18rem;">
+            <img src="@book.ImageExtension" class="card-img-top">
+            <div class="card-body">
+                <p class="card-text">@book.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

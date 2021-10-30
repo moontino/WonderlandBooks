@@ -1,7 +1,7 @@
 ﻿namespace WonderlandBooks.Web.MapperProfile
 {
     using AutoMapper;
-    using WonderlandBooks.Services.Data.ControllerServiceData.Models;
+    using WonderlandBooks.Services.Data.ControllerDataService.Models;
     using WonderlandBooks.Web.ViewModels.Authors;
 
     public class AuthorProfile : Profile

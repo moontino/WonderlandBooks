@@ -1,10 +1,10 @@
-﻿namespace WonderlandBooks.Services.Data.ControllerServiceData
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
     using System.Linq;
 
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
-    using WonderlandBooks.Services.Data.ControllerServiceData.Models;
+    using WonderlandBooks.Services.Data.ControllerDataService.Models;
 
     public class GetAuthorByIdService : IGetAuthorByIdService
     {

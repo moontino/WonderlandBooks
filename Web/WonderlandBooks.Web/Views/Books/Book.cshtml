@@ -12,7 +12,7 @@
                         <h3><strong>@Model.SeriesName</strong> @Model.NumberOfSet</h3>
                         @foreach (var author in Model.Author)
                         {
-                            <p>@author.AuthorName</p>
+                            <p><a asp-controller="Authors" asp-action="Author" asp-route-id="@author.Id">@author.AuthorName</a></p>
                         }
 
                     </header>
@@ -74,16 +74,17 @@
                         Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
                     </p>
                     <div class="row gtr-50">
-                        @foreach (var book in Model.BookRecommendationsByGenre)
+                        @foreach (var book in Model.Recommendations)
                         {
                             <div class="col-4">
                                 <a class="image fit" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" /></a>
                             </div>
                             <div class="col-8">
                                 <h4>@book.Name</h4>
-                                <p>
-                                    @book.Genres
-                                </p>
+                                @foreach (var author in book.Authors)
+                                {
+                                    <a asp-controller="Authors" asp-action="Author" asp-route-id="@author.Id"><p>@author.Name</p></a>
+                                }
                             </div>
                         }
                     </div>
@@ -95,36 +96,23 @@
         </div>
         <hr />
         <div class="row">
-            <article class="col-4 col-12-mobile special">
-                <a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
-                <header>
-                    <h3><a href="#">Gravida aliquam penatibus</a></h3>
-                </header>
-                <p>
-                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-                </p>
-            </article>
-            <article class="col-4 col-12-mobile special">
-                <a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
-                <header>
-                    <h3><a href="#">Sed quis rhoncus placerat</a></h3>
-                </header>
-                <p>
-                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-                </p>
-            </article>
-            <article class="col-4 col-12-mobile special">
-                <a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
-                <header>
-                    <h3><a href="#">Magna laoreet et aliquam</a></h3>
-                </header>
-                <p>
-                    Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-                    porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-                </p>
-            </article>
+            @foreach (var series in Model.Series)
+            {
+                <article class="col-4 col-12-mobile special">
+
+                    <header>
+                        <h3><a href="#">@series.Name</a></h3><!--HERE SERIES-->
+                    </header>
+                    @foreach (var book in series.BooksSeries)
+                    {
+                        <p>
+                            <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" /></a>
+                            <h4>@book.Name</h4>
+                            
+                        </p>
+                    }
+                </article>
+            }
         </div>
     </div>
 </div>

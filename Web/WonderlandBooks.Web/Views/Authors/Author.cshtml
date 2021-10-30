@@ -39,7 +39,7 @@
             <article class="align-self-sm-auto">
                 <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" alt="" /></a>
                 <header>
-                    <h3><a href="#">@book.Name</a></h3>
+                    <h3><a>@book.Name</a></h3>
                 </header>
                 <p>@book.EditionLanguageName</p>
             </article>
@@ -55,14 +55,18 @@
             <header class="table-responsive-sm">
                 <h3><a href="#">@Model.Series[i].SeriesName</a></h3>
             </header>
-            @foreach (var item in Model.Series[i].Books)
+            @foreach (var book in Model.Series[i].Books)
             {
-                <a class="image featured" asp-controller="Book" asp-action="GetBook" asp-route-id="@item.Id"><img src="@item.ImageExtension" /></a>
+                <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" /></a>
                 <div>
-                    <h6 class="align-self-auto">@item.Name <em>(@item.NumberOfSet)</em></h6>
+                    <h6 class="align-self-auto">@book.Name <em>(@book.NumberOfSet)</em></h6>
                 </div>
             }
         </article>
+
     }
+    <footer>
+        <a class="button" asp-controller="Books" asp-action="AllBooks" asp-route-id="@Model.Id">See more books by @Model.Name </a>
+    </footer>
 </div>
 <!---->

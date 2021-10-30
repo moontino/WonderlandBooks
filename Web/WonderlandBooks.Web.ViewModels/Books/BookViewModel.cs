@@ -32,6 +32,8 @@
 
         public IList<BookAuthorViewModel> Author { get; set; }
 
-        public IList<BookRecommendationsViewModel> BookRecommendationsByGenre { get; set; }
+        public IList<BookRecommendationsViewModel> Recommendations { get; set; }
+
+        public IList<BookSeriesViewModel> Series { get; set; }
     }
 }
