@@ -74,7 +74,8 @@
             services.AddTransient<IAuthorsAndBooksPresentationService, AuthorsAndBooksPresentationService>();
             services.AddTransient<IGetAuthorByIdService, GetAuthorByIdService>();
             services.AddTransient<IGetBookByIdService, GetBookByIdService>();
-            services.AddTransient<IAllAuthorBooks, AllAuthorBooks>();
+            services.AddTransient<IAllAuthorBooksService, AllAuthorBooksService>();
+            services.AddTransient<ICountDataService, CountDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

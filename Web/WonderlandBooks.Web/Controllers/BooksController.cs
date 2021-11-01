@@ -10,12 +10,12 @@
     {
         private readonly IGetBookByIdService getBookService;
         private readonly IMapper mapper;
-        private readonly IAllAuthorBooks authorBooks;
+        private readonly IAllAuthorBooksService authorBooks;
 
         public BooksController(
             IGetBookByIdService getBookService,
             IMapper mapper,
-            IAllAuthorBooks authorBooks)
+            IAllAuthorBooksService authorBooks)
         {
             this.getBookService = getBookService;
             this.mapper = mapper;

@@ -1,45 +1,57 @@
 ﻿@using WonderlandBooks.Common
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
     <link rel="stylesheet" href="~/css/vendor/bootstrap/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/lazy.css" asp-append-version="true" />
     <link href="~/css/main.css" rel="stylesheet" />
     <noscript><link href="~/css/noscript.css" rel="stylesheet" /></noscript>
 
-</head>
-<body class="homepage is-preload">
-    <div id="page-wrapper">
-        <div id="header">
-            <div class="inner">
-                <header>
-                    <h1><a src="~/img/LogoLayout.jpg" id="logo">Wonderland</a></h1>
-                </header>
-                <footer>
-                    <a href="#banner" class="button circled scrolly">Start</a>
-                </footer>
-            </div>
-            <!--<img src="~/img/LogoLayout.jpg" />-->
-            <nav id="nav">
-                <ul>
-                    <li><a asp-controller="Home" asp-action="Index">Home</a>></li>
-                    <li><a asp-controller="Authors" asp-action="GetTopTenAuthorsByBooksCount">TOP 10</a></li>
-                    <partial name="_LoginPartial" />
-                </ul>
+    <link href="~/unicornTemp/vendors/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/unicornTemp/vendors/themify-icons/themify-icons.css" rel="stylesheet" />
+    <link href="~/unicornTemp/vendors/linericon/style.css" rel="stylesheet" />
+    <link href="~/unicornTemp/vendors/owl-carousel/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/unicornTemp/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/unicornTemp/vendors/Magnific-Popup/magnific-popup.css" rel="stylesheet" />
+    <link href="~/unicornTemp/css/style.css" rel="stylesheet" />
 
+</head>
+<body>
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
+                    <a class="navbar-brand logo_h" asp-controller="Home" asp-action="Index">
+                        <img src="~/img/logo.png">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav justify-content-end">
+                            <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </div>
-    </div>
-    <div class="container">
+    </header>
+
+
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
-    </div>
+ 
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -48,10 +60,6 @@
     </footer>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    <script src="~/css/vendor/jquery/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/css/vendor/popper/popper.js" asp-append-version="true"></script>
-    <script src="~/css/vendor/bootstrap/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/lazy.js" asp-append-version="true"></script>
     <script src="~/js/jquery.min.js" asp-append-version="true"></script>
     <script src="~/js/jquery.dropotron.min.js" asp-append-version="true"></script>
@@ -61,6 +69,13 @@
     <script src="~/js/breakpoints.min.js" asp-append-version="true"></script>
     <script src="~/js/util.js" asp-append-version="true"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
+    <script src="~/unicornTemp/vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/unicornTemp/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/unicornTemp/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/unicornTemp/vendors/Magnific-Popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/unicornTemp/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/unicornTemp/js/startup-script.js"></script>
+    <script src="~/unicornTemp/js/startup.js"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

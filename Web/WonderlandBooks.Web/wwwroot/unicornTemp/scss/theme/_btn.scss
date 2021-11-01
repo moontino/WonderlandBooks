@@ -1,0 +1,50 @@
+/*=================== custom button rule start ====================*/
+.button{
+  display: inline-block;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 0;
+  background-color: $primary-color;
+  color: $primary-color;
+  color: $white;
+  @include transition;
+
+  i,span{
+    font-size: 12px;
+    padding-left: 3px;
+  }
+
+  @media(min-width: 600px){
+    padding: 12px 42px;
+  }
+
+  &:hover{
+    background: green;
+    color: $white;
+  }
+
+  &-blog{
+    padding: 6px 31px;
+  }
+
+  &-postComment{
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 13px 36px;
+
+    @media(min-width: 1000px){
+      padding: 14px 56px;
+    }
+  }
+
+  &-contactForm{
+    padding: 12px 28px;
+  }
+
+  &-cta{
+    padding: 12px 35px;
+  }
+}
+/*=================== custom button rule end ====================*/

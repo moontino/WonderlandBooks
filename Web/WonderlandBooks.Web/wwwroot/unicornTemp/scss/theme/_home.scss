@@ -1,0 +1,579 @@
+/* Static section start
+============================================================================================ */
+.static__single{
+  border-radius: 4px;
+  text-align: center;
+  background: $white;
+  border: 0;
+  padding: 20px;
+  box-shadow: 0px 15px 20px 0px rgba(153, 153, 153, 0.1); 
+
+  h3{
+    font-size: 36px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+
+    &::after{
+      content: "";
+      display: inline-block;
+      width: 60%;
+      height: 2px;
+      background: $primary-color;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  h4{
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &-position{
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    @media(min-width: 1000px){
+      margin: auto;
+      position: relative;
+      bottom: 40px;
+      margin-bottom: -40px;
+      z-index: 50;
+    }
+  }
+}
+/* Static section end
+============================================================================================ */
+
+
+/* Subject section start
+============================================================================================ */
+.card-subject{
+  border: 0;
+  border-radius: 0;
+  @include transition;
+
+  &__img{
+    position: relative;
+    overflow: hidden;
+
+    &Overlay{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateY(50px);
+      background: rgba(222, 99, 32, 0.51);
+      opacity: 0;
+      z-index: -1;
+      transition: all .52s ease;
+
+      img,i{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__body{
+    background: #f7f7f7;
+    padding: 25px 18px 30px 30px;
+
+    h3{
+      margin-bottom: 16px;
+    }
+
+    a{
+      color: $title-color;
+    }
+  }
+
+  &:hover{
+    box-shadow: 0px 10px 30px 0px rgba(153, 153, 153, 0.2); 
+
+    .card-subject__imgOverlay{
+      opacity: 1;
+      z-index: 1;
+      transform: translateY(0);
+    }
+
+    .card-subject__body{
+      background: $white;
+    }
+  }
+}
+
+/* Subject section end
+============================================================================================ */
+
+
+/* Testimonial section start
+============================================================================================ */
+.testimonial{
+  max-width: 970px;
+  margin-right: auto;
+  margin-left: auto;
+
+  &__item{
+    background: $white;
+    border-radius: 5px;
+    padding: 30px 15px;
+
+    @media(min-width: 600px){
+      padding: 30px 50px;
+    }
+  }
+
+  &__img{
+    max-width: 132px;
+  }
+
+  &__content{
+
+    h3{
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    p{
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__i{
+    font-size: 15px !important;
+    font-style: italic;
+    margin-bottom: 0 !important;
+  }
+
+  &__icon{
+    font-size: 173px;
+    color: rgba(119, 119, 119, 0.1);
+    position: absolute;
+    top : 50%;
+    transform: translateY(-50%);
+    right: 40px;
+  }
+
+  .owl-dots{
+    margin-top: 30px !important;
+
+    @media(min-width: 600px){
+      margin-top: 60px !important;
+    }
+
+    .owl-dot{
+
+      span{
+        width: 20px;
+        height: 4px;
+        background: rgb(211, 210, 213);
+        border-radius: 2px;
+        margin: 5px 10px;
+      }
+
+      &.active span{
+        background: $primary-color;
+      }
+    }
+  }
+}
+/* Testimonial section end
+============================================================================================ */
+
+/* Team section start
+============================================================================================ */
+.card-team{
+  border: 0;
+  border-radius: 0;
+  background: #f7f7f7;
+  @include transition;
+
+  &__body{
+    border: 1px solid transparent;
+    border-top: 0;
+    box-shadow: 0px 5px 25.5px 4.5px rgba(221, 221, 221, 0.2); 
+    padding: 20px 9px;
+    @include transition;
+
+    h3{
+      font-size: 20px;
+      margin-bottom: 3px;
+
+      a{
+        color: $title-color;
+      }
+    }
+
+    p{
+      margin-bottom: 14px;
+    }
+  }
+
+  &__social{
+
+    li{
+      display: inline-block;
+      margin-right: 14px;
+
+      &:last-child{
+        margin-right: 0;
+      }
+
+      a{
+        color: #777884;
+        
+        &:hover{
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &:hover{
+    background: $white;
+    .card-team__body{
+      border-color: $primary-color;
+    }
+  }
+}
+/* Team section end
+============================================================================================ */
+
+
+/* Cta section start
+============================================================================================ */
+.cta{
+
+  &-wrapper{
+    background: url(../img/home/cta-bg.png) left center no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    &::after{
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 0, 9, 0.6);
+      z-index: -1;
+    }
+  }
+
+  &__content{
+    max-width: 640px;
+    margin-right: auto;
+    margin-left: auto;
+    color: $white;
+
+    h2{
+      color: $white;
+      margin-bottom: 20px;
+    }
+
+    p{
+      margin-bottom: 25px;
+
+      @media(min-width: 1000px){
+        margin-bottom: 45px;
+      }
+    }
+  }
+}
+/* Cta section end
+============================================================================================ */
+
+
+/* Blog section start
+============================================================================================ */
+.card-blog{
+  border: 0;
+  border-radius: 0;
+
+  &__body{
+    padding: 20px 0;
+    border-bottom: 1px solid #eeeeee;
+
+    h3{
+      margin-bottom: 15px;
+
+      a{
+        color: $title-color;
+      }
+    }
+
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  &__info{
+    margin-bottom: 12px;
+
+    li{
+      display: inline-block;
+      font-size: 14px;
+      color: #999999;
+      margin-right: 13px;
+
+      &:last-child{
+        margin-right: 0;
+      }
+
+      a{
+        color: #999999;
+      }
+
+      i,span{
+        font-size: 13px;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__footer{
+    font-size: 14px;
+    color: $title-color;
+    font-weight: 500;
+    padding: 18px 0;
+
+    a{
+      color: $title-color;
+      @include transition;
+    }
+
+    i,span{
+      font-size: 13px;
+      padding-left: 8px;
+    }
+  }
+
+  &:hover{
+
+    .card-blog__footer a{
+      color: $primary-color;
+    }
+  }
+}
+/* Blog section end
+============================================================================================ */
+
+
+/* About section start
+============================================================================================ */
+.about__content{
+  // max-width: 470px;
+  margin-top: 35px;
+
+  @media(min-width: 991px){
+    margin-top: 0;
+    margin-left: 35px;
+  }
+
+  @media(min-width: 1200px){
+    max-width: 470px;
+  }
+
+  @media(min-width: 1450px){
+    margin-left: 95px;
+  }
+
+  h3{
+    font-size: 26px;
+    margin-bottom: 25px;
+
+    @media(min-width: 600px){
+      font-size: 36px;
+    }
+  }
+
+  p{
+    margin-bottom: 25px;
+  }
+}
+/* About section end
+============================================================================================ */
+
+
+
+
+/* Start Video Play css
+============================================================================================ */
+.about__video{
+  position: relative;
+
+  &Wrapper{
+
+    @media(min-width: 1000px){
+      min-width: 550px;
+    }
+    @media(min-width: 1400px){
+      min-width: 880px;
+    }
+  }
+
+  &-image{
+    position: relative;
+    
+    &::after{
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 0, 9, 0.6);
+    }
+  }
+
+  &Content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+
+    h4{
+      font-size: 20px;
+      color: $white;
+      font-weight: 700;
+    }
+  }
+}
+.video-play-button {
+  position: relative;
+  box-sizing: content-box;
+  display: inline-block;
+  width: 32px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 46px 8px 18px 28px;
+
+  @media(max-width: 991px){
+    transform: scale(.8);
+  }
+  
+  &:before, &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%, -50%));
+      display: block;
+      width: 80px;
+      height: 80px;
+      background: $white;
+      border-radius: 50%;
+  }
+  &:before {
+      z-index: 0;
+      @include animation(pulse-border 2000ms ease-out infinite);
+  }
+  &:after {
+      z-index: 1;
+      @include transition(all 200ms ease);
+  }
+  span {
+      display: block;
+      position: relative;
+      z-index: 3;
+      width: 0;
+      height: 0;
+      border-left: 16px solid $primary-color;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+  }
+}
+
+@include keyframes(pulse-border) {
+  0% {
+      @include transform(translate(-50%, -50%) translateZ(0) scale(1));
+      opacity: .7;
+  }
+  100% {
+      @include transform(translate(-50%, -50%) translateZ(0) scale(1.5));
+      opacity: 0.1;
+  }
+}
+/* End Video Play css
+============================================================================================ */
+
+
+/* Counters section css
+============================================================================================ */
+.counters{
+  background: url(../img/home/counters-bg.png) left center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding: 60px 0;
+  z-index: 1;
+
+  @media(min-width: 991px){
+    padding: 110px 0;
+  }
+
+  &::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 2, 6, 0.7);
+    z-index: -1;
+  }
+
+  &__single{
+
+    h2{
+      font-family: $text-font;
+      font-size: 45px;
+      font-weight: 700;
+      color: $primary-color;
+      display: inline-block;
+      margin-bottom: 20px;
+
+      @media(min-width: 991px){
+        margin-bottom: 30px;
+      }
+
+      &::after{
+        content: "";
+        display: block;
+        width: 70%;
+        height: 3px;
+        background: $white;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 12px;
+      }
+    }
+    
+    h4{
+      font-size: 20px;
+      font-weight: 700;
+      color: $white;
+    }
+  }
+}
+/* Counters section end
+============================================================================================ */
+
+
+
