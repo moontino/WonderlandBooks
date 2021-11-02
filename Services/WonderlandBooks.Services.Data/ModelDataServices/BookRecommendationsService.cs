@@ -29,27 +29,28 @@
             var authors = this.repositoryBook.AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .SelectMany(x => x.Authors.Select(a => a.Id)).ToList();
-            try
-            {
-                return this.repositoryBook.AllAsNoTracking()
-                               .OrderByDescending(x => x.Id)
-                               .Where(x => x.Genres.Any(x => genres.Contains(x.Name)))
-                               .Select(x => new BookRecommendationsDto
+
+            var recommendations = this.repositoryBook.AllAsNoTracking()
+                           .OrderByDescending(x => x.Id)
+                           .Where(x => x.Genres.Any(x => genres.Contains(x.Name)))
+                           .Select(x => new BookRecommendationsDto
+                           {
+                               Id = x.Id,
+                               Name = x.Name,
+                               ImageUrl = x.Image.Extension,
+                               Authors = x.Authors.Select(a => new BookRecommendationsAuthorsDto
                                {
-                                   Id = x.Id,
-                                   Name = x.Name,
-                                   ImageUrl = x.Image.Extension,
-                                   Authors = x.Authors.Select(a => new BookRecommendationsAuthorsDto
-                                   {
-                                       Id = a.Id,
-                                       Name = a.Name,
-                                   }).ToList(),
-                               }).Take(count).ToList();
-            }
-            catch (Exception)
+                                   Id = a.Id,
+                                   Name = a.Name,
+                               }).ToList(),
+                           }).Take(count).ToList();
+
+            if (recommendations.Count == 0)
             {
                 return this.RandomRecommendation(id, count);
             }
+
+            return recommendations;
         }
 
         public IList<BookRecommendationsDto> RandomRecommendation(int id, int count)

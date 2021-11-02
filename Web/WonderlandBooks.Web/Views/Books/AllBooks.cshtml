@@ -1,4 +1,26 @@
 ﻿@model WonderlandBooks.Web.ViewModels.Books.AllBooksListViewModel
 @{
-    this.ViewData["Title"] = "Author";
+    this.ViewData["Title"] = "List";
 }
+<section class="section-margin">
+    <div class="container">
+        <div class="section-intro text-center pb-65px">
+            <h2 class="section-intro__title">НЗ какво да сложа тук</h2>
+            <p>Female divided bearing rule one called said Beginning set you living above saw seasons void created fruitful third years god.</p>
+        </div>
+        <div class="row">
+            @foreach (var book in Model.Books)
+            {
+                <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 mb-xl-0">
+                    <div class="card card-team">
+                        <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" /></a>
+                        <div class="card-team__body text-center">
+                            <h3><a href="#">@book.Name</a></h3>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

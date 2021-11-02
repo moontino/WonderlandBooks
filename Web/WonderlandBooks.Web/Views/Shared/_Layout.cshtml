@@ -36,10 +36,20 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent"><!--Tuk-->
                         <ul class="nav navbar-nav menu_nav justify-content-end">
-                            <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                    <h3>Home</h3>
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-controller="CreativeWriting" asp-action="Create">
+                                    <h3>Writing</h3>
+                                </a>
+                            </li>
                         </ul>
+                        <partial name="_LoginPartial" />
                     </div>
                 </div>
             </nav>
@@ -47,11 +57,11 @@
     </header>
 
 
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
- 
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @this.RenderBody()
+    </main>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

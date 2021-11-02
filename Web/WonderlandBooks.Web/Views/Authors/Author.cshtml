@@ -47,24 +47,27 @@
     </div>
 </section>
 <hr />
-<div class="row">
-    @for (int i = 0; i < Model.Series.Count(); i++)
-    {
-        <article class="col-3 col-12-mobile special">
+<div class="container">
+    <div class="row">
+        @for (int i = 0; i < Model.Series.Count(); i++)
+        {
+            <article class="col-3 col-12-mobile special">
 
-            <header class="table-responsive-sm">
-                <h3><a href="#">@Model.Series[i].SeriesName</a></h3>
-            </header>
-            @foreach (var book in Model.Series[i].Books)
-            {
-                <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" /></a>
-                <div>
-                    <h6 class="align-self-auto">@book.Name <em>(@book.NumberOfSet)</em></h6>
-                </div>
-            }
-        </article>
-
-    }
+                <header class="table-responsive-sm">
+                    <h3><a href="#">@Model.Series[i].SeriesName</a></h3>
+                </header>
+                @foreach (var book in Model.Series[i].Books)
+                {
+                    <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" /></a>
+                    <div>
+                        <h6 class="align-self-auto">@book.Name <em>(@book.NumberOfSet)</em></h6>
+                    </div>
+                }
+            </article>
+        }
+    </div>
+</div>
+<div>
     <footer>
         <a class="button" asp-controller="Books" asp-action="AllBooks" asp-route-id="@Model.Id">See more books by @Model.Name </a>
     </footer>
