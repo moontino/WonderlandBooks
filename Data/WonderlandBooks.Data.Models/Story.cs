@@ -1,6 +1,5 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
@@ -11,18 +10,30 @@
         {
             this.Chapters = new HashSet<Chapter>();
             this.Tags = new HashSet<Tag>();
-            this.Genres = new HashSet<Genre>();
+            this.Characters = new HashSet<Character>();
         }
 
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        public virtual ICollection<Chapter> Chapters { get; set; }
+        public int? ImageId { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public Image Image { get; set; }
+
+        public int GenreId { get; set; }
+
+        public Genre Genre { get; set; }
+
+        public int EditionLanguageId { get; set; }
+
+        public EditionLanguage EditionLanguage { get; set; }
+
+        public virtual ICollection<Character> Characters { get; set; }
+
+        public virtual ICollection<Chapter> Chapters { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
     }

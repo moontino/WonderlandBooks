@@ -21,8 +21,15 @@
 
         public async Task<IActionResult> Add()
         {
-            await this.goodreadsData.ImportDataAsync(10000, 11000);
+            // 164187-169187
+            for (int i = 1; i < 9; i++)
+            {
+                var start = int.Parse("16" + i + "187");
+                var end = int.Parse("16" + (i + 1) + "187");
 
+                await this.goodreadsData.ImportDataAsync(start, end);
+            }
+           
             return this.View();
         }
     }

@@ -39,7 +39,7 @@
             @foreach (var book in Model.Book)
             {
                 <article>
-                    <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" alt="" /></a>
+                    <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" alt="" /></a>
                     <header>
                         <h3><a href="#">@book.Name</a></h3>
                     </header>

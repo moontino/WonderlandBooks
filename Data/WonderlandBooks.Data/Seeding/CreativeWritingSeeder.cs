@@ -17,23 +17,28 @@
 
             var writer = new CreativeWriting
             {
-                UserId = "07f859a7-91d1-45d5-b145-ad14887971d9",
+                UserId = "04cb4e0f-63ee-48de-a8db-aca8291fa79b",
             };
             var story = new Story
             {
-                Name = "Hero",
-                Description = "When he awoke from his long sleep, he didn't know much more than his name.",
+                Title = "Имало едно време...",
+                Description = "История за един човек",
             };
+            story.Image = new Image { Url = "https://bigbag.bg/userfiles/productlargeimages/product_6124.jpg" };
 
-            var genre = new Genre { Name = "Hero" };
-            story.Genres.Add(genre);
+            story.Genre = new Genre { Name = "Fairy tale" };
+
+            story.EditionLanguage = new EditionLanguage { Name = "Bulgarian" };
 
             var tag = new Tag { Name = "history" };
             story.Tags.Add(tag);
 
-            var chapterOne = new Chapter { Name = "First day", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc risus massa, sagittis sit amet sapien at, euismod semper urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc lectus diam, ultricies ut semper id, tincidunt a velit. Proin sed accumsan ipsum. Aenean dolor mauris, sollicitudin et metus eu, convallis ullamcorper eros. Vivamus consectetur nunc a pharetra luctus. Suspendisse aliquet justo in augue luctus mattis. Quisque justo nulla, luctus vitae enim ac, ultrices maximus dolor. Nam nec est purus. Ut tincidunt urna ac nulla placerat vulputate. Aliquam turpis sapien, posuere in fermentum eu, faucibus in quam. Aliquam congue justo id est egestas, quis egestas nisl tincidunt. Mauris tincidunt metus arcu, elementum consequat tellus pharetra vitae. In dictum, nisl et iaculis fermentum, quam nisl convallis quam, nec dictum tellus sapien nec lectus. Sed eget odio ac odio pretium porttitor." };
+            var characters = new Character { Name = "Иван" };
+            story.Characters.Add(characters);
 
-            var chapterTwo = new Chapter { Name = "Second day", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc risus massa, sagittis sit amet sapien at, euismod semper urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc lectus diam, ultricies ut semper id, tincidunt a velit. Proin sed accumsan ipsum. " };
+            var chapterOne = new Chapter { Title = "Първи ден", Description = "Имало едно време едно Имало едно време. То било доста самотно и много му се искало да се настани в началото на каква да е приказка. Обаче приказки рядко се срещали, тъй като човекът още не се бил очовечил. Разхождало се тъжно насам — натам това Имало едно време, отърквало се о някоя маймуна с надежда да й влезе в устата и да издърпа оттам нещо, което поне малко да прилича на приказка, но маймуните явно или нямали приказки, или не си ги давали. След като безкрайно дълго обикаляло и никъде не могло да открие приказка, измореното Имало едно време легнало и заспало." };
+            var chapterTwo = new Chapter { Title = "На следващия ден", Description = "Имало едно време много се зарадва, засмя се и сълзите му станаха на бисери. Аз ги прибрах за всеки случай. И, както обещах, подхванах приказката. Може малко да съм я изкривил, защото, докато я пишех, щастливото Имало едно време непрекъснато си мушеше муцунката в мен. Но иначе стана съвсем добре, а, какво ще кажете?! И, разбира се, завършва така: седи си тук и си клати краката най-важното, най-хубавото, чудесното Имало едно време!" };
+
             story.Chapters.Add(chapterOne);
             story.Chapters.Add(chapterTwo);
 
@@ -41,23 +46,30 @@
 
             var writerSecond = new CreativeWriting
             {
-                UserId = "c9bf5aec-47bf-4663-b5ad-3ac3f436dc01",
+                UserId = "741ad702-406c-452b-81a2-8bc435ea0e0d",
             };
             var storySecond = new Story
             {
-                Name = "Vampire",
+                Title = "Vampire",
                 Description = "Seventeen-year-old Max Shopht has spent the last ten years fighting for survival in the notorious death prison",
             };
 
-            var genreSecond = new Genre { Name = "Warrior" };
-            storySecond.Genres.Add(genreSecond);
+            storySecond.Image = new Image { Url = "https://pbs.twimg.com/media/DdgUzugX4AAX9Q-.jpg" };
+
+            storySecond.Genre = new Genre { Name = "Warrior" };
+
+            storySecond.EditionLanguage = new EditionLanguage { Name = "English" };
 
             var tagSecond = new Tag { Name = "magic" };
             storySecond.Tags.Add(tagSecond);
 
-            var chapterOneSecondWriter = new Chapter { Name = "Dark day", Description = "Morbi pellentesque ex ut hendrerit euismod. Aliquam volutpat ornare congue. Integer gravida consequat tellus et pretium. Curabitur turpis arcu, blandit ac arcu ac, lobortis sodales tortor. Donec justo lorem, posuere non dictum nec, interdum quis odio. Donec a dictum neque. Integer iaculis tellus et lacus convallis rhoncus. Vivamus non turpis dui. Praesent et dolor rhoncus, gravida elit eget, posuere lectus. Donec vulputate, tellus a vestibulum faucibus, orci felis condimentum massa, ac mollis neque sem nec ex. Cras nec lobortis enim. Etiam vel gravida ipsum, ac mattis nunc." };
+            var charactersSeconf = new Character { Name = "Max Shopht" };
+            storySecond.Characters.Add(charactersSeconf);
+
+            var chapterOneSecondWriter = new Chapter { Title = "Dark day", Description = "Morbi pellentesque ex ut hendrerit euismod. Aliquam volutpat ornare congue. Integer gravida consequat tellus et pretium. Curabitur turpis arcu, blandit ac arcu ac, lobortis sodales tortor. Donec justo lorem, posuere non dictum nec, interdum quis odio. Donec a dictum neque. Integer iaculis tellus et lacus convallis rhoncus. Vivamus non turpis dui. Praesent et dolor rhoncus, gravida elit eget, posuere lectus. Donec vulputate, tellus a vestibulum faucibus, orci felis condimentum massa, ac mollis neque sem nec ex. Cras nec lobortis enim. Etiam vel gravida ipsum, ac mattis nunc." };
 
             storySecond.Chapters.Add(chapterOneSecondWriter);
+
             writerSecond.Stories.Add(storySecond);
 
             dbContext.CreativeWritings.Add(writer);

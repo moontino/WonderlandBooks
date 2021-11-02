@@ -34,7 +34,7 @@
                       {
                           Id = book.Id,
                           Name = book.Name,
-                          ImageExtension = book.Image.Extension,
+                          ImageExtension = book.Image.Url,
                           Description = string.IsNullOrWhiteSpace(book.Description) ? ";)" : book.Description.Substring(0, 150),
                           EditionLanguageName = book.EditionLanguage.Name,
                           Pages = book.Pages,
@@ -54,7 +54,7 @@
                     {
                         Id = s.Id,
                         Name = s.Name,
-                        ImageExtension = s.Image.Extension,
+                        ImageExtension = s.Image.Url,
                         NumberOfSet = s.NumberOfSet,
                     }).ToList(),
                 })

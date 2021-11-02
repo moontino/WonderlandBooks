@@ -38,7 +38,7 @@
                             SeriesId = x.BookSeries.Id,
                             Pages = x.Pages,
                             BookUrl = x.BookUrl,
-                            ImageUrl = x.Image.Extension,
+                            ImageUrl = x.Image.Url,
                             EditionLanguage = x.EditionLanguage.Name,
                             Genres = string.Join("/", x.Genres.Select(x => x.Name)),
                             Characters = string.Join("/", x.Characters.Select(x => x.Name)),
@@ -65,7 +65,7 @@
                         {
                             Id = b.Id,
                             Name = b.Name,
-                            ImageUrl = b.Image.Extension,
+                            ImageUrl = b.Image.Url,
                         }).ToList(),
                     }).ToList();
             }

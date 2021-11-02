@@ -62,7 +62,6 @@
 
                 var authorImage = new Image
                 {
-                    Extension = model.AuthorImage,
                     Url = model.AuthorImage,
                 };
 
@@ -133,8 +132,7 @@
 
             var bookImage = new Image
             {
-                Url = bookDto.BookUrl,
-                Extension = bookDto.BookImage,
+                Url = bookDto.BookImage,
             };
             await this.imageRepository.AddAsync(bookImage);
 

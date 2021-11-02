@@ -15,6 +15,7 @@
         private const string AuthorShowPath = "/author/show/";
         private const string AuthorListPath = "/author/list/";
         private const string AuthorDefaultProfileImage = "https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg";
+        private const string BookDefaultProfileImage = "https://sciendo.com/product-not-found.png";
 
         private readonly IBrowsingContext context;
 
@@ -60,7 +61,7 @@
                 .Attr("href")
                 .FirstOrDefault();
 
-            if (authorWebsite == null)
+            if (authorWebsite == null|| authorWebsite.StartsWith('/'))
             {
                 authorWebsite = authorUrl;
             }
@@ -189,9 +190,18 @@
                 }
             }
 
-            book.BookImage = documentUrl.QuerySelectorAll(".bookCoverPrimary > a > img")
-                .Attr("src")
-                .FirstOrDefault();
+            var bookImage = documentUrl.QuerySelectorAll(".bookCoverPrimary > a > img")
+                  .Attr("src")
+                  .FirstOrDefault();
+
+            if (bookImage != null)
+            {
+                book.BookImage = bookImage;
+            }
+            else
+            {
+                book.BookImage = BookDefaultProfileImage;
+            }
 
             var bookLanguage = documentUrl.QuerySelectorAll(".clearFloats")
                .Where(x => x.Children.HasClass("infoBoxRowItem"))

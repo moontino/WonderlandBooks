@@ -19,7 +19,7 @@
 
         public string BookUrl { get; set; }
 
-        public string ImageExtension { get; set; }
+        public string ImageUrl { get; set; }
 
         public ICollection<string> GenresName { get; set; }
 

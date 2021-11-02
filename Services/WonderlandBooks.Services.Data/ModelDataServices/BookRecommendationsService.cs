@@ -37,7 +37,7 @@
                            {
                                Id = x.Id,
                                Name = x.Name,
-                               ImageUrl = x.Image.Extension,
+                               ImageUrl = x.Image.Url,
                                Authors = x.Authors.Select(a => new BookRecommendationsAuthorsDto
                                {
                                    Id = a.Id,
@@ -65,7 +65,7 @@
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    ImageUrl = x.Image.Extension,
+                    ImageUrl = x.Image.Url,
                     Authors = x.Authors.Select(a => new BookRecommendationsAuthorsDto
                     {
                         Id = a.Id,

@@ -4,7 +4,7 @@
 
     public class CreativeWritingController : BaseController
     {
-        public IActionResult Create()
+        public IActionResult CreateStory()
         {
             return this.View();
         }
