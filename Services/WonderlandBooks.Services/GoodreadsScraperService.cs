@@ -61,7 +61,7 @@
                 .Attr("href")
                 .FirstOrDefault();
 
-            if (authorWebsite == null|| authorWebsite.StartsWith('/'))
+            if (authorWebsite == null || authorWebsite.StartsWith('/'))
             {
                 authorWebsite = authorUrl;
             }

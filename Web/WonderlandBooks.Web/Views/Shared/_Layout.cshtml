@@ -20,7 +20,7 @@
     <link href="~/unicornTemp/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/unicornTemp/vendors/Magnific-Popup/magnific-popup.css" rel="stylesheet" />
     <link href="~/unicornTemp/css/style.css" rel="stylesheet" />
-
+    @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header class="header_area">
@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" asp-controller="CreativeWriting" asp-action="Create">
+                                <a class="nav-link" asp-controller="CreativeWriting" asp-action="CreateStory">
                                     <h3>Writing</h3>
                                 </a>
                             </li>
@@ -87,5 +87,6 @@
     <script src="~/unicornTemp/js/startup-script.js"></script>
     <script src="~/unicornTemp/js/startup.js"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

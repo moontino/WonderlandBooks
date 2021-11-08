@@ -1,13 +1,65 @@
-﻿<!--<form method="post" class="col-md offset-md-2">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.CreateStoryInputModel
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<form method="post" class="col-md-6 offset-md-3">
+    <div class="container">
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" asp-for="ImageUrl" />
+                <label for="imageUpload"></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview" style="background-image: url(http://sciendo.com/product-not-found.png);">
+                </div>
+            </div>
+        </div>
     </div>
-</form>-->
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GenreId"></label>
+        <select asp-for="GenreId" class="form-control" asp-items="@ViewBag.Genres">
+            <option value="0">Select</option>
+        </select>
+        <span asp-validation-for="GenreId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EditionLanguageId"></label>
+        <select asp-for="EditionLanguageId" class="form-control" asp-items="@ViewBag.Language">
+            <option value="0">Select</option>
+        </select>
+        <span asp-validation-for="EditionLanguageId" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+
+</form>
+
+@section Scripts {
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/custom/image.css" rel="stylesheet" />
+}

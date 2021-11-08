@@ -24,4 +24,8 @@
     <ProjectReference Include="..\WonderlandBooks.Services.Mapping\WonderlandBooks.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InputModelDataService\" />
+  </ItemGroup>
+
 </Project>

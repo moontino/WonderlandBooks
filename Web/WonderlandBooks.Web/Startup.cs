@@ -23,6 +23,7 @@
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Services.Messaging;
     using WonderlandBooks.Web.ViewModels;
+    using WonderlandBooks.Web.ViewModels.CreativeWriting.InputModelSelectList;
 
     public class Startup
     {
@@ -76,6 +77,8 @@
             services.AddTransient<IGetBookByIdService, GetBookByIdService>();
             services.AddTransient<IAllAuthorBooksService, AllAuthorBooksService>();
             services.AddTransient<ICountDataService, CountDataService>();
+            services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
+            services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
