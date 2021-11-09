@@ -1,0 +1,66 @@
+﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.CreateChapterInputModel
+
+<form method="post" class="col-md-8 offset-md-2">
+    <div class="form-group">
+        <input asp-for="Title"class="form-text" style=" font-size: 200%" placeholder="Chapter..." />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <textarea asp-for="Description" class="form-text" rows="20" maxlength="30000" placeholder="Start Typin..." autofocus></textarea>
+        <div id="the-count">
+            <span id="current">0</span>
+            <span id="maximum">/ 30000</span>
+        </div>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div>
+        <input class="btn btn-primary" type="submit" value="Publish">
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $('textarea').keyup(function () {
+
+            var characterCount = $(this).val().length,
+                current = $('#current'),
+                maximum = $('#maximum'),
+                theCount = $('#the-count');
+
+            current.text(characterCount);
+
+
+            /*This isn't entirely necessary, just playin around*/
+            if (characterCount < 70) {
+                current.css('color', '#666');
+            }
+            if (characterCount > 70 && characterCount < 90) {
+                current.css('color', '#6d5555');
+            }
+            if (characterCount > 90 && characterCount < 100) {
+                current.css('color', '#793535');
+            }
+            if (characterCount > 100 && characterCount < 120) {
+                current.css('color', '#841c1c');
+            }
+            if (characterCount > 120 && characterCount < 139) {
+                current.css('color', '#8f0001');
+            }
+
+            if (characterCount >= 140) {
+                maximum.css('color', '#8f0001');
+                current.css('color', '#8f0001');
+                theCount.css('font-weight', 'bold');
+            } else {
+                maximum.css('color', '#666');
+                theCount.css('font-weight', 'normal');
+            }
+
+
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/custom/textarea.css" rel="stylesheet" />
+}

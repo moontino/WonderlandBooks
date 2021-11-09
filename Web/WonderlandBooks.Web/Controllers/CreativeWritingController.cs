@@ -24,6 +24,7 @@
         {
             this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
             this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
+
             return this.View();
         }
 
@@ -37,8 +38,25 @@
                 return this.View(input);
             }
 
-            ;
-            return this.Redirect("Home/Index");
+            return this.Redirect("CreateChapter");
         }
+
+        public IActionResult CreateChapter() // id story
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateChapter(CreateChapterInputModel input) // id story
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            return this.Redirect("CreateChapter");
+        }
+
+
     }
 }

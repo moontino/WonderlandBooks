@@ -17,14 +17,18 @@
 
         public string ImageUrl { get; set; }// custom attribute
 
-
+        [Display(Name = "Genre")]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a genre")]
         public int GenreId { get; set; }
 
-
+        [Display(Name = "Language")]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a language")]
         public int EditionLanguageId { get; set; }
 
         // Characters,Tags????
+
+        public IList<string> Characters { get; set; }
+
+        public IList<string> Tags { get; set; }
     }
 }

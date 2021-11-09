@@ -15,34 +15,49 @@
     </div>
     <div class="form-group">
         <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
+        <input class="form-text" asp-for="Title" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+        <textarea asp-for="Description" class="form-text" rows="10"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="GenreId"></label>
-        <select asp-for="GenreId" class="form-control" asp-items="@ViewBag.Genres">
+        <select class="form-select" asp-for="GenreId" asp-items="@ViewBag.Genres">
             <option value="0">Select</option>
         </select>
         <span asp-validation-for="GenreId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="EditionLanguageId"></label>
-        <select asp-for="EditionLanguageId" class="form-control" asp-items="@ViewBag.Language">
+        <select class="form-select" asp-for="EditionLanguageId" asp-items="@ViewBag.Language">
             <option value="0">Select</option>
         </select>
         <span asp-validation-for="EditionLanguageId" class="text-danger"></span>
     </div>
-    <input type="submit" class="btn btn-primary" />
-
+    <div id="addCharacter">
+        <label asp-for="Characters"></label>
+        <input type="text" asp-for="Characters" />
+        <button class="btn btn-light" id="btnAddField" onclick="AddCharacter()">Add more names</button>
+    </div>
+    &nbsp;
+    <div id="addTag">
+        <label asp-for="Tags"></label>
+        <input type="text" asp-for="Tags" />
+        <button class="btn btn-light" id="btnAddSecondField" onclick="AddTag()">Add tag</button>
+    </div>
+    &nbsp;
+    <div>
+        <input type="submit" class="btn btn-outline-primary mr-2" />
+    </div>
 </form>
 
+
+
 @section Scripts {
-    <script>
+    <script type="text/javascript">
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -57,6 +72,29 @@
         $("#imageUpload").change(function () {
             readURL(this);
         });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function AddCharacter() {
+            var $fields = $('#addCharacter');
+            $('#btnAddField').click(function (e) {
+                e.preventDefault();
+                $('<input type="text" name="Characters" /><br/>').appendTo($fields);
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function AddTag() {
+            var $fields = $('#addTag');
+            $('#btnAddSecondField').click(function (e) {
+                e.preventDefault();
+                $('<input type="text" name="Tags" /><br/>').appendTo($fields);
+            });
+        });
+
     </script>
 }
 
