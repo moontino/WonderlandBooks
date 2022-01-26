@@ -2,11 +2,11 @@
 
 <form method="post" class="col-md-8 offset-md-2">
     <div class="form-group">
-        <input asp-for="Title"class="form-text" style=" font-size: 200%" placeholder="Chapter..." />
+        <input asp-for="Title"class="form-control-lg" style=" font-size: 200%" placeholder="Chapter..." />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <textarea asp-for="Description" class="form-text" rows="20" maxlength="30000" placeholder="Start Typin..." autofocus></textarea>
+        <textarea asp-for="Description" class="form-text" rows="32" maxlength="30000" placeholder="Start Typin..." autofocus></textarea>
         <div id="the-count">
             <span id="current">0</span>
             <span id="maximum">/ 30000</span>

@@ -1,75 +1,68 @@
-﻿@model WonderlandBooks.Web.ViewModels.Authors.AuthorViewModel
+﻿
+@model WonderlandBooks.Web.ViewModels.Authors.AuthorViewModel
 @{
     this.ViewData["Title"] = "Author";
 }
-<div class="wrapper style1">
-    <div class="container">
-        <article id="main" class="special">
-            <header>
-                <h2><a href="#">@Model.Name</a></h2>
-                <p>
-                    @Model.Website
-                </p>
-            </header>
-            <div class="w-100 p-100 text-center ">
-                <img class="responsive" src="@Model.ImageUrl" style="width:50%">
-            </div>
-            <div>
-                <p class="h3 text-muted">
-                    @Model.Biography
-                </p>
-            </div>
-            <section class="col-4 col-12-mobile">
 
-                <ul class="divided">
-                    <li>
-                        <article class="tweet">
-                            <strong>Genres:</strong> @Model.Genres.ToString()
-                        </article>
-                    </li>
-                </ul>
-            </section>
-        </article>
+
+<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="author-section">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="overlay"></div>
+                    <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(@Model.ImageUrl);">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="py-md-5 w-100 bg-light px-md-5">
+                    <div class="py-md-5">
+                        <div class="row justify-content-start pb-3">
+                            <div class="col-md-12 heading-section ftco-animate">
+                                <h2 class="mb-4">@Model.Name</h2>
+                                <ul class="about-info mt-4 px-md-0 px-2">
+                                    <li class="d-flex"><span>Name:</span> <span>@Model.Name</span></li>
+                                    <li class="d-flex"><span>Website:</span> <span>@Model.Website</span></li>
+                                    <li class="d-flex"><span>Genres:</span> <span>@Model.Genres</span></li>
+                                </ul>
+                                <p>@Model.Biography</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<section class="carousel">
-    <div class="reel">
-        @foreach (var book in Model.Books)
-        {
-            <article class="align-self-sm-auto">
-                <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" alt="" /></a>
-                <header>
-                    <h3><a>@book.Name</a></h3>
-                </header>
-                <p>@book.EditionLanguageName</p>
-            </article>
-        }
+</section>
+<section class="ftco-section ftco-project" id="projects-section">
+    <div class="container">
+        <div class="row no-gutters justify-content-center pb-5">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4"> Books</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var book in Model.Books)
+            {
+
+                <div class="col-md-3">
+                    <div class="project img ftco-animate d-flex justify-content-center align-items-end" style="background-image: url(@book.ImageUrl);">
+                        <div class="overlay"></div>
+                        <div class="text p-4">
+                            <h3><a href="#">@book.Name</a></h3>
+                            <span>@book.EditionLanguageName</span>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
     </div>
 </section>
 <hr />
-<div class="container">
-    <div class="row">
-        @for (int i = 0; i < Model.Series.Count(); i++)
-        {
-            <article class="col-3 col-12-mobile special">
-
-                <header class="table-responsive-sm">
-                    <h3><a href="#">@Model.Series[i].SeriesName</a></h3>
-                </header>
-                @foreach (var book in Model.Series[i].Books)
-                {
-                    <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageExtension" /></a>
-                    <div>
-                        <h6 class="align-self-auto">@book.Name <em>(@book.NumberOfSet)</em></h6>
-                    </div>
-                }
-            </article>
-        }
-    </div>
-</div>
 <div>
     <footer>
-        <a class="button" asp-controller="Books" asp-action="AllBooks" asp-route-id="@Model.Id">See more books by @Model.Name </a>
+        <a class="button" asp-controller="Authors" asp-action="AllSeries" asp-route-id="@Model.Id">See more books by @Model.Name </a>
     </footer>
 </div>
-<!---->

@@ -27,8 +27,6 @@
 
         public DbSet<Book> Books { get; set; }
 
-        public DbSet<BookSeries> BookSeries { get; set; }
-
         public DbSet<Chapter> Chapters { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
@@ -71,7 +69,7 @@
             this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Needed for Identity models configuration

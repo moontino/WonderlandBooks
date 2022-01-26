@@ -2,8 +2,10 @@
 {
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using WonderlandBooks.Services.Data.ControllerDataService;
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
     using WonderlandBooks.Web.ViewModels.CreativeWriting.InputModelSelectList;
 
@@ -11,13 +13,16 @@
     {
         private readonly IGenreInputModelListItems genreInputModel;
         private readonly IEditionLanguageInputModelListItems editionLanguageInputModel;
+        private readonly IMapper mapper;
 
         public CreativeWritingController(
             IGenreInputModelListItems genreInputModel,
-            IEditionLanguageInputModelListItems editionLanguageInputModel)
+            IEditionLanguageInputModelListItems editionLanguageInputModel,
+            IMapper mapper)
         {
             this.genreInputModel = genreInputModel;
             this.editionLanguageInputModel = editionLanguageInputModel;
+            this.mapper = mapper;
         }
 
         public IActionResult CreateStory()
@@ -57,6 +62,12 @@
             return this.Redirect("CreateChapter");
         }
 
+        public IActionResult AllStoriesByUser() // id user 
+        {
+            // var tempId = "04cb4e0f-63ee-48de-a8db-aca8291fa79b";
 
+            // var model = this.mapper.Map<AllStoriesViewModel>(this.allStories.All(tempId));
+            return this.View();
+        }
     }
 }

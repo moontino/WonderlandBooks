@@ -11,16 +11,19 @@
 
     public class HomeController : BaseController
     {
-        private readonly IAuthorsAndBooksPresentationService presentationService;
+        private readonly IAuthorsService authorsService;
+        private readonly IBooksService booksService;
         private readonly ICountDataService countData;
         private readonly IMapper mapper;
 
         public HomeController(
-            IAuthorsAndBooksPresentationService presentationService,
+            IAuthorsService authorsService,
+            IBooksService booksService,
             ICountDataService countData,
             IMapper mapper)
         {
-            this.presentationService = presentationService;
+            this.authorsService = authorsService;
+            this.booksService = booksService;
             this.countData = countData;
             this.mapper = mapper;
         }
@@ -34,13 +37,18 @@
 
         public IActionResult Welcome()
         {
-            var viewModel = new AuthorsAndBooksPresentationListViewModel
+            var viewModel = new PresentationListViewModel
             {
-                Authors = this.presentationService.GetAllAuthors<AuthorsPresentationViewModel>(),
-                Book = this.presentationService.GetHundredBooks<BookPresentationViewModel>(),
+                Authors = this.authorsService.GetTenAuthors<AuthorsPresentationViewModel>(),
+                Book = this.booksService.GetTenBooks<BookPresentationViewModel>(),
             };
 
             return this.View(viewModel);
+        }
+
+        public IActionResult Recommendations()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -45,16 +45,16 @@
             services.AddAutoMapper(typeof(Startup));
             services.Configure<CookiePolicyOptions>(
                 options =>
-                    {
-                        options.CheckConsentNeeded = context => true;
-                        options.MinimumSameSitePolicy = SameSiteMode.None;
-                    });
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
 
             services.AddControllersWithViews(
                 options =>
-                    {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    }).AddRazorRuntimeCompilation();
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -64,19 +64,20 @@
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
-            services.AddScoped<IBookRecommendationsService, BookRecommendationsService>();
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IGoodreadsScraperService, GoodreadsScraperService>();
             services.AddTransient<IGoodreadsDataService, GoodreadsDataService>();
-            services.AddTransient<ITopTenAuthorsByBookCountService, TopTenAuthorsByBookCountService>();
-            services.AddTransient<IAuthorsAndBooksPresentationService, AuthorsAndBooksPresentationService>();
-            services.AddTransient<IGetAuthorByIdService, GetAuthorByIdService>();
-            services.AddTransient<IGetBookByIdService, GetBookByIdService>();
-            services.AddTransient<IAllAuthorBooksService, AllAuthorBooksService>();
+
+            services.AddScoped<IBookRecommendationsService, BookRecommendationsService>();
+
+            services.AddTransient<IAuthorsService, AuthorsService>();
+            services.AddTransient<IBooksService, BooksService>();
             services.AddTransient<ICountDataService, CountDataService>();
+            services.AddTransient<IStoriesService, StoriesService>();
+
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();
         }
@@ -116,11 +117,11 @@
 
             app.UseEndpoints(
                 endpoints =>
-                    {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+                {
+                    endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapRazorPages();
+                });
         }
     }
 }

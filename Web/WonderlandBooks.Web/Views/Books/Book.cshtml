@@ -2,117 +2,37 @@
 @{
     this.ViewData["Title"] = "Book :)";
 }
-<div class="wrapper style1">
+@await Component.InvokeAsync("Recommendation", new { id = @Model.Id });
+<vc:Recommendation id=@Model.Id></vc:Recommendation>
+<section class="ftco-about img ftco-section" id="about-section">
     <div class="container">
-        <div class="row gtr-200">
-            <div class="col-8 col-12-mobile" id="content">
-                <article id="main">
-                    <header class="text-center">
-                        <h2><a href="@Model.BookUrl">@Model.Name</a></h2>
-                        <h3><strong>@Model.SeriesName</strong> @Model.NumberOfSet</h3>
-                        @foreach (var author in Model.Author)
-                        {
-                            <p><a asp-controller="Authors" asp-action="Author" asp-route-id="@author.Id">@author.AuthorName</a></p>
-                        }
-
-                    </header>
-                    <div class="w-100 p-100 text-center ">
-                        <a href="@Model.BookUrl"><img class="responsive" src="@Model.ImageUrl" style="width:60%" /></a>
+        <div class="row d-flex no-gutters">
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="overlay"></div>
+                    <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(@Model.ImageUrl);">
                     </div>
-                    <section>
-                        <header>
-                            <h3 style="margin:4%"><strong>Description</strong></h3>
-                        </header>
-                        <h3 style="margin:4%">
-                            @Model.Description
-                        </h3>
-
-                        <div class="container">
-                            <table class="table table-responsive-md">
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Pages</strong></td>
-                                        <td>@Model.Pages</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>EditionLanguage</strong></td>
-                                        <td>@Model.EditionLanguage</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Genres</strong></td>
-                                        <td>@Model.Genres</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Characters</strong></td>
-                                        <td>@Model.Characters</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 pl-md-5">
+                <div class="row justify-content-start pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4">@Model.Name</h2>
+                        <p>@Model.Description</p>
+                        <div class="text-about">
+                            <h4>Author</h4>
+                            @foreach (var author in Model.Authors)
+                            {
+                                <p>@author.Name</p>
+                            }
+                            <h4>Genres: </h4><p>@Model.Genres</p>
+                            <h4>Pages: </h4><p>@Model.Pages</p>
+                            <h4>Language: </h4><p>@Model.EditionLanguage</p>
+                            <h4>Site: </h4><p>@Model.BookUrl</p>
                         </div>
-                    </section>
-                </article>
-            </div>
-            <div class="col-3 col-12-mobile" id="sidebar">
-                <hr class="first" />
-                <section>
-                    <header>
-                        <h3><a href="#">Accumsan sed penatibus</a></h3><!--sidebar-->
-                    </header>
-                    <p>
-                        ТУКА МОЖЕ БИ ТРЯБВА ДА СЕ СЛОЖИ ЗА CREATING WRINING
-                    </p>
-                    <footer>
-                        <a href="#" class="button">Learn More</a>
-                    </footer>
-                </section>
-                <hr />
-                <section>
-                    <header>
-                        <h3><a href="#">Sed lorem etiam consequat</a></h3>
-                    </header>
-                    <p>
-                        Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-                    </p>
-                    <div class="row gtr-50">
-                        @foreach (var book in Model.Recommendations)
-                        {
-                            <div class="col-4">
-                                <a class="image fit" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" /></a>
-                            </div>
-                            <div class="col-8">
-                                <h4>@book.Name</h4>
-                                @foreach (var author in book.Authors)
-                                {
-                                    <a asp-controller="Authors" asp-action="Author" asp-route-id="@author.Id"><p>@author.Name</p></a>
-                                }
-                            </div>
-                        }
                     </div>
-                    <footer>
-                        <a href="#" class="button">Magna Adipiscing</a>
-                    </footer>
-                </section>
+                </div>
             </div>
-        </div>
-        <hr />
-        <div class="row">
-            @foreach (var series in Model.Series)
-            {
-                <article class="col-4 col-12-mobile special">
-
-                    <header>
-                        <h3><a href="#">@series.Name</a></h3><!--HERE SERIES-->
-                    </header>
-                    @foreach (var book in series.BooksSeries)
-                    {
-                        <p>
-                            <a class="image featured" asp-controller="Books" asp-action="Book" asp-route-id="@book.Id"><img src="@book.ImageUrl" /></a>
-                            <h4>@book.Name</h4>
-                            
-                        </p>
-                    }
-                </article>
-            }
         </div>
     </div>
-</div>
+</section>

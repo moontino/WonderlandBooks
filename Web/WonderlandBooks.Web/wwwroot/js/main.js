@@ -1,217 +1,356 @@
-/*
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 (function($) {
 
-	var	$window = $(window),
-		$body = $('body'),
-		settings = {
+	"use strict";
 
-			// Carousels
-				carousels: {
-					speed: 4,
-					fadeIn: true,
-					fadeDelay: 250
+	$(window).stellar({
+    responsive: true,
+    parallaxBackgrounds: true,
+    parallaxElements: true,
+    horizontalScrolling: false,
+    hideDistantElements: false,
+    scrollProperty: 'scroll'
+  });
+
+
+	var fullHeight = function() {
+
+		$('.js-fullheight').css('height', $(window).height());
+		$(window).resize(function(){
+			$('.js-fullheight').css('height', $(window).height());
+		});
+
+	};
+	fullHeight();
+
+	// loader
+	var loader = function() {
+		setTimeout(function() { 
+			if($('#ftco-loader').length > 0) {
+				$('#ftco-loader').removeClass('show');
+			}
+		}, 1);
+	};
+	loader();
+
+	// Scrollax
+   $.Scrollax();
+
+
+
+   // Burger Menu
+	var burgerMenu = function() {
+
+		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
+
+			event.preventDefault();
+
+			if ( $('#ftco-nav').is(':visible') ) {
+				$(this).removeClass('active');
+			} else {
+				$(this).addClass('active');	
+			}
+
+			
+			
+		});
+
+	};
+	burgerMenu();
+
+
+	var onePageClick = function() {
+
+
+		$(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
+	    event.preventDefault();
+
+	    var href = $.attr(this, 'href');
+
+	    $('html, body').animate({
+	        scrollTop: $($.attr(this, 'href')).offset().top - 70
+	    }, 500, function() {
+	    	// window.location.hash = href;
+	    });
+		});
+
+	};
+
+	onePageClick();
+	
+
+	var carousel = function() {
+		$('.home-slider').owlCarousel({
+	    loop:true,
+	    autoplay: true,
+	    margin:0,
+	    animateOut: 'fadeOut',
+	    animateIn: 'fadeIn',
+	    nav:false,
+	    autoplayHoverPause: false,
+	    items: 1,
+	    navText : ["<span class='ion-md-arrow-back'></span>","<span class='ion-chevron-right'></span>"],
+	    responsive:{
+	      0:{
+	        items:1
+	      },
+	      600:{
+	        items:1
+	      },
+	      1000:{
+	        items:1
+	      }
+	    }
+		});
+
+		$('.carousel-testimony').owlCarousel({
+			center: true,
+			loop: true,
+			autoplay: true,
+			autoplaySpeed:2000,
+			items:1,
+			margin: 30,
+			stagePadding: 0,
+			nav: false,
+			navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+			responsive:{
+				0:{
+					items: 1
 				},
-
-		};
-
-	// Breakpoints.
-		breakpoints({
-			wide:      [ '1281px',  '1680px' ],
-			normal:    [ '961px',   '1280px' ],
-			narrow:    [ '841px',   '960px'  ],
-			narrower:  [ '737px',   '840px'  ],
-			mobile:    [ null,      '736px'  ]
-		});
-
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
-
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			mode: 'fade',
-			speed: 350,
-			noOpenerFade: true,
-			alignment: 'center'
-		});
-
-	// Scrolly.
-		$('.scrolly').scrolly();
-
-	// Nav.
-
-		// Button.
-			$(
-				'<div id="navButton">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
-
-		// Panel.
-			$(
-				'<div id="navPanel">' +
-					'<nav>' +
-						$('#nav').navList() +
-					'</nav>' +
-				'</div>'
-			)
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					target: $body,
-					visibleClass: 'navPanel-visible'
-				});
-
-	// Carousels.
-		$('.carousel').each(function() {
-
-			var	$t = $(this),
-				$forward = $('<span class="forward"></span>'),
-				$backward = $('<span class="backward"></span>'),
-				$reel = $t.children('.reel'),
-				$items = $reel.children('article');
-
-			var	pos = 0,
-				leftLimit,
-				rightLimit,
-				itemWidth,
-				reelWidth,
-				timerId;
-
-			// Items.
-				if (settings.carousels.fadeIn) {
-
-					$items.addClass('loading');
-
-					$t.scrollex({
-						mode: 'middle',
-						top: '-20vh',
-						bottom: '-20vh',
-						enter: function() {
-
-							var	timerId,
-								limit = $items.length - Math.ceil($window.width() / itemWidth);
-
-							timerId = window.setInterval(function() {
-								var x = $items.filter('.loading'), xf = x.first();
-
-								if (x.length <= limit) {
-
-									window.clearInterval(timerId);
-									$items.removeClass('loading');
-									return;
-
-								}
-
-								xf.removeClass('loading');
-
-							}, settings.carousels.fadeDelay);
-
-						}
-					});
-
+				600:{
+					items: 2
+				},
+				1000:{
+					items: 3
 				}
-
-			// Main.
-				$t._update = function() {
-					pos = 0;
-					rightLimit = (-1 * reelWidth) + $window.width();
-					leftLimit = 0;
-					$t._updatePos();
-				};
-
-				$t._updatePos = function() { $reel.css('transform', 'translate(' + pos + 'px, 0)'); };
-
-			// Forward.
-				$forward
-					.appendTo($t)
-					.hide()
-					.mouseenter(function(e) {
-						timerId = window.setInterval(function() {
-							pos -= settings.carousels.speed;
-
-							if (pos <= rightLimit)
-							{
-								window.clearInterval(timerId);
-								pos = rightLimit;
-							}
-
-							$t._updatePos();
-						}, 10);
-					})
-					.mouseleave(function(e) {
-						window.clearInterval(timerId);
-					});
-
-			// Backward.
-				$backward
-					.appendTo($t)
-					.hide()
-					.mouseenter(function(e) {
-						timerId = window.setInterval(function() {
-							pos += settings.carousels.speed;
-
-							if (pos >= leftLimit) {
-
-								window.clearInterval(timerId);
-								pos = leftLimit;
-
-							}
-
-							$t._updatePos();
-						}, 10);
-					})
-					.mouseleave(function(e) {
-						window.clearInterval(timerId);
-					});
-
-			// Init.
-				$window.on('load', function() {
-
-					reelWidth = $reel[0].scrollWidth;
-
-					if (browser.mobile) {
-
-						$reel
-							.css('overflow-y', 'hidden')
-							.css('overflow-x', 'scroll')
-							.scrollLeft(0);
-						$forward.hide();
-						$backward.hide();
-
-					}
-					else {
-
-						$reel
-							.css('overflow', 'visible')
-							.scrollLeft(0);
-						$forward.show();
-						$backward.show();
-
-					}
-
-					$t._update();
-
-					$window.on('resize', function() {
-						reelWidth = $reel[0].scrollWidth;
-						$t._update();
-					}).trigger('resize');
-
-				});
-
+			}
 		});
+	};
+	carousel();
+
+	$('nav .dropdown').hover(function(){
+		var $this = $(this);
+		// 	 timer;
+		// clearTimeout(timer);
+		$this.addClass('show');
+		$this.find('> a').attr('aria-expanded', true);
+		// $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
+		$this.find('.dropdown-menu').addClass('show');
+	}, function(){
+		var $this = $(this);
+			// timer;
+		// timer = setTimeout(function(){
+			$this.removeClass('show');
+			$this.find('> a').attr('aria-expanded', false);
+			// $this.find('.dropdown-menu').removeClass('animated-fast fadeInUp show');
+			$this.find('.dropdown-menu').removeClass('show');
+		// }, 100);
+	});
+
+
+	$('#dropdown04').on('show.bs.dropdown', function () {
+	  console.log('show');
+	});
+
+	// scroll
+	var scrollWindow = function() {
+		$(window).scroll(function(){
+			var $w = $(this),
+					st = $w.scrollTop(),
+					navbar = $('.ftco_navbar'),
+					sd = $('.js-scroll-wrap');
+
+			if (st > 150) {
+				if ( !navbar.hasClass('scrolled') ) {
+					navbar.addClass('scrolled');	
+				}
+			} 
+			if (st < 150) {
+				if ( navbar.hasClass('scrolled') ) {
+					navbar.removeClass('scrolled sleep');
+				}
+			} 
+			if ( st > 350 ) {
+				if ( !navbar.hasClass('awake') ) {
+					navbar.addClass('awake');	
+				}
+				
+				if(sd.length > 0) {
+					sd.addClass('sleep');
+				}
+			}
+			if ( st < 350 ) {
+				if ( navbar.hasClass('awake') ) {
+					navbar.removeClass('awake');
+					navbar.addClass('sleep');
+				}
+				if(sd.length > 0) {
+					sd.removeClass('sleep');
+				}
+			}
+		});
+	};
+	scrollWindow();
+
+	
+
+	var counter = function() {
+		
+		$('#section-counter, .hero-wrap, .ftco-counter, .ftco-about').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
+
+				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
+				$('.number').each(function(){
+					var $this = $(this),
+						num = $this.data('number');
+						console.log(num);
+					$this.animateNumber(
+					  {
+					    number: num,
+					    numberStep: comma_separator_number_step
+					  }, 7000
+					);
+				});
+				
+			}
+
+		} , { offset: '95%' } );
+
+	}
+	counter();
+
+
+	var contentWayPoint = function() {
+		var i = 0;
+		$('.ftco-animate').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
+				
+				i++;
+
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
+
+					$('body .ftco-animate.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data('animate-effect');
+							if ( effect === 'fadeIn') {
+								el.addClass('fadeIn ftco-animated');
+							} else if ( effect === 'fadeInLeft') {
+								el.addClass('fadeInLeft ftco-animated');
+							} else if ( effect === 'fadeInRight') {
+								el.addClass('fadeInRight ftco-animated');
+							} else {
+								el.addClass('fadeInUp ftco-animated');
+							}
+							el.removeClass('item-animate');
+						},  k * 50, 'easeInOutExpo' );
+					});
+					
+				}, 100);
+				
+			}
+
+		} , { offset: '95%' } );
+	};
+	contentWayPoint();
+
+	// magnific popup
+	$('.image-popup').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    fixedContentPos: true,
+    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+     gallery: {
+      enabled: true,
+      navigateByImgClick: true,
+      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+    },
+    image: {
+      verticalFit: true
+    },
+    zoom: {
+      enabled: true,
+      duration: 300 // don't foget to change the duration also in CSS
+    }
+  });
+
+  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+    disableOn: 700,
+    type: 'iframe',
+    mainClass: 'mfp-fade',
+    removalDelay: 160,
+    preloader: false,
+
+    fixedContentPos: false
+  });
+
 
 })(jQuery);
+
+
+
+
+
+
+
+// this makes the height of each page equal to the height of the window
+// $('.page').css('height', $( window ).height());
+
+// scrollspy section
+(function($){
+  //variable that will hold the href attr of the links in the menu
+  var sections = [];
+  //variable that stores the id of the section
+  var id = false;
+  //variable for the selection of the anchors in the navbar
+  var $navbara = $('#navi a');
+  
+  $navbara.click(function(e){
+    //prevent the page from refreshing
+    e.preventDefault();
+    //set the top offset animation and speed
+    $('html, body').animate({
+      scrollTop: $($(this).attr('href')).offset().top - 180
+},500);
+    hash($(this).attr('href'));
+  });
+  
+  
+  
+  //select all the anchors in the navbar one after another
+  $navbara.each(function(){
+   // and adds them in the sections variable
+    sections.push($($(this).attr('href')));
+    
+  })
+  $(window).scroll(function(e){
+    // scrollTop retains the value of the scroll top with the reference at the middle of the page
+    var scrollTop = $(this).scrollTop() + ($(window).height()/2);
+    //cycle through the values in sections array
+    for (var i in sections) {
+      var section = sections[i];
+      //if scrollTop variable is bigger than the top offset of a section in the sections array then 
+      if (scrollTop > section.offset().top){
+        var scrolled_id = section.attr('id');
+      }
+    }
+    if (scrolled_id !== id) {
+      id = scrolled_id;
+      $($navbara).removeClass('current');
+      $('#navi a[href="#' + id + '"]').addClass('current'); 
+    }
+  })
+})(jQuery);
+
+hash = function(h){
+  if (history.pushState){
+    history.pushState(null, null, h);
+  }else{
+    location.hash = h;
+  }
+}
+
+

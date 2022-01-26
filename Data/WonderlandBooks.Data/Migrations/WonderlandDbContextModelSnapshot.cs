@@ -367,9 +367,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BookSeriesId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BookUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -404,40 +401,11 @@ namespace WonderlandBooks.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookSeriesId");
-
                     b.HasIndex("EditionLanguageId");
 
                     b.HasIndex("ImageId");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.BookSeries", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("BookSeries");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Chapter", b =>
@@ -679,11 +647,17 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
@@ -1023,10 +997,6 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
                 {
-                    b.HasOne("WonderlandBooks.Data.Models.BookSeries", "BookSeries")
-                        .WithMany("Books")
-                        .HasForeignKey("BookSeriesId");
-
                     b.HasOne("WonderlandBooks.Data.Models.EditionLanguage", "EditionLanguage")
                         .WithMany("Books")
                         .HasForeignKey("EditionLanguageId")
@@ -1037,22 +1007,9 @@ namespace WonderlandBooks.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ImageId");
 
-                    b.Navigation("BookSeries");
-
                     b.Navigation("EditionLanguage");
 
                     b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.BookSeries", b =>
-                {
-                    b.HasOne("WonderlandBooks.Data.Models.Author", "Author")
-                        .WithMany("BookSeries")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Chapter", b =>
@@ -1200,21 +1157,11 @@ namespace WonderlandBooks.Data.Migrations
                     b.Navigation("Shelves");
                 });
 
-            modelBuilder.Entity("WonderlandBooks.Data.Models.Author", b =>
-                {
-                    b.Navigation("BookSeries");
-                });
-
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
                 {
                     b.Navigation("Characters");
 
                     b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.BookSeries", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Chapter", b =>

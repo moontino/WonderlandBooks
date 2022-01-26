@@ -12,7 +12,6 @@
         private readonly IGoodreadsScraperService goodreadsScraper;
         private readonly IRepository<Author> authorRepository;
         private readonly IRepository<Book> bookRepository;
-        private readonly IRepository<BookSeries> bookSeriesRepository;
         private readonly IRepository<Character> characterRepository;
         private readonly IRepository<EditionLanguage> languageRepository;
         private readonly IRepository<Genre> genreRepository;
@@ -22,7 +21,6 @@
             IGoodreadsScraperService goodreadsScraper,
             IRepository<Author> authorRepository,
             IRepository<Book> bookRepository,
-            IRepository<BookSeries> bookSeriesRepository,
             IRepository<Character> characterRepository,
             IRepository<EditionLanguage> languageRepository,
             IRepository<Genre> genreRepository,
@@ -31,7 +29,6 @@
             this.goodreadsScraper = goodreadsScraper;
             this.authorRepository = authorRepository;
             this.bookRepository = bookRepository;
-            this.bookSeriesRepository = bookSeriesRepository;
             this.characterRepository = characterRepository;
             this.languageRepository = languageRepository;
             this.genreRepository = genreRepository;
@@ -76,38 +73,12 @@
 
                 foreach (var book in model.AuthorBooks)
                 {
-                    if (book.BookSeriesName != null)
-                    {
-                        author.BookSeries.Add(await this.GetOrCreateSeriesAsync(book));
-                    }
-
                     author.Books.Add(await this.GetOrCreateBookAsync(book));
                 }
 
                 await this.authorRepository.AddAsync(author);
                 await this.authorRepository.SaveChangesAsync();
             }
-        }
-
-        private async Task<BookSeries> GetOrCreateSeriesAsync(BookDto bookDto)
-        {
-            var series = this.bookSeriesRepository.All()
-                .Where(x => x.Name == bookDto.BookSeriesName)
-               .FirstOrDefault();
-
-            if (series != null)
-            {
-                return series;
-            }
-
-            series = new BookSeries
-            {
-                Name = bookDto.BookSeriesName,
-            };
-
-            series.Books.Add(await this.GetOrCreateBookAsync(bookDto));
-
-            return series;
         }
 
         private async Task<Book> GetOrCreateBookAsync(BookDto bookDto)
@@ -127,7 +98,6 @@
                 Description = bookDto.BookDiscription,
                 Pages = bookDto.BookPages,
                 BookUrl = bookDto.BookUrl,
-                NumberOfSet = bookDto.BookNumberOfSet,
             };
 
             var bookImage = new Image

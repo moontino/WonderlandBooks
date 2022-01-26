@@ -21,6 +21,8 @@
 
         public async Task<IActionResult> Add()
         {
+            await this.goodreadsData.ImportDataAsync(161908, 161910);
+
             // 164187-169187
             for (int i = 1; i < 9; i++)
             {

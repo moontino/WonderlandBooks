@@ -4,38 +4,29 @@
     using Microsoft.AspNetCore.Mvc;
 
     using WonderlandBooks.Services.Data.ControllerDataService;
+    using WonderlandBooks.Services.Data.ModelDataServices;
     using WonderlandBooks.Web.ViewModels.Books;
 
     public class BooksController : BaseController
     {
-        private readonly IGetBookByIdService getBookService;
+
         private readonly IMapper mapper;
-        private readonly IAllAuthorBooksService authorBooks;
+        private readonly IBooksService booksService;
+        private readonly IBookRecommendationsService bookRecommendations;
 
         public BooksController(
-            IGetBookByIdService getBookService,
             IMapper mapper,
-            IAllAuthorBooksService authorBooks)
+            IBooksService booksService,
+            IBookRecommendationsService bookRecommendations)
         {
-            this.getBookService = getBookService;
             this.mapper = mapper;
-            this.authorBooks = authorBooks;
+            this.booksService = booksService;
+            this.bookRecommendations = bookRecommendations;
         }
 
         public IActionResult Book(int id)
         {
-            var model = this.mapper.Map<BookViewModel>(this.getBookService.GetBook(id));
-
-            return this.View(model);
-        }
-
-        public IActionResult AllBooks(int id)
-        {
-            AllBooksListViewModel model = new()
-            {
-                Books = this.authorBooks.GetBooks<AllBooksViewModel>(id),
-            };
-
+            var model = this.mapper.Map<BookViewModel>(this.booksService.Book<BookViewModel>(id));
             return this.View(model);
         }
     }

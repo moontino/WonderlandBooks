@@ -11,5 +11,9 @@
         }
 
         public string Url { get; set; }
+
+        public string RemoteImageUrl { get; set; }
+
+        public string Extension { get; set; }
     }
 }

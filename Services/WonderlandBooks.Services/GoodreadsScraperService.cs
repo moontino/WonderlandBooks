@@ -176,20 +176,6 @@
             var bookNumberOfSetAndBookSeries = documentUrl.QuerySelectorAll(".last > h2")
                 .FirstOrDefault().TextContent;
 
-            if (bookNumberOfSetAndBookSeries != null)
-            {
-                var bookPairSetAndSeries = bookNumberOfSetAndBookSeries
-                    .Trim()
-                    .Replace(")", string.Empty)
-                    .Replace("(", string.Empty)
-                    .Split("#");
-                if (bookPairSetAndSeries.Count() > 1)
-                {
-                    book.BookSeriesName = bookPairSetAndSeries[0].TrimEnd();
-                    book.BookNumberOfSet = int.Parse(bookPairSetAndSeries[1]);
-                }
-            }
-
             var bookImage = documentUrl.QuerySelectorAll(".bookCoverPrimary > a > img")
                   .Attr("src")
                   .FirstOrDefault();

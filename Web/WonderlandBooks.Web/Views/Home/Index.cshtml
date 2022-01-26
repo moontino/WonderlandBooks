@@ -4,49 +4,21 @@
     this.ViewData["Title"] = "Welcome";
 }
 
-
-<section class="hero-banner">
-    <div class="hero-banner__content text-center">
-        <h1>We Well Understand Your Intention</h1>
-        <a class="button" href="#">Write and read with as!</a>
-    </div>
-</section>
-<section>
-    <div class="container static__single-position">
-        <div class="row">
-            <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="card static__single">
-                    <h3>@Model.CountAuthors</h3>
-                    <h4>Authors</h4>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="card static__single">
-                    <h3>@Model.CountBooks</h3>
-                    <h4>Books</h4>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="card static__single">
-                    <h3>@Model.CountGenres</h3>
-                    <h4>Genres</h4>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3 mb-4 mb-xl-0">
-                <div class="card static__single">
-                    <h3>@Model.CountWriting</h3>
-                    <h4>Creative Writing</h4>
+<section class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div class="container-fluid px-0">
+        <div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-end">
+            <img class="one-third js-fullheight align-self-end order-md-last img-fluid" src="~/img/undraw_book_lover_mkck.svg">
+            <div class="one-forth d-flex align-items-center ftco-animate js-fullheight">
+                <div class="text mt-5">
+                    <span class="subheading">Best Book Library</span>
+                    <h1>Hello, dear readers and lovers of fantasy worlds!</h1>
+                    <p>I want to introduce you to our world of magic and sorcery. Come and find out some of the most exciting stories and works by famous authors. If you want to be a part of our story... </p>
+                    <p><a class="btn btn-primary py-3 px-4" asp-controller="Home" asp-action="Welcome">Join our adventures.</a></p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, dear readers and lovers of fantasy worlds!</h1>
-        <p class="lead">I want to introduce you to our world of magic and sorcery. Come and find out some of the most exciting stories and works by famous authors.</p>
-        <hr class="my-4">
-        <p>If you want to be a part of our story, join our adventures.</p>
-        <a class="btn btn-primary btn-lg" role="button" asp-controller="Home" asp-action="Welcome">Learn more</a>
-    </div>
-</div>
+
+

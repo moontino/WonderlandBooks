@@ -9,7 +9,6 @@
     {
         public Author()
         {
-            this.BookSeries = new HashSet<BookSeries>();
             this.Books = new HashSet<Book>();
             this.Genres = new HashSet<Genre>();
         }
@@ -28,7 +27,5 @@
         public virtual ICollection<Genre> Genres { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }
-
-        public virtual ICollection<BookSeries> BookSeries { get; set; }
     }
 }

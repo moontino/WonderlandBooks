@@ -26,12 +26,6 @@
         [Required]
         public string BookUrl { get; set; }
 
-        public int? NumberOfSet { get; set; }
-
-        public int? BookSeriesId { get; set; }
-
-        public BookSeries BookSeries { get; set; }
-
         public string ImageId { get; set; }
 
         public Image Image { get; set; }

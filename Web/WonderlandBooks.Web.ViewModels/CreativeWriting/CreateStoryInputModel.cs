@@ -25,8 +25,6 @@
         [Range(1, int.MaxValue, ErrorMessage = "Please select a language")]
         public int EditionLanguageId { get; set; }
 
-        // Characters,Tags????
-
         public IList<string> Characters { get; set; }
 
         public IList<string> Tags { get; set; }
