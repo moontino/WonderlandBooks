@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WonderlandBooks.Data.Migrations
+﻿namespace WonderlandBooks.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class DeleteTableBookSeries : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

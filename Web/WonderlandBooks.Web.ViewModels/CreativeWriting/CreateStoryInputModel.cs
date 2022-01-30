@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Http;
 
     public class CreateStoryInputModel
     {
@@ -15,7 +15,8 @@
         [MinLength(20)]
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }// custom attribute
+        //[AllowedExtensionsAttribute(new string[] { ".jpg", ".png" })]
+        public IFormFile Image { get; set; }// custom attribute
 
         [Display(Name = "Genre")]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a genre")]
@@ -24,6 +25,8 @@
         [Display(Name = "Language")]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a language")]
         public int EditionLanguageId { get; set; }
+
+        public string UserId { get; set; }
 
         public IList<string> Characters { get; set; }
 

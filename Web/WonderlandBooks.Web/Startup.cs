@@ -19,6 +19,7 @@
     using WonderlandBooks.Services;
     using WonderlandBooks.Services.Data;
     using WonderlandBooks.Services.Data.ControllerDataService;
+    using WonderlandBooks.Services.Data.InputDataServices;
     using WonderlandBooks.Services.Data.ModelDataServices;
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Services.Messaging;
@@ -77,6 +78,8 @@
             services.AddTransient<IBooksService, BooksService>();
             services.AddTransient<ICountDataService, CountDataService>();
             services.AddTransient<IStoriesService, StoriesService>();
+
+            services.AddTransient<ICreateStoryService, CreateStoryService>();
 
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();

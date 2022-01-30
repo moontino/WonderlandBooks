@@ -2,8 +2,7 @@
 @{
     this.ViewData["Title"] = "Book :)";
 }
-@await Component.InvokeAsync("Recommendation", new { id = @Model.Id });
-<vc:Recommendation id=@Model.Id></vc:Recommendation>
+
 <section class="ftco-about img ftco-section" id="about-section">
     <div class="container">
         <div class="row d-flex no-gutters">
@@ -18,7 +17,7 @@
                 <div class="row justify-content-start pb-3">
                     <div class="col-md-12 heading-section ftco-animate">
                         <h2 class="mb-4">@Model.Name</h2>
-                        <p>@Model.Description</p>
+                        <p>@Model.Description</p>WS
                         <div class="text-about">
                             <h4>Author</h4>
                             @foreach (var author in Model.Authors)

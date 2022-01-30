@@ -4234,7 +4234,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link.disabled {
-  color: #6c757d;
+  color: #c90e34;
   pointer-events: none;
   cursor: default;
 }
@@ -4254,7 +4254,7 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-  border-color: #e9ecef #e9ecef #dee2e6;
+  border-color: #e9ecef #e9ecef #c90e34;
 }
 
 .nav-tabs .nav-link.disabled {

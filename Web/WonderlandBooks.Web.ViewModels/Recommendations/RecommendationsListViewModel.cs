@@ -10,6 +10,5 @@ namespace WonderlandBooks.Web.ViewModels.Recommendations
         }
 
         public ICollection<RecommendationsViewModel> Models { get; set; }
-
     }
 }

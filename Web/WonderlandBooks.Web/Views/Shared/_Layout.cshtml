@@ -43,6 +43,9 @@
                     <ul class="navbar-nav nav ml-auto">
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index"><span>Home</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="CreativeWriting" asp-action="CreateStory"><span>Writing</span></a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="Book" asp-route-id="1"><span>Book ID=1</span></a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="Author" asp-route-id="1"><span>Author ID=1</span></a></li>
+                        <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>
@@ -54,12 +57,8 @@
         @this.RenderBody()
     </main>
 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!--foother -->
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -26,7 +26,6 @@
         public string Genres { get; set; }
 
         // public string Characters { get; set; }
-
         public IEnumerable<BookAuthorViewModel> Authors { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

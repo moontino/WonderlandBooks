@@ -1,19 +1,10 @@
 ﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.CreateStoryInputModel
-
-<form method="post" class="col-md-6 offset-md-3">
-    <div class="container">
-        <div class="avatar-upload">
-            <div class="avatar-edit">
-                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" asp-for="ImageUrl" />
-                <label for="imageUpload"></label>
-            </div>
-            <div class="avatar-preview">
-                <div id="imagePreview" style="background-image: url(http://sciendo.com/product-not-found.png);">
-                </div>
-            </div>
-        </div>
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data" >
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input class="form-control" asp-for="Image" />
+        <!--  <span asp-validation-for="Image" class="text-danger"></span> //ако няма корица default image трябва да се сложи  -->
     </div>
-
     <div class="form-group">
         <label asp-for="Title"></label>
         <input class="form-control" asp-for="Title" />
@@ -21,7 +12,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-select">
@@ -38,22 +29,23 @@
         </select>
         <span asp-validation-for="EditionLanguageId" class="text-danger"></span>
     </div>
-    <div id="addCharacter">
-        <label asp-for="Characters"></label>
-        <input type="text"  class="form-control" asp-for="Characters" />
-        <button class="btn btn-light" id="btnAddField" onclick="AddCharacter()">Add more names</button>
-    </div>
-    &nbsp;
-    <div id="addTag">
-        <label asp-for="Tags"></label>
-        <input type="text" class="form-control" asp-for="Tags" />
-        <button class="btn btn-light" id="btnAddSecondField" onclick="AddTag()">Add tag</button>
-    </div>
     &nbsp;
     <div>
         <input type="submit" class="btn btn-outline-primary mr-2" />
-    </div>
 
+    </div>
+    <!-- <div id="addCharacter">
+         <label asp-for="Characters"></label>
+         <input type="text" class="form-control" asp-for="Characters" />
+         <button class="btn btn-light" id="character" onclick="AddCharacter()">Add more names</button>
+     </div>
+     &nbsp;
+     <div id="addTag">
+         <label asp-for="Tags"></label>
+         <input type="text" class="form-control" id="inputTags" asp-for="Tags" />
+         <button class="btn btn-light" id="tags" onclick="AddTag()">Add tag</button>
+     </div>
+     &nbsp;-->
 </form>
 
 
@@ -76,7 +68,28 @@
         });
     </script>
 
-    <script type="text/javascript">
+    <script>
+
+       // let allTags = [];
+       // let button = document.getElementById('tags');
+       // button.addEventListener('click', addMoreInputs);
+       // console.log(button);
+       // function addMoreInputs(e) {
+       //     let parentDiv = document.getElementById('addTag');
+       //     let inputText = document.getElementById('inputTags');
+       //
+       //     let inputElement = document.createElement('input');
+       //     let buttonElementClear = document.createElement('button');
+       //     buttonElementClear.textContent = '-';
+       //     buttonElementClear.id = 'clearButton'
+       //     //тук може цвят да сложиш 
+       //     inputElement.appendChild(buttonElementClear);
+       //     parentDiv.appendChild(inputElement);
+       //
+       //     allTags.push(inputText.value);
+       // }
+
+
 
         $(document).ready(function AddCharacter() {
             var $fields = $('#addCharacter');

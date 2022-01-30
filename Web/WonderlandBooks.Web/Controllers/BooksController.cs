@@ -9,7 +9,6 @@
 
     public class BooksController : BaseController
     {
-
         private readonly IMapper mapper;
         private readonly IBooksService booksService;
         private readonly IBookRecommendationsService bookRecommendations;

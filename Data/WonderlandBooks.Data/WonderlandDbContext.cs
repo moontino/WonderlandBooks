@@ -69,7 +69,7 @@
             this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
-        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Needed for Identity models configuration

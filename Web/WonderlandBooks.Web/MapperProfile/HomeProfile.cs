@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using WonderlandBooks.Services.Data.ControllerDataService.Models;
+    using WonderlandBooks.Web.ViewModels.CreativeWriting;
     using WonderlandBooks.Web.ViewModels.Home;
 
     public class HomeProfile : Profile
