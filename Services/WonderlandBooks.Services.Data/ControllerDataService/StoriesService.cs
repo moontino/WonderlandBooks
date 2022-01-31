@@ -1,26 +1,39 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using WonderlandBooks.Data.Common.Repositories;
 using WonderlandBooks.Data.Models;
+using WonderlandBooks.Services.Data.ControllerDataService.Models;
 using WonderlandBooks.Services.Mapping;
+using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
 namespace WonderlandBooks.Services.Data.ControllerDataService
 {
     public class StoriesService : IStoriesService
     {
-        private readonly IRepository<CreativeWriting> repositoryWriting;
+        private readonly IDeletableEntityRepository<Story> stories;
+        private readonly IRepository<CreativeWriting> writing;
 
-        public StoriesService(IRepository<CreativeWriting> repositoryWriting)
+        public StoriesService(IDeletableEntityRepository<Story> stories, IRepository<CreativeWriting> writing)
         {
-            this.repositoryWriting = repositoryWriting;
+            this.stories = stories;
+            this.writing = writing;
         }
 
-        public T All<T>(string id)
+        public CollectionOfStories All(string id)
         {
-            return this.repositoryWriting.AllAsNoTracking()
+            return this.writing.AllAsNoTracking()
                    .Where(x => x.UserId == id)
-                   .To<T>()
-                   .FirstOrDefault();
+                   .Select(x => new CollectionOfStories
+                   {
+                       UserId = x.UserId,
+                       Stories = x.Stories.Select(s => new ListOfStoriesViewModel
+                       {
+                           Title = s.Title,
+                           Description = s.Description,
+                           Image = s.Image.Url ?? "/images/stories/" + s.Image.Id + s.Image.Extension,
+                       }).ToList(),
+                   }).FirstOrDefault();
         }
     }
 }

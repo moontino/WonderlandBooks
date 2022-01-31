@@ -31,6 +31,10 @@
 
         public EditionLanguage EditionLanguage { get; set; }
 
+        public int CreativeWritingId { get; set; }
+
+        public CreativeWriting CreativeWriting { get; set; }
+
         public virtual ICollection<Character> Characters { get; set; }
 
         public virtual ICollection<Chapter> Chapters { get; set; }

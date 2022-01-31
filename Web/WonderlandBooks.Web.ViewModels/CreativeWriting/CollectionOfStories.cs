@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class AllStoriesViewModel
+    using WonderlandBooks.Services.Mapping;
+
+    public class CollectionOfStories: IMapFrom<WonderlandBooks.Data.Models.CreativeWriting>
     {
         public string UserId { get; set; }
 

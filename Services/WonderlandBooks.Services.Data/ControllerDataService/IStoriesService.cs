@@ -1,7 +1,11 @@
-﻿namespace WonderlandBooks.Services.Data.ControllerDataService
+﻿using System.Collections.Generic;
+using WonderlandBooks.Services.Data.ControllerDataService.Models;
+using WonderlandBooks.Web.ViewModels.CreativeWriting;
+
+namespace WonderlandBooks.Services.Data.ControllerDataService
 {
     public interface IStoriesService
     {
-        T All<T>(string id);
+        CollectionOfStories All(string id);
     }
 }

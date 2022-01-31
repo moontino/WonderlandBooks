@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Data.ControllerDataService;
+    using WonderlandBooks.Services.Data.ControllerDataService.Models;
     using WonderlandBooks.Services.Data.InputDataServices;
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
     using WonderlandBooks.Web.ViewModels.CreativeWriting.InputModelSelectList;
@@ -23,6 +24,7 @@
         private readonly ICreateStoryService storyService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment hostEnvironment;
+        private readonly IStoriesService stories;
 
         public CreativeWritingController(
             IGenreInputModelListItems genreInputModel,
@@ -30,7 +32,8 @@
             IMapper mapper,
             ICreateStoryService storyService,
             UserManager<ApplicationUser> userManager,
-            IWebHostEnvironment hostEnvironment)
+            IWebHostEnvironment hostEnvironment,
+            IStoriesService stories)
         {
             this.genreInputModel = genreInputModel;
             this.editionLanguageInputModel = editionLanguageInputModel;
@@ -38,6 +41,7 @@
             this.storyService = storyService;
             this.userManager = userManager;
             this.hostEnvironment = hostEnvironment;
+            this.stories = stories;
         }
 
         public IActionResult CreateStory()
@@ -65,7 +69,7 @@
             var path = this.hostEnvironment.WebRootPath;
             await this.storyService.CreateAsync(input, path);
 
-            return this.Redirect("CreateChapter");
+            return this.Redirect("AllStories");
         }
 
         public IActionResult CreateChapter() // id story
@@ -85,12 +89,15 @@
             return this.Redirect("CreateChapter");
         }
 
-        public IActionResult AllStoriesByUser() // id user
+        [Authorize]
+        public async Task<IActionResult> AllStories() // id user
         {
-            // var tempId = "04cb4e0f-63ee-48de-a8db-aca8291fa79b";
+            // var model = this.mapper.Map<BookViewModel>(this.booksService.Book<BookViewModel>(id));
+            // var model = this.mapper.Map<CountViewModel>(this.countData.GetCount());
 
-            // var model = this.mapper.Map<AllStoriesViewModel>(this.allStories.All(tempId));
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var model = this.mapper.Map<CollectionOfStories>(this.stories.All(user.Id));
+            return this.View(model);
         }
     }
 }
