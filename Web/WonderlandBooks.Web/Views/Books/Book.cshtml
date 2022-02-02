@@ -22,15 +22,26 @@
                             <h4>Author</h4>
                             @foreach (var author in Model.Authors)
                             {
-                                <p>@author.Name</p>
+                                <p><a asp-controller="Authors" asp-action="Author" asp-route-id=@author.Id>@author.Name</a></p>
                             }
                             <h4>Genres: </h4><p>@Model.Genres</p>
                             <h4>Pages: </h4><p>@Model.Pages</p>
                             <h4>Language: </h4><p>@Model.EditionLanguage</p>
-                            <h4>Site: </h4><p>@Model.BookUrl</p>
+                            <h4>Site: </h4><p><a href="@Model.BookUrl">@Model.BookUrl</a></p>
                         </div>
                     </div>
                 </div>
+
+                <form asp-controller="Books" asp-action="SaveBook" method="post">
+
+                    <div class="form-group">
+                        <input id="id" name="id" type="hidden" value="@Model.Id">
+                    </div>
+                    &nbsp;
+                    <div>
+                        <input type="submit" value="Save book" class="btn btn-outline-primary mr-2" ata-toggle="tooltip" data-placement="right" title="Click for save the book" />
+                    </div>
+                </form>                
             </div>
         </div>
     </div>

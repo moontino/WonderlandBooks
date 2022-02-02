@@ -11,6 +11,10 @@
             this.Comments = new HashSet<Comment>();
         }
 
+        public Story Story { get; set; }
+
+        public int StoryId { get; set; }
+
         [Required]
         public string Title { get; set; }
 

@@ -15,7 +15,7 @@
         [MinLength(20)]
         public string Description { get; set; }
 
-        //[AllowedExtensionsAttribute(new string[] { ".jpg", ".png" })]
+        // [AllowedExtensionsAttribute(new string[] { ".jpg", ".png" })]
         public IFormFile Image { get; set; }// custom attribute
 
         [Display(Name = "Genre")]

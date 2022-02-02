@@ -12,6 +12,7 @@
             <span id="maximum">/ 30000</span>
         </div>
         <span asp-validation-for="Description" class="text-danger"></span>
+        <textarea asp-for="StoryId" class="invisible">@Model.StoryId</textarea>
     </div>
     <div>
         <input class="btn btn-primary" type="submit" value="Publish">
@@ -29,8 +30,6 @@
 
             current.text(characterCount);
 
-
-            /*This isn't entirely necessary, just playin around*/
             if (characterCount < 70) {
                 current.css('color', '#666');
             }
@@ -62,5 +61,11 @@
 }
 
 @section Styles {
+<style>
+    .invisible {
+        visibility: hidden;
+        display: none;
+    }
+</style>
     <link href="~/custom/textarea.css" rel="stylesheet" />
 }

@@ -4,8 +4,10 @@
 
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public interface ICreateStoryService
+    public interface IStoryService
     {
         Task CreateAsync(CreateStoryInputModel input, string imagePath);
+
+        Task DeleteAsync(int id);
     }
 }

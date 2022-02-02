@@ -11,5 +11,7 @@
         [Required(ErrorMessage = "The description must contain at least 20 characters")]
         [MinLength(20)]
         public string Description { get; set; }
+
+        public int StoryId { get; set; }
     }
 }

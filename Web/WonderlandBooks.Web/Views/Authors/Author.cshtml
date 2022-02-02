@@ -16,14 +16,14 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 d-flex">
-                <div class="py-md-5 w-100 bg-light px-md-5">
+                <div class="py-md-5 w-200 bg-light px-md-5">
                     <div class="py-md-5">
                         <div class="row justify-content-start pb-3">
                             <div class="col-md-12 heading-section ftco-animate">
                                 <h2 class="mb-4">@Model.Name</h2>
                                 <ul class="about-info mt-4 px-md-0 px-2">
                                     <li class="d-flex"><span>Name:</span> <span>@Model.Name</span></li>
-                                    <li class="d-flex"><span>Website:</span> <span>@Model.Website</span></li>
+                                    <li class="d-flex"><span>Website:</span> <span><a href="@Model.Website">@Model.Website</a></span></li>
                                     <li class="d-flex"><span>Genres:</span> <span>@Model.Genres</span></li>
                                 </ul>
                                 <p>@Model.Biography</p>
@@ -50,7 +50,7 @@
                     <div class="project img ftco-animate d-flex justify-content-center align-items-end" style="background-image: url(@book.ImageUrl);">
                         <div class="overlay"></div>
                         <div class="text p-4">
-                            <h3><a href="#">@book.Name</a></h3>
+                            <h3><a  asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>@book.Name</a></h3>
                             <span>@book.EditionLanguageName</span>
                         </div>
                     </div>

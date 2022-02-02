@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-
-namespace WonderlandBooks.Services.Data.ControllerDataService
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System.Collections.Generic;
+
+    using WonderlandBooks.Web.ViewModels.Books;
+
     public interface IBooksService
     {
         IList<T> GetTenBooks<T>();
 
-        T Book<T>(int id);
+        T GetBook<T>(int id);
+
+        ListOfBooksLibraryViewModel GetLibrary(string id);
     }
 }

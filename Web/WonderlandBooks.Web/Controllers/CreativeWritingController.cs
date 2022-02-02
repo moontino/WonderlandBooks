@@ -21,19 +21,21 @@
         private readonly IGenreInputModelListItems genreInputModel;
         private readonly IEditionLanguageInputModelListItems editionLanguageInputModel;
         private readonly IMapper mapper;
-        private readonly ICreateStoryService storyService;
+        private readonly IStoryService storyService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment hostEnvironment;
-        private readonly IStoriesService stories;
+        private readonly IGetStoriesService stories;
+        private readonly IChapterService chapterService;
 
         public CreativeWritingController(
             IGenreInputModelListItems genreInputModel,
             IEditionLanguageInputModelListItems editionLanguageInputModel,
             IMapper mapper,
-            ICreateStoryService storyService,
+            IStoryService storyService,
             UserManager<ApplicationUser> userManager,
             IWebHostEnvironment hostEnvironment,
-            IStoriesService stories)
+            IGetStoriesService getStories,
+            IChapterService chapterService)
         {
             this.genreInputModel = genreInputModel;
             this.editionLanguageInputModel = editionLanguageInputModel;
@@ -41,7 +43,8 @@
             this.storyService = storyService;
             this.userManager = userManager;
             this.hostEnvironment = hostEnvironment;
-            this.stories = stories;
+            this.stories = getStories;
+            this.chapterService = chapterService;
         }
 
         public IActionResult CreateStory()
@@ -72,32 +75,45 @@
             return this.Redirect("AllStories");
         }
 
-        public IActionResult CreateChapter() // id story
+        public IActionResult CreateChapter(int id) // id story
         {
-            return this.View();
+            CreateChapterInputModel model = new CreateChapterInputModel();
+            model.StoryId = id;
+            return this.View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult CreateChapter(CreateChapterInputModel input) // id story
+        public async Task<IActionResult> CreateChapter(CreateChapterInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
 
-            return this.Redirect("CreateChapter");
+            await this.chapterService.CreateAsync(input);
+
+            return this.RedirectToAction("AllStories");
         }
 
         [Authorize]
-        public async Task<IActionResult> AllStories() // id user
+        public async Task<IActionResult> AllStories()
         {
-            // var model = this.mapper.Map<BookViewModel>(this.booksService.Book<BookViewModel>(id));
-            // var model = this.mapper.Map<CountViewModel>(this.countData.GetCount());
-
             var user = await this.userManager.GetUserAsync(this.User);
             var model = this.mapper.Map<CollectionOfStories>(this.stories.All(user.Id));
+            return this.View(model); // current story виж педал
+        }
+
+        public IActionResult CurrentStory(int id)
+        {
+            var model = this.mapper.Map<StoryViewModel>(this.stories.CurrentStory<StoryViewModel>(id));
             return this.View(model);
+        }
+
+        public async Task<IActionResult> DeleteStory(int id)
+        {
+            await this.storyService.DeleteAsync(id);
+            return this.RedirectToAction("AllStories");
         }
     }
 }

@@ -77,9 +77,11 @@
             services.AddTransient<IAuthorsService, AuthorsService>();
             services.AddTransient<IBooksService, BooksService>();
             services.AddTransient<ICountDataService, CountDataService>();
-            services.AddTransient<IStoriesService, StoriesService>();
+            services.AddTransient<IGetStoriesService, GetStoriesService>();
 
-            services.AddTransient<ICreateStoryService, CreateStoryService>();
+            services.AddTransient<IStoryService, StoryService>();
+            services.AddTransient<IChapterService, ChapterService>();
+            services.AddTransient<ILibraryService, LibraryService>();
 
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();

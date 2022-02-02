@@ -8,12 +8,13 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public class CreateStoryService : ICreateStoryService
+    public class StoryService : IStoryService
     {
         private readonly IRepository<CreativeWriting> writing;
         private readonly IDeletableEntityRepository<Story> stories;
 
-        public CreateStoryService(IRepository<CreativeWriting> writing,
+        public StoryService(
+            IRepository<CreativeWriting> writing,
             IDeletableEntityRepository<Story> stories)
         {
             this.writing = writing;
@@ -21,8 +22,7 @@
         }
 
         public async Task CreateAsync(CreateStoryInputModel input, string imagePath)
-        { // tags, characters 
-
+        { // tags, characters
             Directory.CreateDirectory($"{imagePath}/images/stories/");
 
             var storiesList = this.writing.AllAsNoTracking().Where(x => x.UserId == input.UserId).FirstOrDefault();
@@ -51,7 +51,7 @@
             }
             else
             {
-                var extension = Path.GetExtension(input.Image.FileName);// ще гърми ако няма снимка 
+                var extension = Path.GetExtension(input.Image.FileName); // ще гърми ако няма снимка
                 image.Extension = extension;
                 var physicalPath = $"{imagePath}/images/stories/{image.Id}{extension}";
 
@@ -65,6 +65,13 @@
 
             await this.stories.AddAsync(story);
             await this.writing.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var currentStory = this.stories.All().FirstOrDefault(x => x.Id == id);
+            currentStory.IsDeleted = true;
+            await this.stories.SaveChangesAsync();
         }
     }
 }

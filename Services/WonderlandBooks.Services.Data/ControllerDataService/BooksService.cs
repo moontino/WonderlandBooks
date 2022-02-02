@@ -6,18 +6,22 @@
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
+    using WonderlandBooks.Web.ViewModels.Books;
 
     public class BooksService : IBooksService
     {
         private readonly IRepository<Book> repositoryBooks;
+        private readonly IDeletableEntityRepository<ApplicationUser> users;
 
         public BooksService(
-            IRepository<Book> repositoryBooks)
+            IRepository<Book> repositoryBooks,
+            IDeletableEntityRepository<ApplicationUser> users)
         {
             this.repositoryBooks = repositoryBooks;
+            this.users = users;
         }
 
-        public T Book<T>(int id)
+        public T GetBook<T>(int id)
         {
             var model = this.repositoryBooks.AllAsNoTracking()
                .Where(x => x.Id == id)
@@ -25,6 +29,23 @@
                .FirstOrDefault();
 
             return model;
+        }
+
+        public ListOfBooksLibraryViewModel GetLibrary(string id)
+        {
+            return this.users.All()
+                .Where(x => x.Id == id)
+                .Select(x => new ListOfBooksLibraryViewModel
+                {
+                    Id = x.Id,
+                    Shelves = x.Shelves.OrderByDescending(o => o.CreatedOn)
+                                       .Select(s => new LibraryBooksViewModel
+                                       {
+                                           BookId = s.BookId,
+                                           BookName = s.Book.Name,
+                                           BookImageUrl = s.Book.Image.Url,
+                                       }).ToList(),
+                }).FirstOrDefault();
         }
 
         public IList<T> GetTenBooks<T>()

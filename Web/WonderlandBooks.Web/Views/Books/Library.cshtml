@@ -1,0 +1,32 @@
+﻿@model WonderlandBooks.Web.ViewModels.Books.ListOfBooksLibraryViewModel
+@{
+    ViewData["Title"] = "Library";
+}
+
+
+<section class="ftco-section ftco-project" id="projects-section">
+
+    <div class="container">
+        <div class="row no-gutters justify-content-center pb-10">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4"> Books</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var book in Model.Shelves)
+            {
+
+                <div class="col-md-3">
+                    <div class="project img ftco-animate d-flex justify-content-center align-items-end" style="background-image: url(@book.BookImageUrl);">
+                        <div class="overlay"></div>
+                        <div class="text p-4">
+                            <h3><a asp-controller="Books" asp-action="Book" asp-route-id=@book.BookId>@book.BookName</a></h3>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
