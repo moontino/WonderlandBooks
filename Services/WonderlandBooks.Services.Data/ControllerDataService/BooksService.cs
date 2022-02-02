@@ -21,6 +21,16 @@
             this.users = users;
         }
 
+        public IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 16)
+        {
+            return this.repositoryBooks.AllAsNoTracking()
+                 .OrderByDescending(x => x.Genres.Count())
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
+                 .To<T>()
+                 .ToList();
+        }
+
         public T GetBook<T>(int id)
         {
             var model = this.repositoryBooks.AllAsNoTracking()
@@ -29,6 +39,11 @@
                .FirstOrDefault();
 
             return model;
+        }
+
+        public int GetCount()
+        {
+            return this.repositoryBooks.All().Count();
         }
 
         public ListOfBooksLibraryViewModel GetLibrary(string id)

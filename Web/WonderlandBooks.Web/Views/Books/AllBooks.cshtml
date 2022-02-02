@@ -1,0 +1,67 @@
+﻿@model WonderlandBooks.Web.ViewModels.Books.BookListPagingViewModel
+@{
+    this.ViewData["Title"] = "List";
+}
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="movie-card">
+                <div class="movie-header" style="background-image:url(@book.ImageUrl);    background-size: cover;">
+                    <div class="header-icon-container">
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>
+                            <h3>@book.Name</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @if (!Model.HasPreviousPage) {<text>disabled</text>} ">
+            <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+        </li>
+        @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
+        {
+
+
+            @if (i > 0)
+            {
+                <li class="page-item"><a class="page-link" asp-action="AllBooks" asp-route-id="@i">@i</a></li>
+            }
+        }
+
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.PageNumber
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+     
+        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
+        {
+
+            @if (i <=Model.PagesCount)
+            {
+                <li class="page-item"><a class="page-link" asp-action="AllBooks" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li class="page-item" @if (!Model.HasNextPage) { <text> disabled</text>}>
+            <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.NextPageNumber">Next</a>
+        </li>
+    </ul>
+</nav>
+
+@section Styles {
+
+    <link href="~/custom/cards.css" rel="stylesheet" />
+
+}

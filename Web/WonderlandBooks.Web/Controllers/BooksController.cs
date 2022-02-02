@@ -57,5 +57,19 @@
 
             return this.View(model);
         }
+
+        public IActionResult AllBooks(int id = 1)
+        {
+            const int ItemPerPage = 16;
+            var model = new BookListPagingViewModel()
+            {
+                ItemPerPage= ItemPerPage,
+                PageNumber = id,
+                BooksCount = this.booksService.GetCount(),
+                Books = this.booksService.GetAllBooks<BooksListViewModel>(id, ItemPerPage),
+            };
+
+            return this.View(model);
+        }
     }
 }

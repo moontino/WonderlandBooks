@@ -11,5 +11,9 @@
         T GetBook<T>(int id);
 
         ListOfBooksLibraryViewModel GetLibrary(string id);
+
+        IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 16);
+
+        int GetCount();
     }
 }
