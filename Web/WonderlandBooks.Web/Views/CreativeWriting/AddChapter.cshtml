@@ -15,7 +15,7 @@
         <textarea asp-for="StoryId" class="invisible">@Model.StoryId</textarea>
     </div>
     <div>
-        <input class="btn btn-primary" type="submit" value="Publish">
+        <input class="btn btn-primary" type="submit" value="Publish"  asp-controller="CreativeWriting" asp-action="CreateChapter">
     </div>
 </form>
 

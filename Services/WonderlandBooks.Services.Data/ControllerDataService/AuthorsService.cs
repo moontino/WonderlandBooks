@@ -46,5 +46,20 @@
                        .To<T>()
                        .ToList();
         }
+
+        public IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 8)
+        {
+            return this.repositoryAuthors.AllAsNoTracking()
+                 .OrderByDescending(x => x.Books.Count())
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
+                 .To<T>()
+                 .ToList();
+        }
+
+        public int GetCount()
+        {
+            return this.repositoryAuthors.All().Count();
+        }
     }
 }

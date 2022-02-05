@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace WonderlandBooks.Web.ViewModels.Books
+namespace WonderlandBooks.Web.ViewModels
 {
-    public class BookListPagingViewModel
+    public abstract class BasicPaging
     {
-        public IEnumerable<BooksListViewModel> Books { get; set; }
-
         public int PageNumber { get; set; }
 
         public bool HasPreviousPage => this.PageNumber > 1;
@@ -17,9 +14,9 @@ namespace WonderlandBooks.Web.ViewModels.Books
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int PagesCount => (int)Math.Ceiling((double)this.BooksCount / this.ItemPerPage);
+        public int PagesCount => (int)Math.Ceiling((double)this.Count / this.ItemPerPage);
 
-        public int BooksCount { get; set; }
+        public int Count { get; set; }
 
         public int ItemPerPage { get; set; }
     }

@@ -1,10 +1,10 @@
-﻿@model WonderlandBooks.Web.ViewModels.Books.BooksPagingViewModel
+﻿@model WonderlandBooks.Web.ViewModels.Authors.AuthorsPagingViewModel
 @{
-    this.ViewData["Title"] = "BooksList";
+    this.ViewData["Title"] = "AuthorsList";
 }
 <div class="container">
     <div class="row">
-        @foreach (var book in Model.Books)
+        @foreach (var book in Model.Authors)
         {
             <div class="movie-card">
                 <div class="movie-header" style="background-image:url(@book.ImageUrl);    background-size: cover;">
@@ -13,8 +13,9 @@
                 </div><!--movie-header-->
                 <div class="movie-content">
                     <div class="movie-content-header">
-                        <a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>
+                        <a asp-controller="Authors" asp-action="Author" asp-route-id=@book.Id>
                             <h3>@book.Name</h3>
+                            <h4>Book count: @book.BooksCount</h4>
                         </a>
                     </div>
                     <div class="movie-info">
@@ -27,7 +28,7 @@
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item @if (!Model.HasPreviousPage) {<text>disabled</text>} ">
-            <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+            <a class="page-link" asp-action="AllAuthors" asp-route-id="@Model.PreviousPageNumber">Previous</a>
         </li>
         @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
         {
@@ -35,7 +36,7 @@
 
             @if (i > 0)
             {
-                <li class="page-item"><a class="page-link" asp-action="AllBooks" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="AllAuthors" asp-route-id="@i">@i</a></li>
             }
         }
 
@@ -45,17 +46,17 @@
                 <span class="sr-only">(current)</span>
             </span>
         </li>
-     
+
         @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
         {
 
-            @if (i <=Model.PagesCount)
+            @if (i <= Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-action="AllBooks" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="AllAuthors" asp-route-id="@i">@i</a></li>
             }
         }
         <li class="page-item" @if (!Model.HasNextPage) { <text> disabled</text>}>
-            <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.NextPageNumber">Next</a>
+            <a class="page-link" asp-action="AllAuthors" asp-route-id="@Model.NextPageNumber">Next</a>
         </li>
     </ul>
 </nav>

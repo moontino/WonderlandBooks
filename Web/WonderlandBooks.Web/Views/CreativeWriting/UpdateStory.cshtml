@@ -1,0 +1,46 @@
+﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.UpdateStoryViewModel
+@{
+    ViewData["Title"] = "UpdateStory";
+}
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+    <div class="col-md-8 offset-md-3">
+        <div class="form-group">
+            <input type="hidden" value="@Model.Image" name="imagePath" />
+            <input type="hidden" value="@Model.Id" asp-for="Id" />
+            <img src="@Model.Image" class="mr-4 img-responsive" width="250" />
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Title"></label>
+            <input class="form-control" value="@Model.Title" asp-for="Title">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="form-label" asp-for="Description"></label>
+            <textarea class="form-control" asp-for="Description" rows="5">@Model.Description</textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-select">
+            <label>Genre</label>
+            <select class="custom-select" asp-for="GenreId" asp-items="@ViewBag.Genres">
+                <option selected="@Model.GenreId" value="@Model.GenreId">@Model.GenreName</option>
+            </select>
+            <span class="text-danger" asp-validation-for="GenreId"></span>
+        </div>
+        <div class="form-select">
+            <label>Language</label>
+            <select class="custom-select" asp-for="EditionLanguageId" asp-items="@ViewBag.Language">
+                <option selected="@Model.EditionLanguageId" value="@Model.EditionLanguageId">@Model.EditionLanguageName</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewImage">
+                If you are looking for a new cover
+                <input type="file" class="form-control" asp-for="NewImage" accept="image/png, image/gif, image/jpeg" />
+            </label>
+        </div>
+        &nbsp;
+        <div>
+            <input type="submit" class="btn btn-outline-primary mr-2 " value="update" asp-controller="CreativeWriting" asp-action="UpdateCurrentStory" />
+        </div>
+    </div>
+</form>

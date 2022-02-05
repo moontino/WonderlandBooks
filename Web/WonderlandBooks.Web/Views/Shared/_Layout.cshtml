@@ -34,7 +34,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html">@GlobalConstants.SystemName<span>.</span></a>
+                <a class="navbar-brand"  asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName<span>.</span></a>
                 <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
@@ -45,6 +45,7 @@
                         <li class="nav-item"><a class="nav-link" asp-controller="CreativeWriting" asp-action="CreateStory"><span>Writing</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="Library"><span>Library</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="AllBooks"><span>Books</span></a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="AllAuthors"><span>Authors</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="CreativeWriting" asp-action="AllStories" asp-route-id="1"><span>All Stories</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="Book" asp-route-id="1"><span>Book ID=1</span></a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="Author" asp-route-id="1"><span>Author ID=1</span></a></li>

@@ -24,5 +24,19 @@
             var model = this.mapper.Map<AuthorViewModel>(this.authorsService.Author<AuthorViewModel>(id));
             return this.View(model);
         }
+
+        public IActionResult AllAuthors(int id = 1)
+        {
+            const int ItemPerPage = 8;
+            var model = new AuthorsPagingViewModel()
+            {
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                Count = this.authorsService.GetCount(),
+                Authors = this.authorsService.GetAllBooks<AuthorsListViewModel>(id, ItemPerPage),
+            };
+
+            return this.View(model);
+        }
     }
 }

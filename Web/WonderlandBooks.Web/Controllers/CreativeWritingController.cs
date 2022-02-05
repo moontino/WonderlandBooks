@@ -75,10 +75,10 @@
             return this.Redirect("AllStories");
         }
 
-        public IActionResult CreateChapter(int id) // id story
+        public IActionResult AddChapter(int idStory) // id story
         {
             CreateChapterInputModel model = new CreateChapterInputModel();
-            model.StoryId = id;
+            model.StoryId = idStory;
             return this.View(model);
         }
 
@@ -110,9 +110,31 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> DeleteStory(int id)
+        [Authorize]
+        public IActionResult UpdateStory(int idStory)
         {
-            await this.storyService.DeleteAsync(id);
+            this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
+            this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
+            var model = this.mapper.Map<UpdateStoryViewModel>(this.stories.CurrentStory<UpdateStoryViewModel>(idStory));
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateCurrentStory(UpdateStoryViewModel input,string imagePath)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            input.UserId = user.Id;
+
+            var path = this.hostEnvironment.WebRootPath;
+            await this.storyService.UpdateAsync(input, imagePath, path);
+
+            return this.RedirectToAction("AllStories");
+        }
+
+        public async Task<IActionResult> DeleteStory(int idStory)
+        {
+            await this.storyService.DeleteAsync(idStory);
             return this.RedirectToAction("AllStories");
         }
     }

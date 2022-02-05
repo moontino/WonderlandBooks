@@ -16,7 +16,11 @@
 
         public string GenreName { get; set; }
 
+        public string GenreId { get; set; }
+
         public string EditionLanguageName { get; set; }
+
+        public string EditionLanguageId { get; set; }
 
         public IList<ChaptersViewModel> Chapters { get; set; }
 

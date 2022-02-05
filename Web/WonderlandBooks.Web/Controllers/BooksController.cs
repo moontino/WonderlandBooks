@@ -61,11 +61,11 @@
         public IActionResult AllBooks(int id = 1)
         {
             const int ItemPerPage = 16;
-            var model = new BookListPagingViewModel()
+            var model = new BooksPagingViewModel()
             {
-                ItemPerPage= ItemPerPage,
+                ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                BooksCount = this.booksService.GetCount(),
+                Count = this.booksService.GetCount(),
                 Books = this.booksService.GetAllBooks<BooksListViewModel>(id, ItemPerPage),
             };
 

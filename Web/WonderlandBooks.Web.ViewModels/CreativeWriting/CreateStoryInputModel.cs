@@ -14,9 +14,8 @@
         [Required(ErrorMessage = "The description must contain at least 20 characters")]
         [MinLength(20)]
         public string Description { get; set; }
-
-        // [AllowedExtensionsAttribute(new string[] { ".jpg", ".png" })]
-        public IFormFile Image { get; set; }// custom attribute
+   
+        public IFormFile Image { get; set; }
 
         [Display(Name = "Genre")]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a genre")]
