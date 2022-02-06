@@ -31,25 +31,31 @@
 </head>
 <body>
     <header>
-
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand"  asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName<span>.</span></a>
-                <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
+                <a class="navbar-brand" href="index.html">@GlobalConstants.SystemName.</a>
+                <form action="#" class="searchform order-sm-start order-lg-last">
+                    <div class="form-group d-flex">
+                        <input type="text" class="form-control pl-3" placeholder="Search">
+                        <button type="submit" placeholder="" class="form-control search"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
                 </button>
-
                 <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index"><span>Home</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="CreativeWriting" asp-action="CreateStory"><span>Writing</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="Library"><span>Library</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="AllBooks"><span>Books</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="AllAuthors"><span>Authors</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="CreativeWriting" asp-action="AllStories" asp-route-id="1"><span>All Stories</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="Book" asp-route-id="1"><span>Book ID=1</span></a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="Author" asp-route-id="1"><span>Author ID=1</span></a></li>
-                        <partial name="_LoginPartial" />
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Books" asp-action="AllBooks">Books</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Authors" asp-action="AllAuthors">Authors</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+
+                                <partial name="_LoginPartial" />
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -62,7 +68,7 @@
     </main>
 
     <!--foother -->
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -91,3 +97,12 @@
 
 </body>
 </html>
+<!--<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">Page 1</a>
+                                <a class="dropdown-item" href="#">Page 2</a>
+                                <a class="dropdown-item" href="#">Page 3</a>
+                                <a class="dropdown-item" href="#">Page 4</a>
+                            </div>
+                        </li>-->

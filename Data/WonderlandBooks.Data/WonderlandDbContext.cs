@@ -33,8 +33,6 @@
 
         public DbSet<CreativeWriting> CreativeWritings { get; set; }
 
-        public DbSet<Discussion> Discussions { get; set; }
-
         public DbSet<EditionLanguage> EditionLanguages { get; set; }
 
         public DbSet<Genre> Genres { get; set; }

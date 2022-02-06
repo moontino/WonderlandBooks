@@ -19,7 +19,7 @@
         [Required]
         public string Description { get; set; }
 
-        public int? ImageId { get; set; }
+        public string ImageId { get; set; }
 
         public Image Image { get; set; }
 

@@ -68,7 +68,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IGoodreadsScraperService, GoodreadsScraperService>();
             services.AddTransient<IGoodreadsDataService, GoodreadsDataService>();
 

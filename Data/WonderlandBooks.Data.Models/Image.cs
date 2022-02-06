@@ -10,10 +10,6 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public Story Story { get; set; }
-
-        public int StoryId { get; set; }
-
         public string Url { get; set; }
 
         public string RemoteImageUrl { get; set; }

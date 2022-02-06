@@ -49,6 +49,21 @@ namespace WonderlandBooks.Data.Migrations
                     b.ToTable("AuthorGenre");
                 });
 
+            modelBuilder.Entity("BookCharacter", b =>
+                {
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CharactersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BooksId", "CharactersId");
+
+                    b.HasIndex("CharactersId");
+
+                    b.ToTable("BookCharacter");
+                });
+
             modelBuilder.Entity("BookGenre", b =>
                 {
                     b.Property<int>("BooksId")
@@ -377,9 +392,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DownloadBookExtension")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("EditionLanguageId")
                         .HasColumnType("int");
 
@@ -451,9 +463,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -467,8 +476,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("StoryId");
 
@@ -497,9 +504,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DiscussionId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -514,8 +518,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.HasIndex("BookId");
 
                     b.HasIndex("ChapterId");
-
-                    b.HasIndex("DiscussionId");
 
                     b.HasIndex("IsDeleted");
 
@@ -553,41 +555,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CreativeWritings");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.Discussion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Discussions");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.EditionLanguage", b =>
@@ -656,18 +623,12 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<string>("RemoteImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("StoryId")
-                        .IsUnique();
 
                     b.ToTable("Images");
                 });
@@ -811,8 +772,8 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -831,6 +792,8 @@ namespace WonderlandBooks.Data.Migrations
                     b.HasIndex("EditionLanguageId");
 
                     b.HasIndex("GenreId");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -898,6 +861,21 @@ namespace WonderlandBooks.Data.Migrations
                     b.HasOne("WonderlandBooks.Data.Models.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenresId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BookCharacter", b =>
+                {
+                    b.HasOne("WonderlandBooks.Data.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WonderlandBooks.Data.Models.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1023,10 +1001,6 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Character", b =>
                 {
-                    b.HasOne("WonderlandBooks.Data.Models.Book", null)
-                        .WithMany("Characters")
-                        .HasForeignKey("BookId");
-
                     b.HasOne("WonderlandBooks.Data.Models.Story", null)
                         .WithMany("Characters")
                         .HasForeignKey("StoryId");
@@ -1042,10 +1016,6 @@ namespace WonderlandBooks.Data.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("ChapterId");
 
-                    b.HasOne("WonderlandBooks.Data.Models.Discussion", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("DiscussionId");
-
                     b.HasOne("WonderlandBooks.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -1060,26 +1030,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.Discussion", b =>
-                {
-                    b.HasOne("WonderlandBooks.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.Image", b =>
-                {
-                    b.HasOne("WonderlandBooks.Data.Models.Story", "Story")
-                        .WithOne("Image")
-                        .HasForeignKey("WonderlandBooks.Data.Models.Image", "StoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Story");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Question", b =>
@@ -1111,7 +1061,7 @@ namespace WonderlandBooks.Data.Migrations
             modelBuilder.Entity("WonderlandBooks.Data.Models.Shelf", b =>
                 {
                     b.HasOne("WonderlandBooks.Data.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Shelves")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1145,11 +1095,17 @@ namespace WonderlandBooks.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("WonderlandBooks.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.Navigation("CreativeWriting");
 
                     b.Navigation("EditionLanguage");
 
                     b.Navigation("Genre");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Tag", b =>
@@ -1172,9 +1128,9 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
                 {
-                    b.Navigation("Characters");
-
                     b.Navigation("Comments");
+
+                    b.Navigation("Shelves");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Chapter", b =>
@@ -1185,11 +1141,6 @@ namespace WonderlandBooks.Data.Migrations
             modelBuilder.Entity("WonderlandBooks.Data.Models.CreativeWriting", b =>
                 {
                     b.Navigation("Stories");
-                });
-
-            modelBuilder.Entity("WonderlandBooks.Data.Models.Discussion", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.EditionLanguage", b =>
@@ -1212,8 +1163,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.Navigation("Chapters");
 
                     b.Navigation("Characters");
-
-                    b.Navigation("Image");
 
                     b.Navigation("Tags");
                 });

@@ -35,6 +35,7 @@
                 storiesList = new CreativeWriting();
                 storiesList.UserId = input.UserId;
                 await this.writing.AddAsync(storiesList);
+                await this.writing.SaveChangesAsync();
             }
 
             var story = new Story()
@@ -67,7 +68,7 @@
             story.Image = image;
 
             await this.stories.AddAsync(story);
-            await this.writing.SaveChangesAsync();
+            await this.stories.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -105,6 +106,9 @@
                 {
                     await input.NewImage.CopyToAsync(fileStream);
                 }
+                await this.images.AddAsync(image);
+                await this.images.SaveChangesAsync();
+
             }
             else
             {

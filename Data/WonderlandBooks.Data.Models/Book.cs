@@ -21,8 +21,6 @@
 
         public int? Pages { get; set; }
 
-        public string DownloadBookExtension { get; set; } // TODO: lib for pdf
-
         [Required]
         public string BookUrl { get; set; }
 
@@ -41,6 +39,8 @@
         public virtual ICollection<Character> Characters { get; set; }
 
         public virtual ICollection<Author> Authors { get; set; }
+
+        public virtual ICollection<Shelf> Shelves { get; set; }
 
         // TODO: Rating add
     }
