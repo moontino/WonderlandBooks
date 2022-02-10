@@ -6,12 +6,12 @@
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
 
-    public class LibraryService : ILibraryService
+    public class CreateLibraryService : ICreateLibraryService
     {
         private readonly IDeletableEntityRepository<Shelf> shelves;
         private readonly IDeletableEntityRepository<ApplicationUser> users;
 
-        public LibraryService(IDeletableEntityRepository<Shelf> shelves, IDeletableEntityRepository<ApplicationUser> users)
+        public CreateLibraryService(IDeletableEntityRepository<Shelf> shelves, IDeletableEntityRepository<ApplicationUser> users)
         {
             this.shelves = shelves;
             this.users = users;

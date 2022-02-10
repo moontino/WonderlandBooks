@@ -5,7 +5,7 @@
     using WonderlandBooks.Services.Data.ControllerDataService.Models;
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public interface IGetStoriesService
+    public interface IStoriesService
     {
         CollectionOfStories All(string id);
 

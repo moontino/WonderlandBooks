@@ -21,29 +21,32 @@
         private readonly IGenreInputModelListItems genreInputModel;
         private readonly IEditionLanguageInputModelListItems editionLanguageInputModel;
         private readonly IMapper mapper;
-        private readonly IStoryService storyService;
+        private readonly IModifiedStoryService storyService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment hostEnvironment;
-        private readonly IGetStoriesService stories;
+        private readonly IStoriesService stories;
+        private readonly IModifiedChapterService modifiedChapterService;
         private readonly IChapterService chapterService;
 
         public CreativeWritingController(
             IGenreInputModelListItems genreInputModel,
             IEditionLanguageInputModelListItems editionLanguageInputModel,
             IMapper mapper,
-            IStoryService storyService,
+            IModifiedStoryService modifiedStoryService,
             UserManager<ApplicationUser> userManager,
             IWebHostEnvironment hostEnvironment,
-            IGetStoriesService getStories,
+            IStoriesService storiesService,
+            IModifiedChapterService modifiedChapterService,
             IChapterService chapterService)
         {
             this.genreInputModel = genreInputModel;
             this.editionLanguageInputModel = editionLanguageInputModel;
             this.mapper = mapper;
-            this.storyService = storyService;
+            this.storyService = modifiedStoryService;
             this.userManager = userManager;
             this.hostEnvironment = hostEnvironment;
-            this.stories = getStories;
+            this.stories = storiesService;
+            this.modifiedChapterService = modifiedChapterService;
             this.chapterService = chapterService;
         }
 
@@ -77,8 +80,10 @@
 
         public IActionResult AddChapter(int idStory) // id story
         {
-            CreateChapterInputModel model = new CreateChapterInputModel();
-            model.StoryId = idStory;
+            CreateChapterInputModel model = new CreateChapterInputModel
+            {
+                StoryId = idStory,
+            };
             return this.View(model);
         }
 
@@ -91,7 +96,7 @@
                 return this.View(input);
             }
 
-            await this.chapterService.CreateAsync(input);
+            await this.modifiedChapterService.CreateAsync(input);
 
             return this.RedirectToAction("AllStories");
         }
@@ -119,10 +124,34 @@
             return this.View(model);
         }
 
+        [Authorize]
+        public IActionResult GetChapters(int idStory)
+        {
+            var model = this.mapper.Map<CollectionOfChapters>(this.stories.CurrentStory<CollectionOfChapters>(idStory));
+            return this.View(model);
+        }
+
+        [Authorize]
+        public IActionResult SelectChapter(int idChapter)
+        {
+            var model = this.chapterService.CurrentChapter<UpdateChapterViewModel>(idChapter);
+            return this.View(model);
+        }
+
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> UpdateCurrentStory(UpdateStoryViewModel input,string imagePath)
+        public IActionResult UpdateCurrentChapter(UpdateChapterViewModel input,  int id)
         {
+            input.Id = id;
+            this.modifiedChapterService.UpdateAsync(input);
+            return this.RedirectToAction("AllStories");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateCurrentStory(UpdateStoryViewModel input, string imagePath)
+        {
+
             var user = await this.userManager.GetUserAsync(this.User);
             input.UserId = user.Id;
 

@@ -8,13 +8,13 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public class StoryService : IStoryService
+    public class ModifiedStoryService : IModifiedStoryService
     {
         private readonly IRepository<CreativeWriting> writing;
         private readonly IDeletableEntityRepository<Story> stories;
         private readonly IDeletableEntityRepository<Image> images;
 
-        public StoryService(
+        public ModifiedStoryService(
             IRepository<CreativeWriting> writing,
             IDeletableEntityRepository<Story> stories,
             IDeletableEntityRepository<Image> images)
@@ -32,8 +32,10 @@
 
             if (storiesList == null)
             {
-                storiesList = new CreativeWriting();
-                storiesList.UserId = input.UserId;
+                storiesList = new CreativeWriting
+                {
+                    UserId = input.UserId,
+                };
                 await this.writing.AddAsync(storiesList);
                 await this.writing.SaveChangesAsync();
             }
@@ -59,10 +61,8 @@
                 image.Extension = extension;
                 var physicalPath = $"{imagePath}/images/stories/{image.Id}{extension}";
 
-                using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
-                {
-                    await input.Image.CopyToAsync(fileStream);
-                }
+                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                await input.Image.CopyToAsync(fileStream);
             }
 
             story.Image = image;
@@ -106,9 +106,9 @@
                 {
                     await input.NewImage.CopyToAsync(fileStream);
                 }
+
                 await this.images.AddAsync(image);
                 await this.images.SaveChangesAsync();
-
             }
             else
             {

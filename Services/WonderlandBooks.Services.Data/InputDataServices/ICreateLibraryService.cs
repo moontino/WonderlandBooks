@@ -2,7 +2,7 @@
 
 namespace WonderlandBooks.Services.Data.InputDataServices
 {
-    public interface ILibraryService
+    public interface ICreateLibraryService
     {
         Task SaveAsync(string userId, int bookId);
     }

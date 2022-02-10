@@ -8,7 +8,7 @@
     {
         public WritingProfile()
         {
-            this.CreateMap<ListOfStoriesDto, ListOfStoriesViewModel>();
+            this.CreateMap<ListOfStoriesDto, StoriesViewModel>();
         }
     }
 }

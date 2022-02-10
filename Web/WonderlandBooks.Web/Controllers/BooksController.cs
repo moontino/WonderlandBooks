@@ -18,14 +18,14 @@
         private readonly IBooksService booksService;
         private readonly IBookRecommendationsService bookRecommendations;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILibraryService libraryService;
+        private readonly ICreateLibraryService libraryService;
 
         public BooksController(
             IMapper mapper,
             IBooksService booksService,
             IBookRecommendationsService bookRecommendations,
             UserManager<ApplicationUser> userManager,
-            ILibraryService libraryService)
+            ICreateLibraryService libraryService)
         {
             this.mapper = mapper;
             this.booksService = booksService;

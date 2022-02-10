@@ -4,8 +4,10 @@
 
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public interface IChapterService
+    public interface IModifiedChapterService
     {
         Task CreateAsync(CreateChapterInputModel input);
+
+        Task UpdateAsync(UpdateChapterViewModel input);
     }
 }

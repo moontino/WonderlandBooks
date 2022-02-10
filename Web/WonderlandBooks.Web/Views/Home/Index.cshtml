@@ -1,4 +1,4 @@
-﻿@model WonderlandBooks.Web.ViewModels.Home.CountViewModel
+﻿@model WonderlandBooks.Web.ViewModels.Home.HomeViewModel
 @using WonderlandBooks.Common
 @{
     this.ViewData["Title"] = "Welcome";
@@ -26,7 +26,7 @@
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                 <div class="block-18 bg-light">
                     <div class="text">
-                        <strong class="number" data-number="@Model.CountAuthors">0</strong>
+                        <strong class="number" data-number="@Model.Count.CountAuthors ">0</strong>
                         <span>Authors</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                 <div class="block-18 bg-light">
                     <div class="text">
-                        <strong class="number" data-number="@Model.CountBooks">0</strong>
+                        <strong class="number" data-number="@Model.Count.CountBooks">0</strong>
                         <span>Books</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                 <div class="block-18 bg-light">
                     <div class="text">
-                        <strong class="number" data-number="@Model.CountGenres">0</strong>
+                        <strong class="number" data-number="@Model.Count.CountGenres">0</strong>
                         <span>Genres </span>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
             <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                 <div class="block-18 bg-light">
                     <div class="text">
-                        <strong class="number" data-number="@Model.CountWriting">0</strong>
+                        <strong class="number" data-number="@Model.Count.CountWriting">0</strong>
                         <span>Writers</span>
                     </div>
                 </div>
@@ -58,5 +58,32 @@
         </div>
     </div>
 </section>
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model.RandomBooks)
+        {
+            <div class="movie-card">
+                <div class="movie-header" style="background-image:url(@book.ImageUrl);    background-size: cover;">
+                    <div class="header-icon-container">
+                    </div>
+                </div><!--movie-header-->
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>
+                            <h3>@book.Name</h3>
+                        </a>
+                    </div>
+                    <div class="movie-info">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
+@section Styles {
+
+    <link href="~/custom/cards.css" rel="stylesheet" />
+
+}
 

@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -61,6 +62,15 @@
                                            BookImageUrl = s.Book.Image.Url,
                                        }).ToList(),
                 }).FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetRandom<T>(int count)
+        {
+            return this.repositoryBooks.All()
+                 .OrderBy(x => Guid.NewGuid())
+                 .Take(count)
+                 .To<T>()
+                 .ToList();
         }
 
         public IList<T> GetTenBooks<T>()

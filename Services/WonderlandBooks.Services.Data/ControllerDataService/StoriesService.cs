@@ -7,12 +7,12 @@ using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
 namespace WonderlandBooks.Services.Data.ControllerDataService
 {
-    public class GetStoriesService : IGetStoriesService
+    public class StoriesService : IStoriesService
     {
         private readonly IDeletableEntityRepository<Story> stories;
         private readonly IRepository<CreativeWriting> writing;
 
-        public GetStoriesService(IDeletableEntityRepository<Story> stories, IRepository<CreativeWriting> writing)
+        public StoriesService(IDeletableEntityRepository<Story> stories, IRepository<CreativeWriting> writing)
         {
             this.stories = stories;
             this.writing = writing;
@@ -25,7 +25,7 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
                    .Select(x => new CollectionOfStories
                    {
                        UserId = x.UserId,
-                       Stories = x.Stories.Select(s => new ListOfStoriesViewModel
+                       Stories = x.Stories.Select(s => new StoriesViewModel
                        {
                            Id = s.Id,
                            Title = s.Title,

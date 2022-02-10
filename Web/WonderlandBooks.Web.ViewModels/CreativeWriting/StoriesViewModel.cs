@@ -4,7 +4,7 @@ using WonderlandBooks.Services.Mapping;
 
 namespace WonderlandBooks.Web.ViewModels.CreativeWriting
 {
-    public class ListOfStoriesViewModel : IMapFrom<Story>
+    public class StoriesViewModel : IMapFrom<Story>
     {
         public int Id { get; set; }
 

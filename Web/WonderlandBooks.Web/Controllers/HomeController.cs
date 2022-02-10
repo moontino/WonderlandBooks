@@ -30,8 +30,13 @@
 
         public IActionResult Index()
         {
-            var model = this.mapper.Map<CountViewModel>(this.countData.GetCount());
+            const int RANDOM_BOOKS_COUNT = 12;
 
+            var model = new HomeViewModel()
+            {
+                Count = this.mapper.Map<CountViewModel>(this.countData.GetCount()),
+                RandomBooks = this.booksService.GetRandom<HomeBooksViewModel>(RANDOM_BOOKS_COUNT),
+            };
             return this.View(model);
         }
 

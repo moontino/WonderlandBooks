@@ -30,13 +30,14 @@
                                     <input id="id" name="idStory" type="hidden" value="@story.Id">
                                     <input type="submit" asp-controller="CreativeWriting" asp-action="AddChapter" value="Add chapter" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
                                 </div>
-                                <!--<div>
-        <button type="button" class="list-group-item list-group-item-action btn-block">Update НЕ РАБОТИ</button>
-    </div>-->
                                 <div class="form-group">
                                     <input id="id" name="idStory" type="hidden" value="@story.Id">
-                                    <input type="submit" asp-controller="CreativeWriting" asp-action="UpdateStory" value="Update story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
+                                    <input type="submit" asp-controller="CreativeWriting" asp-action="GetChapters" value="Update chapter" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
                                 </div>
+                               <div class="form-group">
+                                <input id="id" name="idStory" type="hidden" value="@story.Id">
+                                <input type="submit" asp-controller="CreativeWriting" asp-action="UpdateStory" value="Update story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
+                            </div>
                                 <div class="form-group">
                                     <input id="id" name="idStory" type="hidden" value="@story.Id">
                                     <input type="submit" asp-controller="CreativeWriting" asp-action="DeleteStory" value="Delete story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />

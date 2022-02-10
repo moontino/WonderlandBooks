@@ -15,5 +15,7 @@
         IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 16);
 
         int GetCount();
+
+        IEnumerable<T> GetRandom<T>(int count);
     }
 }

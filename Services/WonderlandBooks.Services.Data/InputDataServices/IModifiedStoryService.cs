@@ -4,7 +4,7 @@
 
     using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
-    public interface IStoryService
+    public interface IModifiedStoryService
     {
         Task CreateAsync(CreateStoryInputModel input, string imagePath);
 
