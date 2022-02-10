@@ -17,7 +17,7 @@
             this.OnGet();
         }
 
-        public List<SelectListItem> Options { get;  set; }
+        public List<SelectListItem> Options { get; set; }
 
         public void OnGet()
         {

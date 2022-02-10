@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using WonderlandBooks.Data.Common.Repositories;
-using WonderlandBooks.Data.Models;
-using WonderlandBooks.Services.Mapping;
-using WonderlandBooks.Web.ViewModels.CreativeWriting;
-
-namespace WonderlandBooks.Services.Data.ControllerDataService
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using WonderlandBooks.Data.Common.Repositories;
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
     public class ChapterService : IChapterService
     {
         private readonly IDeletableEntityRepository<Story> stories;

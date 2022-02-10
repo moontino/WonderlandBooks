@@ -1,7 +1,6 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
     using System.Collections.Generic;
-    using WonderlandBooks.Web.ViewModels.CreativeWriting;
 
     public interface IChapterService
     {

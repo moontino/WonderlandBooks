@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -75,7 +76,7 @@ namespace WonderlandBooks.Web.Areas.Identity.Pages.Account
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email};
+                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
@@ -102,6 +103,7 @@ namespace WonderlandBooks.Web.Areas.Identity.Pages.Account
                         return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);

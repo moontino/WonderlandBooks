@@ -17,5 +17,7 @@
         int GetCount();
 
         IEnumerable<T> GetRandom<T>(int count);
+
+        IEnumerable<T> GetBooksByName<T>(string name);
     }
 }

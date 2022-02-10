@@ -1,0 +1,35 @@
+﻿@model WonderlandBooks.Web.ViewModels.Books.SearchListBookViewModel
+@{
+    ViewData["Title"] = "SearchBook";
+}
+<hr />
+@if (Model.Books.Count() == 0)
+{
+    <h1>No results...</h1>
+}
+else
+{
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-sm-start row">
+            <div class="col-md-10">
+                @foreach (var book in Model.Books)
+                {
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3">
+                             <a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>
+                                <img class="img-fluid img-responsive rounded product-image" src=@book.ImageUrl>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <h3 class="text-center">@book.Name</h3>
+                            <hr />
+                            <h5>@book.Description ...</h5>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+

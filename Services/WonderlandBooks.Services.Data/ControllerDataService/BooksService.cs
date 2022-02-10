@@ -42,6 +42,15 @@
             return model;
         }
 
+        public IEnumerable<T> GetBooksByName<T>(string name)
+        {
+            return this.repositoryBooks.AllAsNoTracking()
+                   .Where(x => x.Name.Contains(name))
+                   .OrderBy(x=>x.Name)
+                   .To<T>()
+                   .ToList();
+        }
+
         public int GetCount()
         {
             return this.repositoryBooks.All().Count();

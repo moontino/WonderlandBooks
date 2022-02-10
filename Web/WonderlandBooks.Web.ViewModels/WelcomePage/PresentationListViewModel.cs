@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WonderlandBooks.Web.ViewModels.WelcomePage
 {
-   public class PresentationListViewModel
+    public class PresentationListViewModel
     {
         public IList<AuthorsPresentationViewModel> Authors { get; set; }
 

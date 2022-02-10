@@ -47,7 +47,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             await this.libraryService.SaveAsync(user.Id, id);
 
-            return this.Redirect($"Book/{id}");
+            return this.Redirect($"Library");
         }
 
         public async Task<IActionResult> Library()
@@ -67,6 +67,16 @@
                 PageNumber = id,
                 Count = this.booksService.GetCount(),
                 Books = this.booksService.GetAllBooks<BooksListViewModel>(id, ItemPerPage),
+            };
+
+            return this.View(model);
+        }
+
+        public IActionResult SearchBook(string search)
+        {
+            var model = new SearchListBookViewModel
+            {
+                Books = this.booksService.GetBooksByName<SearchBooksViewModel>(search),
             };
 
             return this.View(model);

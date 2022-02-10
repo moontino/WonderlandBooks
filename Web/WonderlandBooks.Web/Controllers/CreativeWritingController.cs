@@ -140,7 +140,7 @@
 
         [HttpPost]
         [Authorize]
-        public IActionResult UpdateCurrentChapter(UpdateChapterViewModel input,  int id)
+        public IActionResult UpdateCurrentChapter(UpdateChapterViewModel input, int id)
         {
             input.Id = id;
             this.modifiedChapterService.UpdateAsync(input);
@@ -151,7 +151,6 @@
         [Authorize]
         public async Task<IActionResult> UpdateCurrentStory(UpdateStoryViewModel input, string imagePath)
         {
-
             var user = await this.userManager.GetUserAsync(this.User);
             input.UserId = user.Id;
 

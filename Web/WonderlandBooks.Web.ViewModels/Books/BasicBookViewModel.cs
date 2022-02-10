@@ -1,9 +1,9 @@
 ﻿using WonderlandBooks.Data.Models;
 using WonderlandBooks.Services.Mapping;
 
-namespace WonderlandBooks.Web.ViewModels.Home
+namespace WonderlandBooks.Web.ViewModels.Books
 {
-    public class HomeBooksViewModel : IMapFrom<Book>
+    public abstract class BasicBookViewModel
     {
         public int Id { get; set; }
 

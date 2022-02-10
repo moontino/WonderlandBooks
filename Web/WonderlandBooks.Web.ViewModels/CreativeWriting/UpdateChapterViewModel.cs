@@ -5,7 +5,7 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
 
-    public class UpdateChapterViewModel:IMapFrom<Chapter>
+    public class UpdateChapterViewModel : IMapFrom<Chapter>
     {
         public int Id { get; set; }
 
