@@ -25,19 +25,6 @@
         {
             ICollection<RecommendationsViewModel> model = new List<RecommendationsViewModel>();
 
-            for (int i = 0; i < count; i++)
-            {
-                var recommendation = this.mapper.Map<RecommendationsViewModel>(this.recommendationsService.Recommendation<RecommendationsViewModel>(id, count));
-
-                if (model.Any(x => x.Id == recommendation.Id))
-                {
-                    count--;
-                    continue;
-                }
-
-                model.Add(recommendation);
-            }
-
             return this.View(model);
         }
     }

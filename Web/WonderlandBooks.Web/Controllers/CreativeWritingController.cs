@@ -101,11 +101,17 @@
             return this.RedirectToAction("AllStories");
         }
 
+        public async Task<IActionResult> ReadStories()
+        {
+            
+            return this.View(); 
+        }
+
         [Authorize]
         public async Task<IActionResult> AllStories()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var model = this.mapper.Map<CollectionOfStories>(this.stories.All(user.Id));
+            var model = this.mapper.Map<CollectionOfStories>(this.stories.StoriesByUser(user.Id));
             return this.View(model); // current story виж педал
         }
 

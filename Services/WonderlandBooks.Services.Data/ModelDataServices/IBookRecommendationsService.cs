@@ -4,8 +4,6 @@
 
     public interface IBookRecommendationsService
     {
-        T Recommendation<T>(int id, int count);
-
-        T RandomRecommendation<T>(int id, int count);
+        IList<int> RandomArrayId(int number);
     }
 }

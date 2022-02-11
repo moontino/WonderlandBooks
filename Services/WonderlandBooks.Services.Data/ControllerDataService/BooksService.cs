@@ -6,6 +6,7 @@
 
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Data.ModelDataServices;
     using WonderlandBooks.Services.Mapping;
     using WonderlandBooks.Web.ViewModels.Books;
 
@@ -13,13 +14,16 @@
     {
         private readonly IRepository<Book> repositoryBooks;
         private readonly IDeletableEntityRepository<ApplicationUser> users;
+        private readonly IBookRecommendationsService recommendationsService;
 
         public BooksService(
             IRepository<Book> repositoryBooks,
-            IDeletableEntityRepository<ApplicationUser> users)
+            IDeletableEntityRepository<ApplicationUser> users,
+            IBookRecommendationsService recommendationsService)
         {
             this.repositoryBooks = repositoryBooks;
             this.users = users;
+            this.recommendationsService = recommendationsService;
         }
 
         public IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 16)
@@ -46,7 +50,7 @@
         {
             return this.repositoryBooks.AllAsNoTracking()
                    .Where(x => x.Name.Contains(name))
-                   .OrderBy(x=>x.Name)
+                   .OrderBy(x => x.Name)
                    .To<T>()
                    .ToList();
         }
@@ -75,11 +79,13 @@
 
         public IEnumerable<T> GetRandom<T>(int count)
         {
-            return this.repositoryBooks.All()
-                 .OrderBy(x => Guid.NewGuid())
+            var temp = this.recommendationsService.RandomArrayId(12);
+            var model = this.repositoryBooks.All()
+                 .Where(x => temp.Contains(x.Id))
                  .Take(count)
                  .To<T>()
                  .ToList();
+            return model;
         }
 
         public IList<T> GetTenBooks<T>()

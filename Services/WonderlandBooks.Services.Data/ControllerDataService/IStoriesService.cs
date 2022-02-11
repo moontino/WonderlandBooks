@@ -7,7 +7,7 @@
 
     public interface IStoriesService
     {
-        CollectionOfStories All(string id);
+        CollectionOfStories StoriesByUser(string id);
 
         T CurrentStory<T>(int storyId);
     }

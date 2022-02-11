@@ -18,7 +18,7 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
             this.writing = writing;
         }
 
-        public CollectionOfStories All(string id)
+        public CollectionOfStories StoriesByUser(string id)
         {
             return this.writing.AllAsNoTracking()
                    .Where(x => x.UserId == id)
