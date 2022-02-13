@@ -1,6 +1,6 @@
-﻿@model WonderlandBooks.Web.ViewModels.Books.BookViewModel
+﻿@model WonderlandBooks.Web.ViewModels.Books.RandomListBookViewModel
 @{
-    this.ViewData["Title"] = "Book :)";
+    this.ViewData["Title"] = "Book";
 }
 
 <section class="ftco-about img ftco-section" id="about-section">
@@ -9,25 +9,26 @@
             <div class="col-md-6 col-lg-6 d-flex">
                 <div class="img-about img d-flex align-items-stretch">
                     <div class="overlay"></div>
-                    <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(@Model.ImageUrl);">
+                    <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(@Model.Book.ImageUrl);">
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 pl-md-5">
                 <div class="row justify-content-start pb-3">
                     <div class="col-md-12 heading-section ftco-animate">
-                        <h2 class="mb-4">@Model.Name</h2>
-                        <p>@Model.Description</p>WS
+                        <h2 class="mb-4">@Model.Book.Name</h2>
+                        <p>@Model.Book.Description</p>WS
                         <div class="text-about">
                             <h4>Author</h4>
-                            @foreach (var author in Model.Authors)
+                            @foreach (var author in Model.Book.Authors)
                             {
                                 <p><a asp-controller="Authors" asp-action="Author" asp-route-id=@author.Id>@author.Name</a></p>
                             }
-                            <h4>Genres: </h4><p>@Model.Genres</p>
-                            <h4>Pages: </h4><p>@Model.Pages</p>
-                            <h4>Language: </h4><p>@Model.EditionLanguage</p>
-                            <h4>Site: </h4><p><a href="@Model.BookUrl">@Model.BookUrl</a></p>
+                            <h4>Genres: </h4><p>@Model.Book.Genres</p>
+                            <h4>Pages: </h4><p>@Model.Book.Pages</p>
+                            <h4>Language: </h4><p>@Model.Book.EditionLanguage</p>
+                            <h4>Characters: </h4><p>@Model.Book.Characters</p>
+                            <h4>Site: </h4><p><a href="@Model.Book.BookUrl">@Model.Book.BookUrl</a></p>
                         </div>
                     </div>
                 </div>
@@ -35,14 +36,39 @@
                 <form asp-controller="Books" asp-action="SaveBook" method="post">
 
                     <div class="form-group">
-                        <input id="id" name="id" type="hidden" value="@Model.Id">
+                        <input id="id" name="id" type="hidden" value="@Model.Book.Id">
                     </div>
                     &nbsp;
                     <div>
                         <input type="submit" value="Save book" class="btn btn-outline-primary mr-2" ata-toggle="tooltip" data-placement="right" title="Click for save the book" />
                     </div>
-                </form>                
+                </form>
             </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-project" id="projects-section">
+    <div class="container">
+        <div class="row no-gutters justify-content-center pb-5">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4"> Check out more books...</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var book in Model.RandomBooks)
+            {
+
+                <div class="col-md-3">
+                    <div class="project img ftco-animate d-flex justify-content-center align-items-end" style="background-image: url(@book.ImageUrl);">
+                        <div class="overlay"></div>
+                        <div class="text p-4">
+                            <h3><a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>@book.Name</a></h3>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     </div>
 </section>

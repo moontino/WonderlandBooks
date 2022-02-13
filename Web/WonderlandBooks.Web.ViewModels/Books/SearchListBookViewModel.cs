@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WonderlandBooks.Web.ViewModels.Books
 {
-    public class SearchListBookViewModel
+    public class SearchListBookViewModel : BooksPagingViewModel
     {
         public IEnumerable<SearchBooksViewModel> Books { get; set; }
     }

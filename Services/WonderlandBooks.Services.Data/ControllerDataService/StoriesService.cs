@@ -1,12 +1,12 @@
-﻿using System.Linq;
-
-using WonderlandBooks.Data.Common.Repositories;
-using WonderlandBooks.Data.Models;
-using WonderlandBooks.Services.Mapping;
-using WonderlandBooks.Web.ViewModels.CreativeWriting;
-
-namespace WonderlandBooks.Services.Data.ControllerDataService
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using WonderlandBooks.Data.Common.Repositories;
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
     public class StoriesService : IStoriesService
     {
         private readonly IDeletableEntityRepository<Story> stories;
@@ -18,29 +18,36 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
             this.writing = writing;
         }
 
-        public CollectionOfStories StoriesByUser(string id)
+        public T StoriesByUser<T>(string id)
         {
             return this.writing.AllAsNoTracking()
                    .Where(x => x.UserId == id)
-                   .Select(x => new CollectionOfStories
-                   {
-                       UserId = x.UserId,
-                       Stories = x.Stories.Select(s => new StoriesViewModel
-                       {
-                           Id = s.Id,
-                           Title = s.Title,
-                           Description = s.Description,
-                           Image = s.Image.Url ?? "/images/stories/" + s.Image.Id + s.Image.Extension,
-                       }).ToList(),
-                   }).FirstOrDefault();
+                   .To<T>()
+                   .FirstOrDefault();
         }
 
         public T CurrentStory<T>(int storyId)
         {
             return this.stories.All()
                 .Where(x => x.Id == storyId)
+                //.OrderBy(x => x.Chapters.Select(x => x.Title))
                 .To<T>()
                 .FirstOrDefault();
+        }
+
+        public IEnumerable<T> AllStories<T>(int page, int itemsPerPage = 8)
+        {
+            return this.stories.AllAsNoTracking()
+                .OrderByDescending(x => x.Chapters.Count())
+                 .Skip((page - 1) * itemsPerPage)
+                 .Take(itemsPerPage)
+                 .To<T>()
+                 .ToList();
+        }
+
+        public int GetCount()
+        {
+            return this.stories.AllAsNoTracking().Count();
         }
     }
 }

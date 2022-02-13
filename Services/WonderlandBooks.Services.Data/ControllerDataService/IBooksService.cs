@@ -16,8 +16,10 @@
 
         int GetCount();
 
+        int GetCountBySearch(string name);
+
         IEnumerable<T> GetRandom<T>(int count);
 
-        IEnumerable<T> GetBooksByName<T>(string name);
+        IEnumerable<T> GetBooksByName<T>(string name, int page, int itemsPerPage = 10);
     }
 }

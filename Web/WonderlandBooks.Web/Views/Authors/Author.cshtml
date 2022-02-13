@@ -1,10 +1,10 @@
-﻿
-@model WonderlandBooks.Web.ViewModels.Authors.AuthorViewModel
+﻿@model WonderlandBooks.Web.ViewModels.Authors.AuthorViewModel
 @{
     this.ViewData["Title"] = "Author";
+
 }
 
-
+<hr />
 <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="author-section">
     <div class="container">
         <div class="row d-flex no-gutters">
@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row no-gutters justify-content-center pb-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4"> Books</h2>
+                <h2 class="mb-4">Books by @Model.Name</h2>
             </div>
         </div>
         <div class="row">
@@ -61,8 +61,4 @@
     </div>
 </section>
 <hr />
-<div>
-    <footer>
-        <a class="button" asp-controller="Authors" asp-action="AllSeries" asp-route-id="@Model.Id">See more books by @Model.Name </a>
-    </footer>
-</div>
+

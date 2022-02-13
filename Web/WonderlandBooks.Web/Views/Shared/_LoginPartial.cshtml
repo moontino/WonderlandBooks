@@ -11,7 +11,7 @@
     </a>
     <a class="dropdown-item" asp-controller="Books" asp-action="Library">Library</a>
     <a class="dropdown-item" asp-controller="CreativeWriting" asp-action="CreateStory">Writing</a>
-    <a class="dropdown-item" asp-controller="CreativeWriting" asp-action="AllStories">Stories</a>
+    <a class="dropdown-item" asp-controller="CreativeWriting" asp-action="StoriesByUser">Your Stories</a>
     if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <a class="dropdown-item" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">

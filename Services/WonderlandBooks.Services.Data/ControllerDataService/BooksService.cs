@@ -46,13 +46,22 @@
             return model;
         }
 
-        public IEnumerable<T> GetBooksByName<T>(string name)
+        public IEnumerable<T> GetBooksByName<T>(string name, int page, int itemsPerPage = 10)
         {
             return this.repositoryBooks.AllAsNoTracking()
                    .Where(x => x.Name.Contains(name))
                    .OrderBy(x => x.Name)
+                   .Skip((page - 1) * itemsPerPage)
+                   .Take(itemsPerPage)
                    .To<T>()
                    .ToList();
+        }
+
+        public int GetCountBySearch(string name)
+        {
+            return this.repositoryBooks.AllAsNoTracking()
+                .Where(x => x.Name.Contains(name))
+                .Count();
         }
 
         public int GetCount()

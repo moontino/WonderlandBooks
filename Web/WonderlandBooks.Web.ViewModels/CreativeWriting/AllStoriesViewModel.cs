@@ -4,10 +4,8 @@
 
     using WonderlandBooks.Services.Mapping;
 
-    public class CollectionOfStories : IMapFrom<WonderlandBooks.Data.Models.CreativeWriting>
+    public class AllStoriesViewModel :BasicPaging, IMapFrom<WonderlandBooks.Data.Models.CreativeWriting>
     {
-        public string UserId { get; set; }
-
         public IEnumerable<StoriesViewModel> Stories { get; set; }
     }
 }

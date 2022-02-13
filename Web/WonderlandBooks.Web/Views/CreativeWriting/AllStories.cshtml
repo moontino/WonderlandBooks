@@ -1,52 +1,64 @@
-﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.CollectionOfStories
-
+﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.AllStoriesViewModel
 @{
-    ViewData["Title"] = "AllStories";
+    this.ViewData["Title"] = "Stories";
+}
+@{
+    ViewData["Title"] = "ReadStories";
 }
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-sm-start row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             @foreach (var story in Model.Stories)
             {
                 <div class="row p-2 bg-white border rounded">
-                    <div class="col-md-3 mt-1">
-                        <a asp-controller="CreativeWriting" asp-action="CurrentStory"asp-route-id=@story.Id>
+                    <div class="col-md-3">
+                        <a  asp-controller="CreativeWriting" asp-action="CurrentStory"asp-route-id=@story.Id>
                             <img class="img-fluid img-responsive rounded product-image" src=@story.Image>
                         </a>
                     </div>
-                    <div class="col-md-6 mt-1">
-                        <h5>@story.Title</h5>
-                        <div class="d-flex flex-row">
-
-                        </div>
-
-                        <p class="text-justify text-truncate para mb-0">@story.Description<br><br></p>
-                    </div>
-                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                        <form method="post">
-                            <div class="col-xs-3 text-center">
-
-                                <div class="form-group">
-                                    <input id="id" name="idStory" type="hidden" value="@story.Id">
-                                    <input type="submit" asp-controller="CreativeWriting" asp-action="AddChapter" value="Add chapter" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
-                                </div>
-                                <div class="form-group">
-                                    <input id="id" name="idStory" type="hidden" value="@story.Id">
-                                    <input type="submit" asp-controller="CreativeWriting" asp-action="GetChapters" value="Update chapter" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
-                                </div>
-                               <div class="form-group">
-                                <input id="id" name="idStory" type="hidden" value="@story.Id">
-                                <input type="submit" asp-controller="CreativeWriting" asp-action="UpdateStory" value="Update story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
-                            </div>
-                                <div class="form-group">
-                                    <input id="id" name="idStory" type="hidden" value="@story.Id">
-                                    <input type="submit" asp-controller="CreativeWriting" asp-action="DeleteStory" value="Delete story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-md-9">
+                        <h3 class="text-center">@story.Title</h3>
+                        <hr />
+                        <h5>@story.Description ...</h5>
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @if (!Model.HasPreviousPage) {<text>disabled</text>} ">
+            <a class="page-link" asp-action="AllStories" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+        </li>
+        @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
+        {
+
+
+            @if (i > 0)
+            {
+                <li class="page-item"><a class="page-link" asp-action="AllStories" asp-route-id="@i">@i</a></li>
+            }
+        }
+
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                @Model.PageNumber
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+
+        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
+        {
+
+            @if (i <= Model.PagesCount)
+            {
+                <li class="page-item"><a class="page-link" asp-action="AllStories" asp-route-id="@i">@i</a></li>
+            }
+        }
+        <li class="page-item" @if (!Model.HasNextPage) { <text> disabled</text>}>
+            <a class="page-link" asp-action="AllStories" asp-route-id="@Model.NextPageNumber">Next</a>
+        </li>
+    </ul>
+</nav>
+

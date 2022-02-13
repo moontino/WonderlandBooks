@@ -2,13 +2,14 @@
 {
     using System.Collections.Generic;
 
-    using WonderlandBooks.Services.Data.ControllerDataService.Models;
-    using WonderlandBooks.Web.ViewModels.CreativeWriting;
-
     public interface IStoriesService
     {
-        CollectionOfStories StoriesByUser(string id);
+        T StoriesByUser<T>(string id);
 
         T CurrentStory<T>(int storyId);
+
+        IEnumerable<T> AllStories<T>(int page, int itemsPerPage = 8);
+
+        int GetCount();
     }
 }

@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WonderlandBooks.Data.Models;
-using WonderlandBooks.Services.Mapping;
-
-namespace WonderlandBooks.Web.ViewModels.Books
+﻿namespace WonderlandBooks.Web.ViewModels.Books
 {
+    using AutoMapper;
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
     public class SearchBooksViewModel : BasicBookViewModel, IMapFrom<Book>, IHaveCustomMappings
     {
         public string Description { get; set; }

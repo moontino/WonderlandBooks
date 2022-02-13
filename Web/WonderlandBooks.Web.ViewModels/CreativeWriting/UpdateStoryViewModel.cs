@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Web.ViewModels.CreativeWriting
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
@@ -39,6 +40,8 @@
         public int EditionLanguageId { get; set; }
 
         public int CreativeWritingId { get; set; }
+
+        public IEnumerable<UpdateChapterViewModel> Chapters { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

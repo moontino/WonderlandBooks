@@ -6,14 +6,8 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
 
-    public class StoryViewModel : IMapFrom<Story>, IHaveCustomMappings
+    public class StoryViewModel : BaseStoryViewModel, IMapFrom<Story>, IHaveCustomMappings
     {
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public string Image { get; set; }
-
         public string GenreName { get; set; }
 
         public string GenreId { get; set; }

@@ -1,46 +1,83 @@
 ﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.UpdateStoryViewModel
 @{
-    ViewData["Title"] = "UpdateStory";
+    ViewData["Title"] = "Update Story";
 }
+<hr />
 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
-    <div class="col-md-8 offset-md-3">
+    <div class="col-md-10 offset-md-1">
         <div class="form-group">
             <input type="hidden" value="@Model.Image" name="imagePath" />
-            <input type="hidden" value="@Model.Id" asp-for="Id" />
+            <input type="hidden" value="@Model.Id" asp-for="@Model.Id" />
             <img src="@Model.Image" class="mr-4 img-responsive" width="250" />
         </div>
         <div class="form-group">
-            <label class="form-label" asp-for="Title"></label>
-            <input class="form-control" value="@Model.Title" asp-for="Title">
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <label class="form-label" asp-for="@Model.Title"></label>
+            <input class="form-control" value="@Model.Title" asp-for="@Model.Title">
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label class="form-label" asp-for="Description"></label>
-            <textarea class="form-control" asp-for="Description" rows="5">@Model.Description</textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label class="form-label" asp-for="@Model.Description"></label>
+            <textarea class="form-control" asp-for="@Model.Description" rows="5">@Model.Description</textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
         </div>
         <div class="form-select">
             <label>Genre</label>
-            <select class="custom-select" asp-for="GenreId" asp-items="@ViewBag.Genres">
+            <select class="custom-select" asp-for="@Model.GenreId" asp-items="@ViewBag.Genres">
                 <option selected="@Model.GenreId" value="@Model.GenreId">@Model.GenreName</option>
             </select>
-            <span class="text-danger" asp-validation-for="GenreId"></span>
+            <span class="text-danger" asp-validation-for="@Model.GenreId"></span>
         </div>
         <div class="form-select">
             <label>Language</label>
-            <select class="custom-select" asp-for="EditionLanguageId" asp-items="@ViewBag.Language">
+            <select class="custom-select" asp-for="@Model.EditionLanguageId" asp-items="@ViewBag.Language">
                 <option selected="@Model.EditionLanguageId" value="@Model.EditionLanguageId">@Model.EditionLanguageName</option>
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="NewImage">
+            <label asp-for="@Model.NewImage">
                 If you are looking for a new cover
-                <input type="file" class="form-control" asp-for="NewImage" accept="image/png, image/gif, image/jpeg" />
+                <input type="file" class="form-control"  style="border:0px solid white" asp-for="@Model.NewImage" accept="image/png, image/gif, image/jpeg" />
             </label>
         </div>
         &nbsp;
-        <div>
-            <input type="submit" class="btn btn-outline-primary mr-2 " value="update" asp-controller="CreativeWriting" asp-action="UpdateCurrentStory" />
-        </div>
+
+    </div>
+    <nav class="accordion arrows">
+        <input type="radio" name="accordion" id="cb1" />
+        <section class="box">
+            <label class="box-title" for="cb1">Chapters</label>
+            <label class="box-close" for="acc-close"></label>
+            <div class="box-content">
+                <div class="form-group">
+                    @foreach (var chapter in Model.Chapters)
+                    {
+                    
+                        <div class="form-group">
+                            <label class="form-label" asp-for="@chapter.Name"></label>
+                            <textarea class="form-control" asp-for="@chapter.Name" rows="1"  >@chapter.Name</textarea>
+                            <span asp-validation-for="@chapter.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="@chapter.Description"></label>
+                            <textarea class="form-control" asp-for="@chapter.Description" rows="8">@chapter.Description</textarea>
+                            <span asp-validation-for="@chapter.Description" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <input type="radio" name="accordion" id="acc-close" />
+    </nav>
+    <div class="offset-md-11">
+        <input type="submit" class="btn btn-outline-primary mr-xl-5 btn-lg " value="update" asp-controller="CreativeWriting" asp-action="UpdateCurrentStory" />
     </div>
 </form>
+
+@section Scripts {
+
+
+}
+@section Styles {
+
+    <link href="~/custom/steps.css" rel="stylesheet" />
+}

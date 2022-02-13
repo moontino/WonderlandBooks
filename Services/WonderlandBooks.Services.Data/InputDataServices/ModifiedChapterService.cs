@@ -33,11 +33,17 @@
 
         public async Task UpdateAsync(UpdateChapterViewModel input)
         {
-
             var curChapter = this.chaptersRepository.All()
                  .FirstOrDefault(x => x.Id == input.Id);
-            curChapter.Title = input.Title;
-            curChapter.Description = input.Description;
+
+            var model = new Chapter()
+            {
+                Title = input.Name,
+                Description = input.Description,
+                StoryId = curChapter.StoryId,
+            };
+
+            await this.chaptersRepository.AddAsync(model);
 
             await this.chaptersRepository.SaveChangesAsync();
         }

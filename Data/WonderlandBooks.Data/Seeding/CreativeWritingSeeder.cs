@@ -6,7 +6,7 @@
 
     using WonderlandBooks.Data.Models;
 
-    public class CreativeWritingSeeder // : ISeeder
+    public class CreativeWritingSeeder: ISeeder
     {
         public async Task SeedAsync(WonderlandDbContext dbContext, IServiceProvider serviceProvider)
         {
@@ -17,7 +17,7 @@
 
             var writer = new CreativeWriting
             {
-                UserId = "a98c9680-1af9-4232-a01f-747be5ef2b4d",
+                UserId = "3d3fbb27-652a-450e-8007-29c795863437",
             };
             var story = new Story
             {
@@ -46,7 +46,7 @@
 
             var writerSecond = new CreativeWriting
             {
-                UserId = "7e257fc3-84f5-417f-af2a-6098124c7e6f",
+                UserId = "9468740e-6973-4458-83a7-a2b7e17684ac",
             };
             var storySecond = new Story
             {

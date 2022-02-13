@@ -9,34 +9,37 @@
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Data.ControllerDataService;
     using WonderlandBooks.Services.Data.InputDataServices;
-    using WonderlandBooks.Services.Data.ModelDataServices;
     using WonderlandBooks.Web.ViewModels.Books;
 
     public class BooksController : BaseController
     {
         private readonly IMapper mapper;
         private readonly IBooksService booksService;
-        private readonly IBookRecommendationsService bookRecommendations;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICreateLibraryService libraryService;
 
         public BooksController(
             IMapper mapper,
             IBooksService booksService,
-            IBookRecommendationsService bookRecommendations,
             UserManager<ApplicationUser> userManager,
             ICreateLibraryService libraryService)
         {
             this.mapper = mapper;
             this.booksService = booksService;
-            this.bookRecommendations = bookRecommendations;
             this.userManager = userManager;
             this.libraryService = libraryService;
         }
 
         public IActionResult Book(int id)
         {
-            var model = this.mapper.Map<BookViewModel>(this.booksService.GetBook<BookViewModel>(id));
+            const int RANDOM_BOOKS_COUNT = 12;
+
+            var model = new RandomListBookViewModel
+            {
+                Book = this.mapper.Map<BookViewModel>(this.booksService.GetBook<BookViewModel>(id)),
+                RandomBooks = this.booksService.GetRandom<BooksListViewModel>(RANDOM_BOOKS_COUNT),
+            };
+
             return this.View(model);
         }
 
@@ -72,11 +75,15 @@
             return this.View(model);
         }
 
-        public IActionResult SearchBook(string search)
+        public IActionResult SearchBook(string search, int id = 1)
         {
+            const int ItemPerPage = 10;
             var model = new SearchListBookViewModel
             {
-                Books = this.booksService.GetBooksByName<SearchBooksViewModel>(search),
+                ItemPerPage = ItemPerPage,
+                PageNumber = id,
+                Count = this.booksService.GetCountBySearch(search),
+                Books = this.booksService.GetBooksByName<SearchBooksViewModel>(search, id, ItemPerPage),
             };
 
             return this.View(model);

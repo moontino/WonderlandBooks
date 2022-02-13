@@ -1,23 +1,20 @@
-﻿using AutoMapper;
-using WonderlandBooks.Data.Models;
-using WonderlandBooks.Services.Mapping;
-
-namespace WonderlandBooks.Web.ViewModels.CreativeWriting
+﻿namespace WonderlandBooks.Web.ViewModels.CreativeWriting
 {
-    public class StoriesViewModel : IMapFrom<Story>,IHaveCustomMappings
+    using AutoMapper;
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
+    public class StoriesViewModel : BaseStoryViewModel, IMapFrom<Story>, IHaveCustomMappings
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public string Image { get; set; }
-
         public void CreateMappings(IProfileExpression configuration)
         {
-            // Image = s.Image.Url ?? "/images/stories/" + s.Image.Id + s.Image.Extension,
+            configuration.CreateMap<Story, StoriesViewModel>()
+              .ForMember(x => x.Image, opt => opt
+              .MapFrom(x => x.Image.Url ?? "/images/stories/" + x.Image.Id + x.Image.Extension))
 
+              .ForMember(x => x.Description, opt => opt
+              .MapFrom(x => x.Description == null ? "..." : x.Description
+              .Substring(0, x.Description.Length <= 500 ? x.Description.Length : 500)));
         }
     }
 }

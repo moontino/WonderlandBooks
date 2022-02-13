@@ -1,8 +1,11 @@
 ﻿@model WonderlandBooks.Web.ViewModels.CreativeWriting.CreateChapterInputModel
+@{
+    this.ViewData["Title"] = "Add";
+}
 <hr />
 <form method="post" class="col-md-8 offset-md-2">
     <div class="form-group">
-        <input asp-for="Title"class="form-control-lg" style=" font-size: 200%" placeholder="Chapter..." />
+        <input asp-for="Title" class="form-control-lg" style=" font-size: 200%" placeholder="Chapter..." />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -15,7 +18,7 @@
         <textarea asp-for="StoryId" class="invisible">@Model.StoryId</textarea>
     </div>
     <div>
-        <input class="btn btn-primary" type="submit" value="Publish"  asp-controller="CreativeWriting" asp-action="CreateChapter">
+        <input class="btn btn-primary" type="submit" value="Publish" asp-controller="CreativeWriting" asp-action="CreateChapter">
     </div>
 </form>
 
@@ -61,11 +64,11 @@
 }
 
 @section Styles {
-<style>
-    .invisible {
-        visibility: hidden;
-        display: none;
-    }
-</style>
+    <style>
+        .invisible {
+            visibility: hidden;
+            display: none;
+        }
+    </style>
     <link href="~/custom/textarea.css" rel="stylesheet" />
 }
