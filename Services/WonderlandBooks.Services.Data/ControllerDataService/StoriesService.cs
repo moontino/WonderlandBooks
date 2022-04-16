@@ -20,7 +20,7 @@
 
         public T StoriesByUser<T>(string id)
         {
-            return this.writing.AllAsNoTracking()
+            return this.writing.All()
                    .Where(x => x.UserId == id)
                    .To<T>()
                    .FirstOrDefault();
@@ -37,7 +37,7 @@
 
         public IEnumerable<T> AllStories<T>(int page, int itemsPerPage = 8)
         {
-            return this.stories.AllAsNoTracking()
+            return this.stories.All()
                 .OrderByDescending(x => x.Chapters.Count())
                  .Skip((page - 1) * itemsPerPage)
                  .Take(itemsPerPage)

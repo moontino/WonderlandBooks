@@ -36,7 +36,7 @@
         <div class="form-group">
             <label asp-for="@Model.NewImage">
                 If you are looking for a new cover
-                <input type="file" class="form-control"  style="border:0px solid white" asp-for="@Model.NewImage" accept="image/png, image/gif, image/jpeg" />
+                <input type="file" class="form-control" style="border:0px solid white" asp-for="@Model.NewImage" accept="image/png, image/gif, image/jpeg" />
             </label>
         </div>
         &nbsp;
@@ -49,27 +49,34 @@
             <label class="box-close" for="acc-close"></label>
             <div class="box-content">
                 <div class="form-group">
-                    @foreach (var chapter in Model.Chapters)
+                    @if (Model.Chapters != null)
                     {
-                    
-                        <div class="form-group">
-                            <label class="form-label" asp-for="@chapter.Name"></label>
-                            <textarea class="form-control" asp-for="@chapter.Name" rows="1"  >@chapter.Name</textarea>
-                            <span asp-validation-for="@chapter.Name" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" asp-for="@chapter.Description"></label>
-                            <textarea class="form-control" asp-for="@chapter.Description" rows="8">@chapter.Description</textarea>
-                            <span asp-validation-for="@chapter.Description" class="text-danger"></span>
-                        </div>
-                    }
+                        @foreach (var chapter in Model.Chapters)
+                        {
+
+                            <div class="form-group">
+                                <label class="form-label" asp-for="@chapter.Title"></label>
+                                <textarea class="form-control" asp-for="@chapter.Title" rows="1">@chapter.Title</textarea>
+                                <span asp-validation-for="@chapter.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" asp-for="@chapter.Description"></label>
+                                <textarea class="form-control" asp-for="@chapter.Description" rows="8">@chapter.Description</textarea>
+                                <span asp-validation-for="@chapter.Description" class="text-danger"></span>
+                            </div>
+                        }
+            }
+            else
+            {
+                <h1>You don't have chapters yet...</h1>
+            }
                 </div>
             </div>
         </section>
         <input type="radio" name="accordion" id="acc-close" />
     </nav>
     <div class="offset-md-11">
-        <input type="submit" class="btn btn-outline-primary mr-xl-5 btn-lg " value="update" asp-controller="CreativeWriting" asp-action="UpdateCurrentStory" />
+        <input type="submit" class="btn btn-outline-primary mr-xl-5 btn-lg " asp-controller="CreativeWriting" asp-action="UpdateStory" />
     </div>
 </form>
 

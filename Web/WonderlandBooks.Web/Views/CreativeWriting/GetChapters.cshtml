@@ -9,12 +9,12 @@
         <h1 class="display-4">Chapters</h1>
         <hr />
         <form method="post">
-            <input id="idStory" name="idStory" type="hidden" value="@Model.Id">
             @foreach (var item in Model.Chapters)
             {
                 <div class="form-group">
-                    <input id="idChapter" name="idChapter" type="hidden" value="@item.Id">
-                    <input type="submit" asp-controller="CreativeWriting" asp-action="SelectChapter" value="@item.Title" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
+                    
+                    <input type="submit" asp-controller="CreativeWriting" asp-action="SelectChapter"
+                       asp-route-id="@item.Id" value="@item.Title" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
                 </div>
             }
         </form>

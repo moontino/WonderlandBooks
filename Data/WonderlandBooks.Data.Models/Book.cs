@@ -12,6 +12,7 @@
             this.Comments = new HashSet<Comment>();
             this.Genres = new HashSet<Genre>();
             this.Characters = new HashSet<Character>();
+            this.VoteBooks = new HashSet<VoteBook>();
         }
 
         [Required]
@@ -42,6 +43,6 @@
 
         public virtual ICollection<Shelf> Shelves { get; set; }
 
-        // TODO: Rating add
+        public virtual ICollection<VoteBook> VoteBooks { get; set; }
     }
 }

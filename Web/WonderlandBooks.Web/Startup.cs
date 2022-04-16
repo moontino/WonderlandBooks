@@ -78,6 +78,7 @@
             services.AddTransient<ICountDataService, CountDataService>();
             services.AddTransient<IStoriesService, StoriesService>();
             services.AddTransient<IChapterService, ChapterService>();
+            services.AddTransient<IVoteBookService, VoteBookService>();
 
             services.AddTransient<IModifiedStoryService, ModifiedStoryService>();
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();

@@ -15,11 +15,9 @@
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Shelves = new HashSet<Shelf>();
+            this.VoteBooks = new HashSet<VoteBook>();
         }
 
-        public string ImageId { get; set; }
-
-        public Image Image { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
@@ -30,6 +28,8 @@
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<Shelf> Shelves { get; set; }
+
+        public virtual ICollection<VoteBook> VoteBooks { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

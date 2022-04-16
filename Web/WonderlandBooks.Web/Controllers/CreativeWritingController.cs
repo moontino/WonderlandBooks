@@ -63,6 +63,12 @@
             return this.View(model);
         }
 
+        public IActionResult CurrentStory(int id)
+        {
+            var model = this.mapper.Map<StoryViewModel>(this.stories.CurrentStory<StoryViewModel>(id));
+            return this.View(model);
+        }
+
         [Authorize]
         public async Task<IActionResult> StoriesByUser()
         {
@@ -71,12 +77,7 @@
             return this.View(model);
         }
 
-        public IActionResult CurrentStory(int id)
-        {
-            var model = this.mapper.Map<StoryViewModel>(this.stories.CurrentStory<StoryViewModel>(id));
-            return this.View(model);
-        }
-
+        [Authorize]
         public IActionResult CreateStory()
         {
             this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
@@ -105,8 +106,46 @@
             return this.Redirect("StoriesByUser");
         }
 
+        [Authorize]
+        public IActionResult UpdateStory(int idStory)
+        {
+            this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
+            this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
+
+            var model = this.mapper.Map<UpdateStoryViewModel>(this.stories.CurrentStory<UpdateStoryViewModel>(idStory));
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateStory(UpdateStoryViewModel input, string imagePath)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
+                this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
+                return this.View(input);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            input.UserId = user.Id;
+
+            var path = this.hostEnvironment.WebRootPath;
+            await this.storyService.UpdateAsync(input, imagePath, path);
+
+            return this.RedirectToAction("StoriesByUser");
+        }
+
+        [Authorize]
         public IActionResult CreateChapter(int idStory)
         {
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(idStory);
+            }
+
             CreateChapterInputModel model = new CreateChapterInputModel
             {
                 StoryId = idStory,
@@ -128,35 +167,20 @@
             return this.RedirectToAction("StoriesByUser");
         }
 
-        [Authorize]
-        public IActionResult UpdateStory(int idStory)
-        {
-            this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
-            this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
-
-            var model = this.mapper.Map<UpdateStoryViewModel>(this.stories.CurrentStory<UpdateStoryViewModel>(idStory));
-
-            return this.View(model);
-        }
-
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> UpdateCurrentStory(UpdateStoryViewModel input, string imagePath, IEnumerable<UpdateChapterViewModel> model)
+        public async Task<IActionResult> UpdateChapter(UpdateChapterViewModel input, int id)
         {
-            if (!this.ModelState.IsValid)
-            {
-                this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
-                this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
-                return this.View(input);
-            }
-
-            var user = await this.userManager.GetUserAsync(this.User);
-            input.UserId = user.Id;
-
-            var path = this.hostEnvironment.WebRootPath;
-            await this.storyService.UpdateAsync(input, imagePath, path);
-
+            await this.modifiedChapterService.UpdateAsync(input);
             return this.RedirectToAction("StoriesByUser");
+        }
+
+        [Authorize]
+        [Route("SelectChapter/{id:int}")]
+        public IActionResult SelectChapter(int id)
+        {
+            var model = this.chapterService.CurrentChapter<UpdateChapterViewModel>(id);
+            return this.View(model);
         }
 
         [Authorize]
@@ -166,21 +190,7 @@
             return this.View(model);
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult UpdateCurrentChapter(UpdateChapterViewModel input, int id)
-        {
-            input.Id = id;
-            this.modifiedChapterService.UpdateAsync(input);
-            return this.RedirectToAction("StoriesByUser");
-        }
-        [Authorize]
-        public IActionResult SelectChapter(int idChapter)
-        {
-            var model = this.chapterService.CurrentChapter<UpdateChapterViewModel>(idChapter);
-            return this.View(model);
-        }
-        public IActionResult AddChapter(int idStory) // id story
+        public IActionResult AddChapter(int idStory)
         {
             CreateChapterInputModel model = new CreateChapterInputModel
             {
@@ -188,6 +198,7 @@
             };
             return this.View(model);
         }
+
         public async Task<IActionResult> DeleteStory(int idStory)
         {
             await this.storyService.DeleteAsync(idStory);

@@ -6,10 +6,6 @@
 
     public class Chapter : BaseDeletableModel<int>
     {
-        public Chapter()
-        {
-            this.Comments = new HashSet<Comment>();
-        }
 
         public Story Story { get; set; }
 
@@ -20,7 +16,5 @@
 
         [Required]
         public string Description { get; set; }
-
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

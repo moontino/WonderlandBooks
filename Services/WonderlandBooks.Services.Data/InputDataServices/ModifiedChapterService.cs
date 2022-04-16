@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Services.Data.InputDataServices
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,12 +11,11 @@
     public class ModifiedChapterService : IModifiedChapterService
     {
         private readonly IDeletableEntityRepository<Chapter> chaptersRepository;
-        private readonly IDeletableEntityRepository<Story> storyRepository;
 
-        public ModifiedChapterService(IDeletableEntityRepository<Chapter> chaptersRepository, IDeletableEntityRepository<Story> storyRepository)
+        public ModifiedChapterService(IDeletableEntityRepository<Chapter> chaptersRepository)
         {
             this.chaptersRepository = chaptersRepository;
-            this.storyRepository = storyRepository;
+
         }
 
         public async Task CreateAsync(CreateChapterInputModel input)
@@ -33,18 +33,12 @@
 
         public async Task UpdateAsync(UpdateChapterViewModel input)
         {
-            var curChapter = this.chaptersRepository.All()
+            var chapter = this.chaptersRepository.All()
                  .FirstOrDefault(x => x.Id == input.Id);
+            chapter.Description = input.Description;
+            chapter.Title = input.Title;
 
-            var model = new Chapter()
-            {
-                Title = input.Name,
-                Description = input.Description,
-                StoryId = curChapter.StoryId,
-            };
-
-            await this.chaptersRepository.AddAsync(model);
-
+            this.chaptersRepository.Update(chapter);
             await this.chaptersRepository.SaveChangesAsync();
         }
     }

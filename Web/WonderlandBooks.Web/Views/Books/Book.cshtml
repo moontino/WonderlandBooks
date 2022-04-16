@@ -3,6 +3,11 @@
     this.ViewData["Title"] = "Book";
 }
 
+
+@section Styles {
+    <link href="~/custom/star.css" rel="stylesheet" />
+}
+
 <section class="ftco-about img ftco-section" id="about-section">
     <div class="container">
         <div class="row d-flex no-gutters">
@@ -32,7 +37,14 @@
                         </div>
                     </div>
                 </div>
-
+                <ul class="ratings">
+                    <li class="star"></li>
+                    <li class="star"></li>
+                    <li class="star"></li>
+                    <li class="star"></li>
+                    <li class="star"></li>
+                    <h1> 5 /0 </h1>
+                </ul>
                 <form asp-controller="Books" asp-action="SaveBook" method="post">
 
                     <div class="form-group">
@@ -72,3 +84,23 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script>
+        $(function () {
+            var star = '.star',
+                selected = '.selected';
+
+            $(star).on('click', function () {
+                $(selected).each(function () {
+                    $(this).removeClass('selected');
+                });
+                $(this).addClass('selected');
+            });
+
+        });
+    </script>
+    <script>
+
+    </script>
+}

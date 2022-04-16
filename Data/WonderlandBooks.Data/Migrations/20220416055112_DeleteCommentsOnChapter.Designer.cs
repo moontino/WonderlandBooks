@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WonderlandBooks.Data;
 
 namespace WonderlandBooks.Data.Migrations
 {
     [DbContext(typeof(WonderlandDbContext))]
-    partial class WonderlandDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220416055112_DeleteCommentsOnChapter")]
+    partial class DeleteCommentsOnChapter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,6 +285,9 @@ namespace WonderlandBooks.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -323,6 +328,8 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -825,37 +832,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("WonderlandBooks.Data.Models.VoteBook", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<byte>("Value")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("VoteBooks");
-                });
-
             modelBuilder.Entity("AuthorBook", b =>
                 {
                     b.HasOne("WonderlandBooks.Data.Models.Author", null)
@@ -972,6 +948,15 @@ namespace WonderlandBooks.Data.Migrations
                     b.HasOne("WonderlandBooks.Data.Models.Question", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId");
+                });
+
+            modelBuilder.Entity("WonderlandBooks.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("WonderlandBooks.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Author", b =>
@@ -1123,23 +1108,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasForeignKey("StoryId");
                 });
 
-            modelBuilder.Entity("WonderlandBooks.Data.Models.VoteBook", b =>
-                {
-                    b.HasOne("WonderlandBooks.Data.Models.Book", "Book")
-                        .WithMany("VoteBooks")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("WonderlandBooks.Data.Models.ApplicationUser", "User")
-                        .WithMany("VoteBooks")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("WonderlandBooks.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -1149,8 +1117,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.Navigation("Roles");
 
                     b.Navigation("Shelves");
-
-                    b.Navigation("VoteBooks");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
@@ -1158,8 +1124,6 @@ namespace WonderlandBooks.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Shelves");
-
-                    b.Navigation("VoteBooks");
                 });
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.CreativeWriting", b =>
