@@ -1,4 +1,7 @@
-﻿@model WonderlandBooks.Web.ViewModels.Books.RandomListBookViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using WonderlandBooks.Data.Models
+@model WonderlandBooks.Web.ViewModels.Books.RandomListBookViewModel
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     this.ViewData["Title"] = "Book";
 }
@@ -38,23 +41,19 @@
                     </div>
                 </div>
                 <ul class="ratings">
-                    <li class="star"></li>
-                    <li class="star"></li>
-                    <li class="star"></li>
-                    <li class="star"></li>
-                    <li class="star"></li>
-                    <h1> 5 /0 </h1>
+                    <li class="star" data-vote="5"></li>
+                    <li class="star" data-vote="4"></li>
+                    <li class="star" data-vote="3"></li>
+                    <li class="star" data-vote="2"></li>
+                    <li class="star" data-vote="1"></li>
                 </ul>
-                <form asp-controller="Books" asp-action="SaveBook" method="post">
-
-                    <div class="form-group">
-                        <input id="id" name="id" type="hidden" value="@Model.Book.Id">
-                    </div>
-                    &nbsp;
+                <h1>5 / <span id="averageVoteValue">@Model.Book.VotesAvarege</span></h1>
+                @if (this.SignInManager.IsSignedIn(this.User))
+                {
                     <div>
-                        <input type="submit" value="Save book" class="btn btn-outline-primary mr-2" ata-toggle="tooltip" data-placement="right" title="Click for save the book" />
+                        <button type="button" class="btn btn-primary" id="btn-save-book" title="Click for save the book">Save book</button>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
@@ -84,6 +83,7 @@
         </div>
     </div>
 </section>
+<form method="post" id="antiForgeryForm"></form>
 
 @section Scripts{
     <script>
@@ -101,6 +101,68 @@
         });
     </script>
     <script>
-
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var bookId = @Model.Book.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { bookId: bookId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/VoteBook",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
     </script>
+    <script>
+
+        $("#btn-save-book").click(function (e) {
+            e.preventDefault();
+            var bookId = @Model.Book.Id;
+            var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+            var data = { bookId: bookId };
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Library",
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': antiForgeryToken
+                },
+                success: function (res) {
+
+                    if (res) {
+                        $("#btn-save-book").prop('disabled', true).text("@Model.Book.Name is already in your library")
+                    } else {
+                        $("#btn-save-book").prop('disabled', false).text("Save book")
+                    }
+                },
+                contentType: 'application/json',
+            });
+        });
+        $(window).load(function (e) {
+            $.ajax({
+                type: "GET",
+                url: "/api/Library/" + @Model.Book.Id,
+                contentType: 'application/json',
+                success: (res) => {
+
+                    if (res) {
+                        $("#btn-save-book").prop('disabled', true).text("@Model.Book.Name is already in your library")
+                    } else {
+                        $("#btn-save-book").prop('disabled', false).text("Save book");
+                    };
+                }
+            });
+        });
+    </script>
+
 }

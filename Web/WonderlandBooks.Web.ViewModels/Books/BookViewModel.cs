@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Web.ViewModels.Books
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -21,6 +22,8 @@
 
         public string Characters { get; set; }
 
+        public string  VotesAvarege { get; set; }
+
         public IEnumerable<BookAuthorViewModel> Authors { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
@@ -35,7 +38,12 @@
 
              .ForMember(
              x => x.EditionLanguage,
-             y => y.MapFrom(t => t.EditionLanguage.Name));
+             y => y.MapFrom(t => t.EditionLanguage.Name))
+
+            .ForMember(
+               x => x.VotesAvarege,
+               y => y.MapFrom(x => x.VoteBooks.Average(x => x.Value)==null? 
+               "0.0" : Math.Round(x.VoteBooks.Average(x => x.Value), 1).ToString()));
         }
     }
 }

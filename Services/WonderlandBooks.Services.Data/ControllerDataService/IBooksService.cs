@@ -6,11 +6,10 @@
 
     public interface IBooksService
     {
-        IList<T> GetTenBooks<T>();
 
         T GetBook<T>(int id);
 
-        ListOfBooksLibraryViewModel GetLibrary(string id);
+        T GetLibrary<T>(string id);
 
         IEnumerable<T> GetAllBooks<T>(int page, int itemsPerPage = 16);
 

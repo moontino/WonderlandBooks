@@ -16,26 +16,24 @@
         private readonly IMapper mapper;
         private readonly IBooksService booksService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ICreateLibraryService libraryService;
 
         public BooksController(
             IMapper mapper,
             IBooksService booksService,
-            UserManager<ApplicationUser> userManager,
-            ICreateLibraryService libraryService)
+            UserManager<ApplicationUser> userManager)
         {
             this.mapper = mapper;
             this.booksService = booksService;
             this.userManager = userManager;
-            this.libraryService = libraryService;
         }
 
-        public IActionResult Book(int id)
+        public async Task<IActionResult> Book(int id)
         {
             const int RANDOM_BOOKS_COUNT = 12;
 
             var model = new RandomListBookViewModel
             {
+
                 Book = this.mapper.Map<BookViewModel>(this.booksService.GetBook<BookViewModel>(id)),
                 RandomBooks = this.booksService.GetRandom<BooksListViewModel>(RANDOM_BOOKS_COUNT),
             };
@@ -43,20 +41,10 @@
             return this.View(model);
         }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> SaveBookAsync(int id)
-        {
-            var user = await this.userManager.GetUserAsync(this.User);
-            await this.libraryService.SaveAsync(user.Id, id);
-
-            return this.Redirect($"Library");
-        }
-
         public async Task<IActionResult> Library()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var model = this.mapper.Map<ListOfBooksLibraryViewModel>(this.booksService.GetLibrary(user.Id));
+            var model = this.mapper.Map<ListOfBooksLibraryViewModel>(this.booksService.GetLibrary<ListOfBooksLibraryViewModel>(user.Id));
 
             return this.View(model);
         }
@@ -77,13 +65,15 @@
 
         public IActionResult SearchBook(string search, int id = 1)
         {
-            const int ItemPerPage = 10;
+
+            int itemPerPage = this.booksService.GetCountBySearch(search) > 10 ? 10 : this.booksService.GetCountBySearch(search);
             var model = new SearchListBookViewModel
             {
-                ItemPerPage = ItemPerPage,
+                ItemPerPage = itemPerPage,
                 PageNumber = id,
+                SearchString = search,
                 Count = this.booksService.GetCountBySearch(search),
-                Books = this.booksService.GetBooksByName<SearchBooksViewModel>(search, id, ItemPerPage),
+                Books = this.booksService.GetBooksByName<SearchBooksViewModel>(search, id, itemPerPage),
             };
 
             return this.View(model);

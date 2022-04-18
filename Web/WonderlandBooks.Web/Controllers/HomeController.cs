@@ -40,16 +40,6 @@
             return this.View(model);
         }
 
-        public IActionResult Welcome()
-        {
-            var viewModel = new PresentationListViewModel
-            {
-                Authors = this.authorsService.GetTenAuthors<AuthorsPresentationViewModel>(),
-                Book = this.booksService.GetTenBooks<BookPresentationViewModel>(),
-            };
-
-            return this.View(viewModel);
-        }
 
         public IActionResult Recommendations()
         {

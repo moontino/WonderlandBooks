@@ -57,10 +57,11 @@
                    .ToList();
         }
 
-        public int GetCountBySearch(string name)
+        public int GetCountBySearch(string name, int skipItem)
         {
             return this.repositoryBooks.AllAsNoTracking()
                 .Where(x => x.Name.Contains(name))
+                .Skip(skipItem)
                 .Count();
         }
 
@@ -69,21 +70,12 @@
             return this.repositoryBooks.All().Count();
         }
 
-        public ListOfBooksLibraryViewModel GetLibrary(string id)
+        public T GetLibrary<T>(string id)
         {
             return this.users.All()
                 .Where(x => x.Id == id)
-                .Select(x => new ListOfBooksLibraryViewModel
-                {
-                    Id = x.Id,
-                    Shelves = x.Shelves.OrderByDescending(o => o.CreatedOn)
-                                       .Select(s => new LibraryBooksViewModel
-                                       {
-                                           BookId = s.BookId,
-                                           BookName = s.Book.Name,
-                                           BookImageUrl = s.Book.Image.Url,
-                                       }).ToList(),
-                }).FirstOrDefault();
+                .To<T>()
+                .FirstOrDefault();
         }
 
         public IEnumerable<T> GetRandom<T>(int count)
@@ -95,14 +87,6 @@
                  .To<T>()
                  .ToList();
             return model;
-        }
-
-        public IList<T> GetTenBooks<T>()
-        {
-            return this.repositoryBooks.All()
-                          .Take(10)
-                          .To<T>()
-                          .ToList();
         }
     }
 }

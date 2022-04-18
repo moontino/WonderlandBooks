@@ -58,7 +58,10 @@
                 }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -79,10 +82,11 @@
             services.AddTransient<IStoriesService, StoriesService>();
             services.AddTransient<IChapterService, ChapterService>();
             services.AddTransient<IVoteBookService, VoteBookService>();
+            services.AddTransient<ILibraryService, LibraryService>();
 
             services.AddTransient<IModifiedStoryService, ModifiedStoryService>();
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();
-            services.AddTransient<ICreateLibraryService, CreateLibraryService>();
+            services.AddTransient<IModifiedLibraryService, ModifiedLibraryService>();
 
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();

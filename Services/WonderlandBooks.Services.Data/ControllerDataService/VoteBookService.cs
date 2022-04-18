@@ -14,6 +14,13 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
             this.votesRepository = votesRepository;
         }
 
+        public double GetAvarageVotes(int bookId)
+        {
+            return this.votesRepository.All()
+                  .Where(x => x.BookId == bookId)
+                  .Average(x => x.Value);
+        }
+
         public async Task SetVoteAsync(int bookId, string userId, byte value)
         {
             var vote = this.votesRepository.All()
@@ -25,7 +32,7 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
                 {
                     BookId = bookId,
                     UserId = userId,
-                    Value = value
+                    Value = value,
                 };
                 await this.votesRepository.AddAsync(vote);
             }

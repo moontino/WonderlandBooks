@@ -8,8 +8,7 @@
         <div class="row d-flex no-gutters">
             <div class="col-md-6 col-lg-6 d-flex">
                 <div class="img-about img d-flex align-items-stretch">
-                    <div class="img d-flex align-self-stretch align-items-center" style=" background-image: url( @Model.Image );">
-                    </div>
+                    <img src=@Model.Image class="img-fluid">
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 pl-md-5">
@@ -29,34 +28,48 @@
         </div>
     </div>
 </section>
-<section class="ftco-section ftco-no-pb ftco-no-pt" id="chapter-section">
-    <div class="container">
-        <div class="row justify-content-center py-5 mt-5">
-            <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">What's Inside The Story</h2>
+@if (Model.Chapters.Count > 0)
+{
+    <section class="ftco-section ftco-no-pb ftco-no-pt" id="chapter-section">
+        <div class="container">
+            <div class="row justify-content-center py-5 mt-5">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">What's Inside The Story</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <nav id="navi">
+                        <ul>
+                            @for (int i = 0; i < Model.Chapters.Count; i++)
+                            {
+                                <li><a href="#@i"> @Model.Chapters[i].Title</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-9">
+                    @for (int i = 0; i < Model.Chapters.Count; i++)
+                    {
+                        <div id="@i" class="page bg-light one">
+                            <h2 class="heading">@Model.Chapters[i].Title</h2>
+                            <p>@Model.Chapters[i].Description</p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 mb-4">
-                <nav id="navi">
-                    <ul>
-                        @for (int i = 0; i < Model.Chapters.Count; i++)
-                        {
-                            <li><a href="#@i"> @Model.Chapters[i].Title</a></li>
-                        }
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-md-9">
-                @for (int i = 0; i < Model.Chapters.Count; i++)
-                {
-                    <div id="@i" class="page bg-light one">
-                        <h2 class="heading">@Model.Chapters[i].Title</h2>
-                        <p>@Model.Chapters[i].Description</p>
-                    </div>
-                }
+    </section>
+}
+else
+{
+    <section class="ftco-section ftco-no-pb ftco-no-pt" id="chapter-section">
+        <div class="container">
+            <div class="row justify-content-center py-5 mt-5">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">Coming soon!</h2>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
+}

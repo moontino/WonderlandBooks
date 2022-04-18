@@ -1,4 +1,5 @@
-﻿@model WonderlandBooks.Web.ViewModels.Books.ListOfBooksLibraryViewModel
+﻿@using WonderlandBooks.Data.Models
+@model WonderlandBooks.Web.ViewModels.Books.ListOfBooksLibraryViewModel
 @{
     ViewData["Title"] = "Library";
 }
@@ -12,21 +13,93 @@
                 <h2 class="mb-4">Library</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row align-content-md-between">
+
             @foreach (var book in Model.Shelves)
             {
 
-                <div class="col-md-3">
+                <div class="col-md-3" id="@book.BookId">
                     <div class="project img ftco-animate d-flex justify-content-center align-items-end" style="background-image: url(@book.BookImageUrl);">
                         <div class="overlay"></div>
                         <div class="text p-4">
                             <h3><a asp-controller="Books" asp-action="Book" asp-route-id=@book.BookId>@book.BookName</a></h3>
                         </div>
+                        <div class="deleteBook">
+                            <button class="btn btn-danger btn-sm rounded-0" type="button" title="Delete"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div style="margin-block-end:60px">
+                        <form class="col-md-12 ">
+                            <div class="form-select">
+                                <select class="custom-select" id="@book.BookId" asp-for="@book.ReadType" asp-items="Html.GetEnumSelectList<ReadType>()">
+                                    <option selected="selected" value="@book.ReadType">Please select</option>
 
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
             }
         </div>
     </div>
 </section>
+<form method="post" id="antiForgeryForm"></form>
 
+@section Scripts{
+    <script>
+        $(".custom-select").each(function (el) {
+            $(this).change(function (e) {
+                let value = $(this).find(':selected').val();
+                let bookId = e.target.id;
+
+                let numberValue = parseInt(value);
+
+                if (numberValue) {
+                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                    var data = { bookId: bookId, value: value };
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Library/type",
+                        data: JSON.stringify(data),
+                        headers: {
+                            'X-CSRF-TOKEN': antiForgeryToken
+                        },
+                        success: function (data) {
+
+                        },
+                        contentType: 'application/json',
+
+                    })
+                }
+            })
+        })
+    </script>
+    <script>
+        $(".deleteBook").each(function  (el) {
+            $(this).click(function deleteBook (e) {
+
+                let parentElement = e.currentTarget.parentElement.parentElement;
+                let id = parentElement.id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { id: id };
+
+                $.ajax({
+                    url: "/api/Library/delete",
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+
+                        parentElement.remove();
+                    },
+                    contentType: 'application/json',
+
+                
+                });
+            })
+        })
+    </script>
+   
+}

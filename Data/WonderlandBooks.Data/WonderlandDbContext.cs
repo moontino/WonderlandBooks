@@ -49,6 +49,8 @@
 
         public DbSet<Answer> Answers { get; set; }
 
+        public DbSet<Post> Posts { get; set; }
+
         public DbSet<VoteBook> VoteBooks { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
