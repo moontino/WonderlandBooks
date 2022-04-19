@@ -11,12 +11,44 @@
         <form method="post">
             @foreach (var item in Model.Chapters)
             {
-                <div class="form-group">
-                    
+                <div class="form-group" id="@item.Id">
+
                     <input type="submit" asp-controller="CreativeWriting" asp-action="SelectChapter"
-                       asp-route-id="@item.Id" value="@item.Title" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
+                           asp-route-id="@item.Id" value="@item.Title" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
+                    <div class="deleteChapter">
+                        <button class="btn btn-danger btn-sm rounded-0" type="button" title="Delete"><i class="fa fa-trash"></i></button>
+                    </div>
                 </div>
             }
         </form>
     </div>
 </div>
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts{   
+    <script>
+        $(".deleteChapter").each(function  (el) {
+            $(this).click(function (e) {
+
+                let parentElement = e.currentTarget.parentElement;
+                let id = parentElement.id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { id: id };
+
+                $.ajax({
+                    url: "/api/Stories/delete/chapter/"+ id,
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+
+                        parentElement.remove();
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        })
+    </script>
+
+}

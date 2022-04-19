@@ -15,7 +15,6 @@
         public ModifiedChapterService(IDeletableEntityRepository<Chapter> chaptersRepository)
         {
             this.chaptersRepository = chaptersRepository;
-
         }
 
         public async Task CreateAsync(CreateChapterInputModel input)
@@ -28,6 +27,16 @@
             };
 
             await this.chaptersRepository.AddAsync(chapher);
+            await this.chaptersRepository.SaveChangesAsync();
+        }
+
+        public async Task RemoveAsync(int chapterId)
+        {
+            var chapter = this.chaptersRepository.All()
+                .Where(c => c.Id == chapterId)
+                .FirstOrDefault();
+
+            this.chaptersRepository.Delete(chapter);
             await this.chaptersRepository.SaveChangesAsync();
         }
 

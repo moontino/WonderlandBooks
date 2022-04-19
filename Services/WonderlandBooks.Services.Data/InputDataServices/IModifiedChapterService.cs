@@ -9,5 +9,7 @@
         Task CreateAsync(CreateChapterInputModel input);
 
         Task UpdateAsync(UpdateChapterViewModel input);
+
+        Task RemoveAsync(int chapterId);
     }
 }

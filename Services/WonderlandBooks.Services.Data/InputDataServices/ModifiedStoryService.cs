@@ -25,7 +25,7 @@
         }
 
         public async Task CreateAsync(CreateStoryInputModel input, string imagePath)
-        { // tags, characters
+        {
             Directory.CreateDirectory($"{imagePath}/images/stories/");
 
             var storiesList = this.writing.AllAsNoTracking().Where(x => x.UserId == input.UserId).FirstOrDefault();
@@ -57,7 +57,7 @@
             }
             else
             {
-                var extension = Path.GetExtension(input.Image.FileName); // ще гърми ако няма снимка
+                var extension = Path.GetExtension(input.Image.FileName); 
                 image.Extension = extension;
                 var physicalPath = $"{imagePath}/images/stories/{image.Id}{extension}";
 
@@ -71,10 +71,10 @@
             await this.stories.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task RemoveAsync(int id)
         {
-            var currentStory = this.stories.All().FirstOrDefault(x => x.Id == id);
-            currentStory.IsDeleted = true;
+            var story = this.stories.All().FirstOrDefault(x => x.Id == id);
+            this.stories.Delete(story);
             await this.stories.SaveChangesAsync();
         }
 

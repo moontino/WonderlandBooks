@@ -199,10 +199,5 @@
             return this.View(model);
         }
 
-        public async Task<IActionResult> DeleteStory(int idStory)
-        {
-            await this.storyService.DeleteAsync(idStory);
-            return this.RedirectToAction("StoriesByUser");
-        }
     }
 }

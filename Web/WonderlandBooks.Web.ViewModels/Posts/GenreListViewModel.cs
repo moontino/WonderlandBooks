@@ -8,8 +8,8 @@ using WonderlandBooks.Services.Mapping;
 
 namespace WonderlandBooks.Web.ViewModels.Posts
 {
-    public class HomeGenreListViewModel
+    public class GenreListViewModel
     {
-        public IEnumerable<HomeGenreViewModel> Genres { get; set; }
+        public IEnumerable<GenreViewModel> Genres { get; set; }
     }
 }

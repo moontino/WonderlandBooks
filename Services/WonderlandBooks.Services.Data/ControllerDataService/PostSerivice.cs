@@ -18,6 +18,14 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
             this.genreRepository = genreRepository;
         }
 
+        public T PostById<T>(int id)
+        {
+            return this.genreRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+        }
+
         public IEnumerable<T> TopGenres<T>()
         {
             return this.genreRepository.AllAsNoTracking()

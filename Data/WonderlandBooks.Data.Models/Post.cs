@@ -22,10 +22,6 @@
 
         public int GenreId { get; set; }
 
-        public Book Book { get; set; }
-
-        public int BookId { get; set; }
-
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -10,7 +10,7 @@
         <span>Hello @this.User.Identity.Name!</span>
     </a>
     <a class="dropdown-item" asp-controller="Books" asp-action="Library">Library</a>
-    <a class="dropdown-item" asp-controller="Posts" asp-action="HomePost">Discussions</a>
+    <a class="dropdown-item" asp-controller="Posts" asp-action="GenreList">Discussions</a>
     <a class="dropdown-item" asp-controller="CreativeWriting" asp-action="CreateStory">Writing</a>
     <a class="dropdown-item" asp-controller="CreativeWriting" asp-action="StoriesByUser">Your Stories</a>
     if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))

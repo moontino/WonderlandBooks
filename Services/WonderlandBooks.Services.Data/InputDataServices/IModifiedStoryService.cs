@@ -10,6 +10,6 @@
 
         Task UpdateAsync(UpdateStoryViewModel input, string imagelocal, string imagePath);
 
-        Task DeleteAsync(int id);
+        Task RemoveAsync(int id);
     }
 }

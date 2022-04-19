@@ -5,5 +5,7 @@
     public interface IPostSerivice
     {
         IEnumerable<T> TopGenres<T>();
+
+        T PostById<T>(int id);
     }
 }

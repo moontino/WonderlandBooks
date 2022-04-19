@@ -17,12 +17,18 @@ namespace WonderlandBooks.Web.Controllers
             this.postSerivice = postSerivice;
         }
 
-        public IActionResult HomePost()
+        public IActionResult GenreList()
         {
-            var model = new HomeGenreListViewModel
+            var model = new GenreListViewModel
             {
-                Genres = this.postSerivice.TopGenres<HomeGenreViewModel>(),
+                Genres = this.postSerivice.TopGenres<GenreViewModel>(),
             };
+            return this.View(model);
+        }
+
+        public IActionResult Post(int id)
+        {
+            var model = this.postSerivice.PostById<GenrePostViewModel>(id);
             return this.View(model);
         }
     }
