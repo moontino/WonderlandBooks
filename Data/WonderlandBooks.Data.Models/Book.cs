@@ -13,6 +13,7 @@
             this.Genres = new HashSet<Genre>();
             this.Characters = new HashSet<Character>();
             this.VoteBooks = new HashSet<VoteBook>();
+            this.Posts = new HashSet<Post>();
         }
 
         [Required]
@@ -38,6 +39,8 @@
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Character> Characters { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<Author> Authors { get; set; }
 

@@ -1,0 +1,18 @@
+﻿@model WonderlandBooks.Web.ViewModels.Posts.HomeGenreListViewModel
+@using WonderlandBooks.Common
+@{
+    this.ViewData["Title"] = "Topics";
+}
+<div class="row">
+    @foreach (var genre in Model.Genres)
+    {
+    
+        <div class="card w-25 text-center">
+            <div class="card-body">
+                <h3 class="card-title">@genre.Name</h3>
+                <a href="#" class="btn btn-dark">See more...</a>
+            </div>
+        </div>
+    
+    }
+</div>

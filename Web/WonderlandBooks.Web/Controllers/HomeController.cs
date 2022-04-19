@@ -40,12 +40,6 @@
             return this.View(model);
         }
 
-
-        public IActionResult Recommendations()
-        {
-            return this.View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

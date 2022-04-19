@@ -11,13 +11,13 @@
 
     [ApiController]
     [Route("api/[controller]")]
-    public class LibraryController : BaseController
+    public class LibrariesController : BaseController
     {
         private readonly ILibraryService libraryService;
         private readonly IModifiedLibraryService createLibraryService;
         private readonly IModifiedLibraryService modifiedLibrary;
 
-        public LibraryController(
+        public LibrariesController(
             ILibraryService libraryService,
             IModifiedLibraryService createLibraryService,
             IModifiedLibraryService modifiedLibrary)

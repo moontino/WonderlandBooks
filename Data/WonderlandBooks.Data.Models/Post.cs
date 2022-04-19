@@ -1,9 +1,15 @@
-﻿using WonderlandBooks.Data.Common.Models;
-
-namespace WonderlandBooks.Data.Models
+﻿namespace WonderlandBooks.Data.Models
 {
-    public class Post:BaseDeletableModel<int>
+    using System.Collections.Generic;
+    using WonderlandBooks.Data.Common.Models;
+
+    public class Post : BaseDeletableModel<int>
     {
+        public Post()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+
         public string Title { get; set; }
 
         public string Content { get; set; }
@@ -20,5 +26,6 @@ namespace WonderlandBooks.Data.Models
 
         public int BookId { get; set; }
 
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

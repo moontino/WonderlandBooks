@@ -83,6 +83,7 @@
             services.AddTransient<IChapterService, ChapterService>();
             services.AddTransient<IVoteBookService, VoteBookService>();
             services.AddTransient<ILibraryService, LibraryService>();
+            services.AddTransient<IPostSerivice, PostSerivice>();
 
             services.AddTransient<IModifiedStoryService, ModifiedStoryService>();
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();

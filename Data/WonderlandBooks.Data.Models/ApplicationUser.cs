@@ -16,8 +16,8 @@
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Shelves = new HashSet<Shelf>();
             this.VoteBooks = new HashSet<VoteBook>();
+            this.Posts = new HashSet<Post>();
         }
-
 
         public DateTime CreatedOn { get; set; }
 
@@ -30,6 +30,8 @@
         public virtual ICollection<Shelf> Shelves { get; set; }
 
         public virtual ICollection<VoteBook> VoteBooks { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
