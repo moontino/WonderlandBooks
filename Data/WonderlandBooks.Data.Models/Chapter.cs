@@ -6,7 +6,6 @@
 
     public class Chapter : BaseDeletableModel<int>
     {
-
         public Story Story { get; set; }
 
         public int StoryId { get; set; }

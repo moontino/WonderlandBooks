@@ -1,10 +1,7 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
 
@@ -27,7 +24,6 @@
         public void Test(int bookId, string userId)
         {
             var test = this.libraryRepository.All().Take(1);
-
         }
     }
 }

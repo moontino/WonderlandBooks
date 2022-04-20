@@ -6,7 +6,7 @@
 
     using WonderlandBooks.Data.Models;
 
-    public class CreativeWritingSeeder: ISeeder
+    public class CreativeWritingSeeder : ISeeder
     {
         public async Task SeedAsync(WonderlandDbContext dbContext, IServiceProvider serviceProvider)
         {

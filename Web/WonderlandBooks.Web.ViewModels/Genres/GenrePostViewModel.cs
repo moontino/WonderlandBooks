@@ -1,4 +1,4 @@
-﻿namespace WonderlandBooks.Web.ViewModels.Posts
+﻿namespace WonderlandBooks.Web.ViewModels.Genres
 {
     using System.Collections.Generic;
 

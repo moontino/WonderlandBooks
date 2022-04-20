@@ -81,10 +81,11 @@
                 let parentElement = e.currentTarget.parentElement.parentElement;
                 let id = parentElement.id;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                
                 var data = { id: id };
-
+                console.log(id)
                 $.ajax({
-                    url: "/api/Library/delete",
+                    url: "/api/Libraries/delete",
                     type: 'POST',
                     data: JSON.stringify(data),
                     headers: {

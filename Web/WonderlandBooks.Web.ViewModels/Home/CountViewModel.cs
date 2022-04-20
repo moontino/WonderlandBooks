@@ -11,6 +11,5 @@
         public int CountGenres { get; set; }
 
         public int CountWriting { get; set; }
-
     }
 }

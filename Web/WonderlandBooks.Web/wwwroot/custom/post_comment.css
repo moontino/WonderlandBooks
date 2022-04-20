@@ -1,11 +1,9 @@
-﻿body {
-    margin-top: 0px;
+﻿
+.display-4 {
+    margin-block-start: 20px;
+    margin-left: 40%;
 }
 
-.display-4{
- margin-block-start:20px;
-margin-left: 40%;
-}
 
 .img-sm {
     width: 46px;
@@ -99,8 +97,8 @@ margin-left: 40%;
     padding-right: 9px;
 }
 
-     .btn-group-sm > .btn, .btn-icon.btn-sm {
-        padding: 5px 10px !important;
+    .btn-group-sm > .btn, .btn-icon.btn-sm {
+        padding: 25px 10px !important;
     }
 
 .mar-top {

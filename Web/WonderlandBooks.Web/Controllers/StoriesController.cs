@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using WonderlandBooks.Services.Data.InputDataServices;
-
-namespace WonderlandBooks.Web.Controllers
+﻿namespace WonderlandBooks.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using WonderlandBooks.Services.Data.InputDataServices;
+
     [ApiController]
     [Route("api/[controller]")]
     public class StoriesController : BaseController

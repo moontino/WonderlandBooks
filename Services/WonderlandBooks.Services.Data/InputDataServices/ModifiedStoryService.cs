@@ -57,7 +57,7 @@
             }
             else
             {
-                var extension = Path.GetExtension(input.Image.FileName); 
+                var extension = Path.GetExtension(input.Image.FileName);
                 image.Extension = extension;
                 var physicalPath = $"{imagePath}/images/stories/{image.Id}{extension}";
 

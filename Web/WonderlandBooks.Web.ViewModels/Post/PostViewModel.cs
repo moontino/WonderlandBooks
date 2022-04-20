@@ -1,5 +1,6 @@
-﻿namespace WonderlandBooks.Web.ViewModels.Posts
+﻿namespace WonderlandBooks.Web.ViewModels.Post
 {
+    using System;
     using System.Collections.Generic;
 
     using WonderlandBooks.Data.Models;
@@ -15,6 +16,9 @@
 
         public string UserUserName { get; set; }
 
-        public IEnumerable<PostComentsViewModel> Comments { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public IEnumerable<PostComentsViewModel> Coments { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model WonderlandBooks.Web.ViewModels.Posts.GenreListViewModel
+﻿@model WonderlandBooks.Web.ViewModels.Genres.GenreListViewModel
 @{
     this.ViewData["Title"] = "Topics";
 }
@@ -9,7 +9,7 @@
         <div class="card w-25 text-center">
             <div class="card-body">
                 <h3 class="card-title">@genre.Name</h3>
-                <a class="btn btn-dark "asp-controller="Posts" asp-action="Post"asp-route-id="@genre.Id"> See more</a>
+                <a class="btn btn-dark "asp-controller="Genres" asp-action="PostByName"asp-route-id="@genre.Id"> See more</a>
             </div>
         </div>   
     }

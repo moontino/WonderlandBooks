@@ -27,13 +27,12 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> Book(int id)
+        public IActionResult Book(int id)
         {
             const int RANDOM_BOOKS_COUNT = 12;
 
             var model = new RandomListBookViewModel
             {
-
                 Book = this.mapper.Map<BookViewModel>(this.booksService.GetBook<BookViewModel>(id)),
                 RandomBooks = this.booksService.GetRandom<BooksListViewModel>(RANDOM_BOOKS_COUNT),
             };
@@ -65,7 +64,6 @@
 
         public IActionResult SearchBook(string search, int id = 1)
         {
-
             int itemPerPage = this.booksService.GetCountBySearch(search) > 10 ? 10 : this.booksService.GetCountBySearch(search);
             var model = new SearchListBookViewModel
             {

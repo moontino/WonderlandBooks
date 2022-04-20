@@ -11,18 +11,15 @@
 
     public class HomeController : BaseController
     {
-        private readonly IAuthorsService authorsService;
         private readonly IBooksService booksService;
         private readonly ICountDataService countData;
         private readonly IMapper mapper;
 
         public HomeController(
-            IAuthorsService authorsService,
             IBooksService booksService,
             ICountDataService countData,
             IMapper mapper)
         {
-            this.authorsService = authorsService;
             this.booksService = booksService;
             this.countData = countData;
             this.mapper = mapper;

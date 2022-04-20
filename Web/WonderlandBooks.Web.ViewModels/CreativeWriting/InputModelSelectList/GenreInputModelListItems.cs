@@ -23,7 +23,7 @@
         {
             this.Options = this.repositoryGenres.AllAsNoTracking()
                  .OrderByDescending(x => x.Books.Count())
-                 .Take(10)
+                 .Take(20)
                  .Select(x => new SelectListItem
                  {
                      Value = x.Id.ToString(),

@@ -8,7 +8,6 @@
     {
         public string UserId { get; set; }
 
-
         public ICollection<StoriesViewModel> Stories { get; set; }
     }
 }

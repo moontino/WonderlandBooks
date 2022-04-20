@@ -1,10 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using WonderlandBooks.Data.Common.Repositories;
-using WonderlandBooks.Data.Models;
-
-namespace WonderlandBooks.Services.Data.ControllerDataService
+﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using WonderlandBooks.Data.Common.Repositories;
+    using WonderlandBooks.Data.Models;
+
     public class VoteBookService : IVoteBookService
     {
         private readonly IRepository<VoteBook> votesRepository;
@@ -39,8 +40,6 @@ namespace WonderlandBooks.Services.Data.ControllerDataService
 
             vote.Value = value;
             await this.votesRepository.SaveChangesAsync();
-
         }
     }
 }
-

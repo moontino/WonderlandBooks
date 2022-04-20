@@ -8,6 +8,6 @@ namespace WonderlandBooks.Services.Data.InputDataServices
 
         Task ChangeType(string userId, int bookId, int value);
 
-        Task RemoveBook(string userId,int bookId);
+        Task RemoveBook(string userId, int bookId);
     }
 }

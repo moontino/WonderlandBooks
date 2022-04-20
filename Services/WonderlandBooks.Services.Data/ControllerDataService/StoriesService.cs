@@ -30,7 +30,6 @@
         {
             return this.stories.All()
                 .Where(x => x.Id == storyId)
-                //.OrderBy(x => x.Chapters.Select(x => x.Title))
                 .To<T>()
                 .FirstOrDefault();
         }

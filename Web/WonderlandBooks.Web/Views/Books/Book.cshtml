@@ -24,7 +24,7 @@
                 <div class="row justify-content-start pb-3">
                     <div class="col-md-12 heading-section ftco-animate">
                         <h2 class="mb-4">@Model.Book.Name</h2>
-                        <p>@Model.Book.Description</p>WS
+                        <p>@Model.Book.Description</p>
                         <div class="text-about">
                             <h4>Author</h4>
                             @foreach (var author in Model.Book.Authors)
@@ -131,7 +131,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/api/Library",
+                url: "/api/Libraries",
                 data: JSON.stringify(data),
                 headers: {
                     'X-CSRF-TOKEN': antiForgeryToken
@@ -150,7 +150,7 @@
         $(window).load(function (e) {
             $.ajax({
                 type: "GET",
-                url: "/api/Library/" + @Model.Book.Id,
+                url: "/api/Libraries/" + @Model.Book.Id,
                 contentType: 'application/json',
                 success: (res) => {
 

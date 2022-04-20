@@ -140,7 +140,6 @@
         [Authorize]
         public IActionResult CreateChapter(int idStory)
         {
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(idStory);
@@ -198,6 +197,5 @@
             };
             return this.View(model);
         }
-
     }
 }

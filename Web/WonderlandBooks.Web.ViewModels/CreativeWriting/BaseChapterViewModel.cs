@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using WonderlandBooks.Data.Models;
-using WonderlandBooks.Services.Mapping;
-
-namespace WonderlandBooks.Web.ViewModels.CreativeWriting
+﻿namespace WonderlandBooks.Web.ViewModels.CreativeWriting
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using WonderlandBooks.Data.Models;
+    using WonderlandBooks.Services.Mapping;
+
     public class BaseChapterViewModel : IMapFrom<Chapter>
     {
         [Required(ErrorMessage = "The title must contain at least 3 characters")]

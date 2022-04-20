@@ -10,8 +10,8 @@ using WonderlandBooks.Data;
 namespace WonderlandBooks.Data.Migrations
 {
     [DbContext(typeof(WonderlandDbContext))]
-    [Migration("20220419142127_RemoveBookFromPost")]
-    partial class RemoveBookFromPost
+    [Migration("20220419155945_RemovePostBook")]
+    partial class RemovePostBook
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -637,9 +637,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -665,8 +662,6 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("GenreId");
 
@@ -1108,10 +1103,6 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Post", b =>
                 {
-                    b.HasOne("WonderlandBooks.Data.Models.Book", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("BookId");
-
                     b.HasOne("WonderlandBooks.Data.Models.Genre", "Genre")
                         .WithMany("Posts")
                         .HasForeignKey("GenreId")
@@ -1245,8 +1236,6 @@ namespace WonderlandBooks.Data.Migrations
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Posts");
 
                     b.Navigation("Shelves");
 

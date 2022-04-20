@@ -1,0 +1,40 @@
+﻿@model WonderlandBooks.Web.ViewModels.Genres.GenrePostViewModel
+@using WonderlandBooks.Common
+@{
+    this.ViewData["Title"] = "Topics";
+}
+
+@section Styles {
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="~/custom/post_comment.css" rel="stylesheet" />
+}
+
+<h1 class="display-4">@Model.Name</h1>
+<hr />
+<a asp-controller="Post" asp-action="Create"><button class="btn btn-block"> Create new post</button></a>
+@foreach (var post in Model.Posts)
+{
+    <div class="container bootdey">
+        <div class="col-md-12 bootstrap snippets">
+
+            <a asp-controller="Post" asp-action="ById" asp-route-id="@post.Id">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="media-block">
+                            <img class=" media-left img-circle img-sm" alt="Profile Picture" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg">
+                            <div class="media-body">
+                                <div class="mar-btm">
+                                    <h2 class=" text-semibold media-heading box-inline">@post.UserUserName</h2>
+                                    <p class="text-muted text-sm"><i class="fa-solid fa-calendar-days"></i> @post.CreatedOn</p>
+                                </div>
+                                <p><strong>@post.Title</strong></p>
+                                <p>@post.Content</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+}

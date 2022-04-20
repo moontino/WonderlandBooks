@@ -56,6 +56,7 @@
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 }).AddRazorRuntimeCompilation();
+
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddAntiforgery(options =>
@@ -83,11 +84,13 @@
             services.AddTransient<IChapterService, ChapterService>();
             services.AddTransient<IVoteBookService, VoteBookService>();
             services.AddTransient<ILibraryService, LibraryService>();
-            services.AddTransient<IPostSerivice, PostSerivice>();
+            services.AddTransient<IGenreSerivice, GenreSerivice>();
+            services.AddTransient<IPostService, PostService>();
 
             services.AddTransient<IModifiedStoryService, ModifiedStoryService>();
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();
             services.AddTransient<IModifiedLibraryService, ModifiedLibraryService>();
+            services.AddTransient<IModifiedPostService, ModifiedPostService>();
 
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();

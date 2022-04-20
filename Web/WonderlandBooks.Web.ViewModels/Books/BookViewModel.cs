@@ -22,7 +22,7 @@
 
         public string Characters { get; set; }
 
-        public string  VotesAvarege { get; set; }
+        public string VotesAvarege { get; set; }
 
         public IEnumerable<BookAuthorViewModel> Authors { get; set; }
 
@@ -42,7 +42,7 @@
 
             .ForMember(
                x => x.VotesAvarege,
-               y => y.MapFrom(x => x.VoteBooks.Average(x => x.Value)==null? 
+               y => y.MapFrom(x => x.VoteBooks.Average(x => x.Value) == null? 
                "0.0" : Math.Round(x.VoteBooks.Average(x => x.Value), 1).ToString()));
         }
     }

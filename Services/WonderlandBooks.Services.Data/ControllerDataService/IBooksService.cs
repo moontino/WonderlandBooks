@@ -6,7 +6,6 @@
 
     public interface IBooksService
     {
-
         T GetBook<T>(int id);
 
         T GetLibrary<T>(string id);

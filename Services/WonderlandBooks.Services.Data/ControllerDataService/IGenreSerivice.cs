@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public interface IPostSerivice
+    public interface IGenreSerivice
     {
         IEnumerable<T> TopGenres<T>();
 
-        T PostById<T>(int id);
+        T PostByName<T>(int id);
     }
 }
