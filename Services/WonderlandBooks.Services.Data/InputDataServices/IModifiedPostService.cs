@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using WonderlandBooks.Web.ViewModels.Post;
+    using WonderlandBooks.Web.ViewModels.Posts;
 
     public interface IModifiedPostService
     {

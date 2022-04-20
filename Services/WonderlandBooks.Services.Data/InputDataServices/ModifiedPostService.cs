@@ -4,7 +4,7 @@
 
     using WonderlandBooks.Data.Common.Repositories;
     using WonderlandBooks.Data.Models;
-    using WonderlandBooks.Web.ViewModels.Post;
+    using WonderlandBooks.Web.ViewModels.Posts;
 
     public class ModifiedPostService : IModifiedPostService
     {

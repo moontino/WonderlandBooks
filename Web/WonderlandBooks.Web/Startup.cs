@@ -82,10 +82,12 @@
             services.AddTransient<ICountDataService, CountDataService>();
             services.AddTransient<IStoriesService, StoriesService>();
             services.AddTransient<IChapterService, ChapterService>();
-            services.AddTransient<IVoteBookService, VoteBookService>();
             services.AddTransient<ILibraryService, LibraryService>();
             services.AddTransient<IGenreSerivice, GenreSerivice>();
             services.AddTransient<IPostService, PostService>();
+
+            services.AddTransient<IVoteBookService, VoteBookService>();
+            services.AddTransient<IVotePostService, VotePostService>();
 
             services.AddTransient<IModifiedStoryService, ModifiedStoryService>();
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();

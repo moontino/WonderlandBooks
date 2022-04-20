@@ -13,28 +13,37 @@
 <h1 class="display-4">@Model.Name</h1>
 <hr />
 <a asp-controller="Post" asp-action="Create"><button class="btn btn-block"> Create new post</button></a>
-@foreach (var post in Model.Posts)
+@if (Model.Posts == null)
 {
-    <div class="container bootdey">
-        <div class="col-md-12 bootstrap snippets">
+    <div class="commented-section mt-2">
+        <div class="comment-text-sm"><span>There are no discussions on this topic.</span></div>
+    </div>
+}
+else
+{
+    @foreach (var post in Model.Posts)
+    {
+        <div class="container bootdey">
+            <div class="col-md-12 bootstrap snippets">
 
-            <a asp-controller="Post" asp-action="ById" asp-route-id="@post.Id">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="media-block">
-                            <img class=" media-left img-circle img-sm" alt="Profile Picture" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg">
-                            <div class="media-body">
-                                <div class="mar-btm">
-                                    <h2 class=" text-semibold media-heading box-inline">@post.UserUserName</h2>
-                                    <p class="text-muted text-sm"><i class="fa-solid fa-calendar-days"></i> @post.CreatedOn</p>
+                <a asp-controller="Post" asp-action="ById" asp-route-id="@post.Id">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="media-block">
+
+                                <div class="media-body">
+                                    <div class="mar-btm">
+                                        <h2 class=" text-semibold media-heading box-inline">@post.UserUserName</h2>
+                                        <p class="text-muted text-sm"><i class="fa-solid fa-calendar-days"></i> @post.CreatedOn</p>
+                                    </div>
+                                    <p><strong>@post.Title</strong></p>
+                                    <p>@Html.Raw(post.SanitizedContent)</p>
                                 </div>
-                                <p><strong>@post.Title</strong></p>
-                                <p>@post.Content</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
-    </div>
+    }
 }

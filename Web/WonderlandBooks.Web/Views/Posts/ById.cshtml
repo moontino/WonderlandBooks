@@ -1,0 +1,56 @@
+﻿@model WonderlandBooks.Web.ViewModels.Posts.PostViewModel
+@{
+    this.ViewData["Title"] = @Model.Title;
+}
+
+@section Styles {
+
+    <link href="~/custom/currentPost.css" rel="stylesheet" />
+}
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="d-flex flex-column col-md-8">
+            <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
+                <div class="d-flex flex-column-reverse flex-grow-0 align-items-center votings ml-1">
+                    <i class="fa fa-sort-up fa-2x hit-voting"></i>
+                    <span>@Model.VotesCount</span>
+                    <i class="fa fa-sort-down fa-2x hit-voting"></i>
+                </div>
+                <div class="d-flex flex-column ml-3">
+                    <div class="d-flex flex-row post-title">
+                        <h4>@Model.Title</h4><span class="ml-2">(@Model.UserUserName)</span>
+
+                    </div>
+                    <p>@Html.Raw(Model.SanitizedContent)</p>
+                </div>
+            </div>
+            <div class="coment-bottom bg-white p-2 px-4">
+                @if (@Model.Coments == null)
+                {
+                    <div class="commented-section mt-2">
+                        <div class="comment-text-sm"><span>No comments yet.</span></div>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var comment in Model.Coments)
+                    {
+
+                        <div class="commented-section mt-2">
+                            <div class="d-flex flex-row align-items-center commented-user">
+                                <h5 class="mr-2">@comment.UserUserName</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">@comment.CreatedOn</span>
+                            </div>
+                            <div class="comment-text-sm"><span>@comment.Content</span></div>
+                            <div class="reply-section">
+                                <div class="d-flex flex-row align-items-center voting-icons">
+                                    <i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span class="ml-2">10</span><span class="dot ml-2"></span>
+                                    <h6 class="ml-2 mt-1">Reply</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,15 @@
-﻿namespace WonderlandBooks.Web.ViewModels.Genres
+﻿namespace WonderlandBooks.Web.ViewModels.Posts
 {
     using System;
-    using System.Net;
-    using System.Text.RegularExpressions;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using AutoMapper;
     using Ganss.XSS;
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
 
-    public class PostViewModel : IMapFrom<Post>, IHaveCustomMappings
+    public class PostViewModel : IMapFrom<Post>,IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -23,13 +23,17 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public int VotesCount { get; set; }
+
+        public IEnumerable<PostComentsViewModel> Coments { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Post, PostViewModel>().ForMember(
-              x => x.Content,
-              y => y.MapFrom(x => x.Content.Length > 100
-              ? WebUtility.HtmlDecode(Regex.Replace(x.Content, @"<[^>]+>", string.Empty)).Substring(0, 100) + "..."
-              : WebUtility.HtmlDecode(Regex.Replace(x.Content, @"<[^>]+>", string.Empty))));
+            configuration.CreateMap<Post, PostViewModel>()
+                .ForMember(x => x.VotesCount, y =>
+                {
+                    y.MapFrom(v => v.Votes.Sum(c => (int)c.Type));
+                });
         }
     }
 }

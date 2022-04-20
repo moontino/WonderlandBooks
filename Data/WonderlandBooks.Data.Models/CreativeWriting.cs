@@ -1,6 +1,7 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class CreativeWriting : BaseDeletableModel<int>
@@ -10,6 +11,7 @@
             this.Stories = new HashSet<Story>();
         }
 
+        [Required]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }

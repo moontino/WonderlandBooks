@@ -1,4 +1,5 @@
-﻿using WonderlandBooks.Data.Common.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using WonderlandBooks.Data.Common.Models;
 
 namespace WonderlandBooks.Data.Models
 {
@@ -8,9 +9,10 @@ namespace WonderlandBooks.Data.Models
 
         public int BookId { get; set; }
 
-        public string UserId { get; set; }
-
         public ApplicationUser User { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
 
         public byte Value { get; set; }
     }

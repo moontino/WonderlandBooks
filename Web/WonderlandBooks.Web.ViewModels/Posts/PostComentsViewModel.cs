@@ -1,4 +1,4 @@
-﻿namespace WonderlandBooks.Web.ViewModels.Post
+﻿namespace WonderlandBooks.Web.ViewModels.Posts
 {
     using System;
 

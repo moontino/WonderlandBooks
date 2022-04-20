@@ -2,7 +2,7 @@
 
 namespace WonderlandBooks.Web.ViewModels.VoteBooks
 {
-    public class PostVoteInputModel
+    public class BookVoteInputModel
     {
         public int BookId { get; set; }
 

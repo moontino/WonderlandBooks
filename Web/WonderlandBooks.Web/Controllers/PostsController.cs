@@ -9,15 +9,15 @@
     using WonderlandBooks.Services.Data.ControllerDataService;
     using WonderlandBooks.Services.Data.InputDataServices;
     using WonderlandBooks.Web.ViewModels.CreativeWriting.InputModelSelectList;
-    using WonderlandBooks.Web.ViewModels.Post;
+    using WonderlandBooks.Web.ViewModels.Posts;
 
-    public class PostController : BaseController
+    public class PostsController : BaseController
     {
         private readonly IGenreInputModelListItems genreInputModel;
         private readonly IModifiedPostService editPostService;
         private readonly IPostService postService;
 
-        public PostController(
+        public PostsController(
             IGenreInputModelListItems genreInputModel,
             IModifiedPostService editPostService,
             IPostService postService)

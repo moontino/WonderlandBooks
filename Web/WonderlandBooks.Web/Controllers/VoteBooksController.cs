@@ -10,24 +10,24 @@
 
     [ApiController]
     [Route("api/[controller]")]
-    public class VoteBookController : BaseController
+    public class VoteBooksController : BaseController
     {
         private readonly IVoteBookService voteService;
 
-        public VoteBookController(IVoteBookService voteService)
+        public VoteBooksController(IVoteBookService voteService)
         {
             this.voteService = voteService;
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<PostVoteViewModel>> Post(PostVoteInputModel input)
+        public async Task<ActionResult<BookVoteViewModel>> Post(BookVoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.voteService.SetVoteAsync(input.BookId, userId, input.Value);
 
             var avaregeVotes = this.voteService.GetAvarageVotes(input.BookId);
-            return new PostVoteViewModel { AverageVote = avaregeVotes };
+            return new BookVoteViewModel { AverageVote = avaregeVotes };
         }
     }
 }

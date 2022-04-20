@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using WonderlandBooks.Data.Common.Models;
 
     public class Comment : BaseDeletableModel<int>
@@ -14,6 +15,7 @@
 
         public int BookId { get; set; }
 
+        [Required]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }

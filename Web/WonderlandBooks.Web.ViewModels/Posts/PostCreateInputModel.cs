@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WonderlandBooks.Web.ViewModels.Post
+﻿namespace WonderlandBooks.Web.ViewModels.Posts
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class PostCreateInputModel
     {
         [Required]

@@ -39,19 +39,16 @@
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<Question> Questions { get; set; }
-
-        public DbSet<Quiz> Quizzes { get; set; }
 
         public DbSet<Story> Stories { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
 
-        public DbSet<Answer> Answers { get; set; }
-
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<VoteBook> VoteBooks { get; set; }
+
+        public DbSet<VotePost> VotePosts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
