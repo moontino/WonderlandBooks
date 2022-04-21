@@ -12,7 +12,7 @@
 
 <h1 class="display-4">@Model.Name</h1>
 <hr />
-<a asp-controller="Post" asp-action="Create"><button class="btn btn-block"> Create new post</button></a>
+<a asp-controller="Posts" asp-action="Create"><button class="btn btn-block"> Create new post</button></a>
 @if (Model.Posts == null)
 {
     <div class="commented-section mt-2">
@@ -26,7 +26,7 @@ else
         <div class="container bootdey">
             <div class="col-md-12 bootstrap snippets">
 
-                <a asp-controller="Post" asp-action="ById" asp-route-id="@post.Id">
+                <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">
                     <div class="panel">
                         <div class="panel-body">
                             <div class="media-block">

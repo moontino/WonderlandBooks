@@ -18,7 +18,7 @@
         public int GetVotes(int postId)
         {
             return this.repositoryVote.All()
-                    .Where(x => x.Id == postId)
+                    .Where(x => x.PostId == postId)
                     .Sum(x => (int)x.Type);
         }
 

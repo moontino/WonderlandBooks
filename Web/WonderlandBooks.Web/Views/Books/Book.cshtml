@@ -108,7 +108,7 @@
                 var data = { bookId: bookId, value: value };
                 $.ajax({
                     type: "POST",
-                    url: "/api/VoteBook",
+                    url: "/api/VoteBooks",
                     data: JSON.stringify(data),
                     headers: {
                         'X-CSRF-TOKEN': antiForgeryToken
