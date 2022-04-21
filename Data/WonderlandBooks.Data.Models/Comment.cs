@@ -7,6 +7,10 @@
     {
         public string Content { get; set; }
 
+        public int? ParentId { get; set; }
+
+        public Comment Parent { get; set; }
+
         public Post Post { get; set; }
 
         public int PostId { get; set; }

@@ -57,14 +57,6 @@
                    .ToList();
         }
 
-        public int GetCountBySearch(string name, int skipItem)
-        {
-            return this.repositoryBooks.AllAsNoTracking()
-                .Where(x => x.Name.Contains(name))
-                .Skip(skipItem)
-                .Count();
-        }
-
         public int GetCount()
         {
             return this.repositoryBooks.All().Count();
@@ -91,7 +83,9 @@
 
         public int GetCountBySearch(string name)
         {
-            throw new NotImplementedException(); // TODO: nz kvo da pravim sas saicha
+            return this.repositoryBooks.AllAsNoTracking()
+                .Where(x => x.Name.Contains(name))
+                .Count();
         }
     }
 }

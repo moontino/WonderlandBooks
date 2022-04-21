@@ -13,7 +13,7 @@
                 </div>
                 <div class="movie-content">
                     <div class="movie-content-header">
-                        <a asp-controller="Books" asp-action="Book" asp-route-id=@book.Id>
+                        <a asp-controller="Books" asp-action="AllBooks" asp-route-id=@book.Id>
                             <h3>@book.Name</h3>
                         </a>
                     </div>
@@ -27,7 +27,7 @@
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item @if (!Model.HasPreviousPage) {<text>disabled</text>} ">
-            <a class="page-link" asp-action="SearchBook" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+            <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.PreviousPageNumber">Previous</a>
         </li>
         @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
         {
@@ -51,10 +51,10 @@
 
             @if (i <=Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-action="SearchBook" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="AllBooks" asp-route-id="@i">@i</a></li>
             }
         }
-        <li class="page-item" @if (!Model.HasNextPage) { <text> disabled</text>}>
+        <li class="page-item @if (!Model.HasNextPage) { <text> disabled</text>}">
             <a class="page-link" asp-action="AllBooks" asp-route-id="@Model.NextPageNumber">Next</a>
         </li>
     </ul>

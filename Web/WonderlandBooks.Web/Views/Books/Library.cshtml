@@ -59,7 +59,7 @@
                     var data = { bookId: bookId, value: value };
                     $.ajax({
                         type: "POST",
-                        url: "/api/Library/type",
+                        url: "/api/Libraries/type",
                         data: JSON.stringify(data),
                         headers: {
                             'X-CSRF-TOKEN': antiForgeryToken

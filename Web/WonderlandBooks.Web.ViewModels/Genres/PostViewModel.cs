@@ -28,7 +28,7 @@
             configuration.CreateMap<Post, PostViewModel>().ForMember(
               x => x.Content,
               y => y.MapFrom(x => x.Content.Length > 100
-              ? WebUtility.HtmlDecode(Regex.Replace(x.Content, @"<[^>]+>", string.Empty)).Substring(0, 100) + "..."
+              ? WebUtility.HtmlDecode(Regex.Replace(x.Content, @"<[^>]+>", string.Empty)).Substring(0, 140) + "..."
               : WebUtility.HtmlDecode(Regex.Replace(x.Content, @"<[^>]+>", string.Empty))));
         }
     }

@@ -4,6 +4,6 @@
 
     public class GenrePostViewModel : BaseGenreViewModel
     {
-        public IEnumerable<PostViewModel> Posts { get; set; }
+        public IEnumerable<PostViewModel> FormPost { get; set; }
     }
 }

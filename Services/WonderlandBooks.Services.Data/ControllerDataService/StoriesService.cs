@@ -18,12 +18,22 @@
             this.writing = writing;
         }
 
-        public T StoriesByUser<T>(string id)
+        public T UserWritring<T>(string id)
         {
             return this.writing.All()
                    .Where(x => x.UserId == id)
                    .To<T>()
                    .FirstOrDefault();
+        }
+
+        public IEnumerable<T> StoriesByUser<T>(string userId, int page, int itemsPerPage = 8)
+        {
+            return this.stories.All()
+                   .Where(x => x.CreativeWriting.UserId ==userId)
+                   .Skip((page - 1) * itemsPerPage)
+                   .Take(itemsPerPage)
+                   .To<T>()
+                   .ToList();
         }
 
         public T CurrentStory<T>(int storyId)
@@ -44,7 +54,14 @@
                  .ToList();
         }
 
-        public int GetCount()
+        public int GetCountByUser(string userId)
+        {
+            return this.stories.AllAsNoTracking()
+                 .Where(x => x.CreativeWriting.UserId == userId)
+                 .Count();
+        }
+
+        public int GetAllCount()
         {
             return this.stories.AllAsNoTracking().Count();
         }

@@ -6,25 +6,34 @@
 
     public class GenresController : BaseController
     {
-        private readonly IGenreSerivice postSerivice;
+        private readonly IGenreSerivice genreSerivice;
+        private readonly IPostService postService;
 
-        public GenresController(IGenreSerivice postSerivice)
+        public GenresController(
+            IGenreSerivice genreSerivice,
+            IPostService postService)
         {
-            this.postSerivice = postSerivice;
+            this.genreSerivice = genreSerivice;
+            this.postService = postService;
         }
 
         public IActionResult GenreList()
         {
             var model = new GenreListViewModel
             {
-                Genres = this.postSerivice.TopGenres<GenreViewModel>(),
+                Genres = this.genreSerivice.TopGenres<GenreViewModel>(),
             };
             return this.View(model);
         }
 
-        public IActionResult PostByName(int id)
+        public IActionResult PostByName(int id, int page = 1)
         {
-            var model = this.postSerivice.PostByName<GenrePostViewModel>(id);
+            int itemPerPage = 10;
+            var model = this.genreSerivice.PostByName<GenrePostViewModel>(id);
+            model.ItemPerPage = itemPerPage;
+            model.PageNumber = page;
+            model.Count = this.postService.GetCount(id);
+            model.FormPost = this.postService.GetPostByGenre<PostViewModel>(id, page, itemPerPage);
             return this.View(model);
         }
     }

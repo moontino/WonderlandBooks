@@ -19,9 +19,11 @@
         public T PostByName<T>(int id)
         {
             return this.genreRepository.All()
-                .Where(x => x.Id == id)
-                .To<T>()
-                .FirstOrDefault();
+                .OrderByDescending(x => x.CreatedOn)
+                 .Where(x => x.Id == id)
+                 .To<T>()
+                 .FirstOrDefault();
+
         }
 
         public IEnumerable<T> TopGenres<T>()

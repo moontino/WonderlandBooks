@@ -2,6 +2,7 @@
 @{
     this.ViewData["Title"] = "Topics";
 }
+<a class="btn btn-block" asp-controller="Posts" asp-action="Create"><h1>Create new post</h1> </a>
 <div class="row">
     @foreach (var genre in Model.Genres)
     {

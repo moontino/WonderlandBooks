@@ -23,7 +23,7 @@
         private readonly IModifiedStoryService storyService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IWebHostEnvironment hostEnvironment;
-        private readonly IStoriesService stories;
+        private readonly IStoriesService storiesService;
         private readonly IModifiedChapterService modifiedChapterService;
         private readonly IChapterService chapterService;
 
@@ -44,7 +44,7 @@
             this.storyService = modifiedStoryService;
             this.userManager = userManager;
             this.hostEnvironment = hostEnvironment;
-            this.stories = storiesService;
+            this.storiesService = storiesService;
             this.modifiedChapterService = modifiedChapterService;
             this.chapterService = chapterService;
         }
@@ -52,12 +52,14 @@
         public IActionResult AllStories(int id = 1)
         {
             const int ItemPerPage = 8;
+
+
             var model = new AllStoriesViewModel
             {
                 ItemPerPage = ItemPerPage,
                 PageNumber = id,
-                Count = this.stories.GetCount(),
-                Stories = this.stories.AllStories<StoriesViewModel>(id, ItemPerPage),
+                Count = this.storiesService.GetAllCount(),
+                Stories = this.storiesService.AllStories<StoriesViewModel>(id, ItemPerPage),
             };
 
             return this.View(model);
@@ -65,15 +67,23 @@
 
         public IActionResult CurrentStory(int id)
         {
-            var model = this.mapper.Map<StoryViewModel>(this.stories.CurrentStory<StoryViewModel>(id));
+            var model = this.mapper.Map<StoryViewModel>(this.storiesService.CurrentStory<StoryViewModel>(id));
             return this.View(model);
         }
 
         [Authorize]
-        public async Task<IActionResult> StoriesByUser()
+        public async Task<IActionResult> StoriesByUser(int id = 1)
         {
+            const int itemPerPage = 8;
             var user = await this.userManager.GetUserAsync(this.User);
-            var model = this.mapper.Map<CollectionOfStories>(this.stories.StoriesByUser<CollectionOfStories>(user.Id));
+
+            var model = this.mapper.Map<CollectionOfStories>(this.storiesService.UserWritring<CollectionOfStories>(user.Id));
+
+            model.ItemPerPage = itemPerPage;
+            model.PageNumber = id;
+            model.Count = this.storiesService.GetCountByUser(user.Id);
+            model.StoriesStorage = this.storiesService.StoriesByUser<StoriesViewModel>(user.Id, id, itemPerPage);
+
             return this.View(model);
         }
 
@@ -112,7 +122,7 @@
             this.ViewBag.Genres = new SelectList(this.genreInputModel.Options, "Value", "Text");
             this.ViewBag.Language = new SelectList(this.editionLanguageInputModel.Options, "Value", "Text");
 
-            var model = this.mapper.Map<UpdateStoryViewModel>(this.stories.CurrentStory<UpdateStoryViewModel>(idStory));
+            var model = this.mapper.Map<UpdateStoryViewModel>(this.storiesService.CurrentStory<UpdateStoryViewModel>(idStory));
 
             return this.View(model);
         }
@@ -185,7 +195,7 @@
         [Authorize]
         public IActionResult GetChapters(int idStory)
         {
-            var model = this.mapper.Map<CollectionOfChapters>(this.stories.CurrentStory<CollectionOfChapters>(idStory));
+            var model = this.mapper.Map<CollectionOfChapters>(this.storiesService.CurrentStory<CollectionOfChapters>(idStory));
             return this.View(model);
         }
 

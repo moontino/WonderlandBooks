@@ -1,5 +1,6 @@
 ﻿namespace WonderlandBooks.Services.Data.ControllerDataService
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using WonderlandBooks.Data.Common.Repositories;
@@ -21,6 +22,24 @@
                  .Where(x => x.Id == id)
                  .To<T>()
                  .FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetPostByGenre<T>(int id, int page, int itemsPerPage = 10)
+        {
+            return this.postRepository.AllAsNoTracking()
+                   .OrderByDescending(x => x.CreatedOn)
+                   .Where(x => x.GenreId == id)
+                   .Skip((page - 1) * itemsPerPage)
+                   .Take(itemsPerPage)
+                   .To<T>()
+                   .ToList();
+        }
+
+        public int GetCount(int id)
+        {
+            return this.postRepository.All()
+                .Where(x => x.GenreId == id)
+                .Count();
         }
     }
 }

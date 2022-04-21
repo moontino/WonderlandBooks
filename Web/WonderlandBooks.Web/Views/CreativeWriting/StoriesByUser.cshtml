@@ -15,7 +15,7 @@
             }
             else
             {
-                @foreach (var story in Model.Stories)
+                @foreach (var story in Model.StoriesStorage)
                 {
                     <div class="row p-2 bg-white border rounded" id="@story.Id">
                         <div class="col-md-3 mt-1">
@@ -32,7 +32,7 @@
                             <p class="text-justify text-truncate para mb-0">@story.Description<br><br></p>
                         </div>
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                            <form >
+                            <form>
                                 <div class="col-xs-3 text-center">
 
                                     <div class="form-group">
@@ -47,19 +47,57 @@
                                         <input id="id" name="idStory" type="hidden" value="@story.Id">
                                         <input type="submit" asp-controller="CreativeWriting" asp-action="UpdateStory" value="Update story" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" />
                                     </div>
-                                    <div class="deleteStory" >                             
-                                        <input type="submit" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" value="Delete"/>
+                                    <div class="deleteStory">
+                                        <input type="submit" class="list-group-item list-group-item-action btn-block" ata-toggle="tooltip" value="Delete" />
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 }
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @if (!Model.HasPreviousPage)
+        {<text>disabled</text>} ">
+                            <a class="page-link" asp-controller="CreativeWriting" asp-action="StoriesByUser"  asp-route-id="@Model.PreviousPageNumber">Previous</a>
+                        </li>
+                        @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
+                        {
 
+
+                            @if (i > 0)
+                            {
+                                <li class="page-item"><a class="page-link" asp-controller="CreativeWriting" asp-action="StoriesByUser" asp-route-id="@i">@i</a></li>
+
+                            }
+                        }
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">
+                                @Model.PageNumber
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
+                        {
+
+                            @if (i <= Model.PagesCount)
+                            {
+                                <li class="page-item"><a class="page-link" asp-controller="CreativeWriting"  asp-action="StoriesByUser" asp-route-id="@i">@i</a></li>
+
+                            }
+                        }
+                        <li class="page-item @if (!Model.HasNextPage)
+        { <text>disabled</text>}">
+                            <a class="page-link" asp-controller="CreativeWriting" asp-action="StoriesByUser"  asp-route-id="@Model.NextPageNumber">Next</a>
+
+                        </li>
+                    </ul>
+                </nav>
             }
         </div>
     </div>
 </div>
+
 <form method="post" id="antiForgeryForm"></form>
 @section Scripts{
     <script>

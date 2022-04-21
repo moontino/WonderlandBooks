@@ -4,12 +4,16 @@
 
     public interface IStoriesService
     {
-        T StoriesByUser<T>(string id);
+        T UserWritring<T>(string id);
 
         T CurrentStory<T>(int storyId);
 
         IEnumerable<T> AllStories<T>(int page, int itemsPerPage = 8);
 
-        int GetCount();
+        IEnumerable<T> StoriesByUser<T>(string userId, int page, int itemsPerPage = 8);
+
+        int GetCountByUser(string userId);
+
+        int GetAllCount();
     }
 }

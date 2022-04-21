@@ -57,14 +57,13 @@
                 PageNumber = id,
                 Count = this.booksService.GetCount(),
                 Books = this.booksService.GetAllBooks<BooksListViewModel>(id, ItemPerPage),
-            };
-
+            }; 
             return this.View(model);
         }
 
         public IActionResult SearchBook(string search, int id = 1)
         {
-            int itemPerPage = this.booksService.GetCountBySearch(search) > 10 ? 10 : this.booksService.GetCountBySearch(search);
+            int itemPerPage = 10;
             var model = new SearchListBookViewModel
             {
                 ItemPerPage = itemPerPage,
