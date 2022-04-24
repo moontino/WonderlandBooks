@@ -25,7 +25,9 @@
 
         public int VotesCount { get; set; }
 
-        public IEnumerable<PostComentsViewModel> Coments { get; set; }
+        public int CommentsCount { get; set; }
+
+        public IEnumerable<PostComentsViewModel> Comments { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

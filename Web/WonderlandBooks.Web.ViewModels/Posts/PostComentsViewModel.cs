@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Ganss.XSS;
     using WonderlandBooks.Data.Models;
     using WonderlandBooks.Services.Mapping;
 
@@ -9,7 +10,11 @@
     {
         public int Id { get; set; }
 
+        public int? ParentId { get; set; }
+
         public string Content { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public string UserUserName { get; set; }
 

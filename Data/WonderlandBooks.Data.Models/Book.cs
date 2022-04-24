@@ -9,7 +9,6 @@
         public Book()
         {
             this.Authors = new HashSet<Author>();
-            this.Comments = new HashSet<Comment>();
             this.Genres = new HashSet<Genre>();
             this.Characters = new HashSet<Character>();
             this.VoteBooks = new HashSet<VoteBook>();
@@ -34,8 +33,6 @@
         public EditionLanguage EditionLanguage { get; set; }
 
         public virtual ICollection<Genre> Genres { get; set; }
-
-        public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Character> Characters { get; set; }
 

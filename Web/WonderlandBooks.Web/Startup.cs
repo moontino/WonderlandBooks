@@ -93,6 +93,7 @@
             services.AddTransient<IModifiedChapterService, ModifiedChapterService>();
             services.AddTransient<IModifiedLibraryService, ModifiedLibraryService>();
             services.AddTransient<IModifiedPostService, ModifiedPostService>();
+            services.AddTransient<IModifiedCommentService, ModifiedCommentService>();
 
             services.AddTransient<IEditionLanguageInputModelListItems, EditionLanguageInputModelListItems>();
             services.AddTransient<IGenreInputModelListItems, GenreInputModelListItems>();

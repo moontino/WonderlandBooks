@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WonderlandBooks.Data;
 
 namespace WonderlandBooks.Data.Migrations
 {
     [DbContext(typeof(WonderlandDbContext))]
-    partial class WonderlandDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220422133453_RemoveBookComments")]
+    partial class RemoveBookComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,6 +452,9 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -476,6 +481,8 @@ namespace WonderlandBooks.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("IsDeleted");
 
@@ -989,6 +996,10 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Comment", b =>
                 {
+                    b.HasOne("WonderlandBooks.Data.Models.Book", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BookId");
+
                     b.HasOne("WonderlandBooks.Data.Models.Comment", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId");
@@ -1156,6 +1167,8 @@ namespace WonderlandBooks.Data.Migrations
 
             modelBuilder.Entity("WonderlandBooks.Data.Models.Book", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Shelves");
 
                     b.Navigation("VoteBooks");

@@ -6,44 +6,50 @@
 @section Styles {
 
     <link href="~/custom/currentPost.css" rel="stylesheet" />
+    <link href="~/custom/post.css" rel="stylesheet" />
 }
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-center row">
         <div class="d-flex flex-column col-md-8">
             <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
-                <div class="d-flex flex-column-reverse flex-grow-0 align-items-center votings ml-1"> 
-                        <i class="fa fa-sort-up fa-2x hit-voting" onclick="sendVote(@Model.Id,true)"></i>                
+                <div class="d-flex flex-column-reverse flex-grow-0 align-items-center votings ml-1">
+                    <i class="fa fa-sort-up fa-2x hit-voting" onclick="sendVote(@Model.Id,true)"></i>
                     <span id="count">@Model.VotesCount</span>
-                        <i class="fa fa-sort-down fa-2x hit-voting" onclick="sendVote(@Model.Id,false)"></i>
+                    <i class="fa fa-sort-down fa-2x hit-voting" onclick="sendVote(@Model.Id,false)"></i>
                 </div>
                 <div class="d-flex flex-column ml-3">
                     <div class="d-flex flex-row post-title">
                         <h4>@Model.Title</h4><span class="ml-2">(@Model.UserUserName)</span>
-
                     </div>
                     <p>@Html.Raw(Model.SanitizedContent)</p>
                 </div>
             </div>
+            <div class="reply-section">
+                <div class="d-flex flex-row align-items-center voting-icons">
+
+                    <h6 class="ml-2 mt-1"> <button class="btn btn-outline-primary mr-2" onclick="showCommentForm()">Comment</button></h6>
+                </div>
+            </div>
             <div class="coment-bottom bg-white p-2 px-4">
-                @if (@Model.Coments == null)
+                @if (@Model.CommentsCount == 0)
                 {
-                    <div class="commented-section mt-2">
+                    <div id="noComments" class="commented-section mt-2">
                         <div class="comment-text-sm"><span>No comments yet.</span></div>
                     </div>
                 }
                 else
                 {
-                    @foreach (var comment in Model.Coments)
+                    @foreach (var comment in Model.Comments)
                     {
 
                         <div class="commented-section mt-2">
                             <div class="d-flex flex-row align-items-center commented-user">
                                 <h5 class="mr-2">@comment.UserUserName</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">@comment.CreatedOn</span>
                             </div>
-                            <div class="comment-text-sm"><span>@comment.Content</span></div>
+                            <div class="comment-text-sm"><span>@Html.Raw(comment.SanitizedContent)</span></div>
                             <div class="reply-section">
                                 <div class="d-flex flex-row align-items-center voting-icons">
-                                    <i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i><span class="ml-2">10</span><span class="dot ml-2"></span>
+
                                     <h6 class="ml-2 mt-1">Reply</h6>
                                 </div>
                             </div>
@@ -54,12 +60,79 @@
         </div>
     </div>
 </div>
-
+<div id="AddComentForm" class="col-md-8 offset-md-2" style="display:none">
+    <form method="post" asp-controller="Comments" asp-action="Create">
+        <input type="hidden" name="PostId" value="@Model.Id" />
+        <div class="form-group">
+            <label for="Content"></label>
+            <textarea name="Content" id="Content" class="form-control" rows="10"></textarea>
+        </div>
+        &nbsp;
+        <div>
+            <input type="submit" class="btn btn-outline-primary mr-2" value="Send" />
+        </div>
+    </form>
+</div>
 <form method="post" id="antiForgeryForm"></form>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="comments">
+                <div class="comment-box">
+                    <span class="commenter-pic">
+                    </span>
+                    <span class="commenter-name">
+                        @Model.Title<span class="comment-time"><i class="fa-solid fa-user"></i> (@Model.UserUserName)     <i class="fa-solid fa-calendar-days"></i>  @Model.CreatedOn </span>
+                    </span>
+                    <p class="comment-txt more">@Html.Raw(Model.SanitizedContent)</p>
+                    <div class="comment-meta">
+                        <button class="comment-like"><i class="fa fa-sort-up fa-2x hit-voting" onclick="sendVote(@Model.Id,true)"></i> </button> <span id="count">@Model.VotesCount</span>
+                        <button class="comment-dislike">
+                            <i class="fa fa-sort-down fa-2x hit-voting" onclick="sendVote(@Model.Id,false)"></i>
+                        </button>
+                        <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
+                    </div>
+                    <div class="comment-box replied">
+                        <span class="commenter-pic">
+
+                        </span>
+                        <span class="commenter-name">
+                            <a href="#">Happy markuptag</a> <span class="comment-time">2 hours ago</span>
+                        </span>
+                        <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
+                        <div class="comment-meta">
+                            <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="comment-box replied" style="display:none">
+    <span class="commenter-pic">
+    </span>
+    <span class="commenter-name">
+        <a href="#">Happy markuptag</a> <span class="comment-time">2 hours ago</span>
+    </span>
+    <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
+    <div class="comment-meta">
+        <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
+        <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button>
+        <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
+    </div>
+</div>
 @section Scripts
 {
-    <script>    
-        function sendVote(postId,isUpVote) {
+    <script>
+        function showCommentForm() {
+
+            $("#AddComentForm").toggle();
+            $("#noComments").hide();
+        }
+
+        function sendVote(postId, isUpVote) {
             var data = { postId: postId, IsUpVote: isUpVote }
             var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
 
@@ -71,11 +144,30 @@
                     'X-CSRF-TOKEN': antiForgeryToken
                 },
                 success: function (data) {
-                    $("#count").html(data);       
+                    $("#count").html(data);
                 },
                 contentType: 'application/json',
             });
         }
 
-    </script>  
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".reply-popup").click(function () {
+                $(".reply-box").toggle();
+            });
+        });
+    </script>
 }
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        relative_urls: false,
+        remove_script_host: false,
+        convert_urls: true,
+        plugins: [
+            "image paste table link code media fullscreen wordcount searchreplace lists"
+        ]
+    });
+</script>

@@ -15,10 +15,6 @@
 
         public int PostId { get; set; }
 
-        public Book Book { get; set; }
-
-        public int BookId { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

@@ -2,41 +2,41 @@
 
 namespace WonderlandBooks.Data.Migrations
 {
-    public partial class DeleteCommentsOnChapter : Migration
+    public partial class RemoveCommentBook : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Chapters_ChapterId",
+                name: "FK_Comments_Books_BookId",
                 table: "Comments");
 
             migrationBuilder.DropIndex(
-                name: "IX_Comments_ChapterId",
+                name: "IX_Comments_BookId",
                 table: "Comments");
 
             migrationBuilder.DropColumn(
-                name: "ChapterId",
+                name: "BookId",
                 table: "Comments");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "ChapterId",
+                name: "BookId",
                 table: "Comments",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_ChapterId",
+                name: "IX_Comments_BookId",
                 table: "Comments",
-                column: "ChapterId");
+                column: "BookId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Chapters_ChapterId",
+                name: "FK_Comments_Books_BookId",
                 table: "Comments",
-                column: "ChapterId",
-                principalTable: "Chapters",
+                column: "BookId",
+                principalTable: "Books",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
