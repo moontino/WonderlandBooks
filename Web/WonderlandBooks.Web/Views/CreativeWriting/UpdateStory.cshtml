@@ -42,39 +42,7 @@
         &nbsp;
 
     </div>
-    <nav class="accordion arrows">
-        <input type="radio" name="accordion" id="cb1" />
-        <section class="box">
-            <label class="box-title" for="cb1">Chapters</label>
-            <label class="box-close" for="acc-close"></label>
-            <div class="box-content">
-                <div class="form-group">
-                    @if (Model.Chapters != null)
-                    {
-                        @foreach (var chapter in Model.Chapters)
-                        {
-
-                            <div class="form-group">
-                                <label class="form-label" asp-for="@chapter.Title"></label>
-                                <textarea class="form-control" asp-for="@chapter.Title" rows="1">@chapter.Title</textarea>
-                                <span asp-validation-for="@chapter.Title" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" asp-for="@chapter.Description"></label>
-                                <textarea class="form-control" asp-for="@chapter.Description" rows="8">@chapter.Description</textarea>
-                                <span asp-validation-for="@chapter.Description" class="text-danger"></span>
-                            </div>
-                        }
-            }
-            else
-            {
-                <h1>You don't have chapters yet...</h1>
-            }
-                </div>
-            </div>
-        </section>
-        <input type="radio" name="accordion" id="acc-close" />
-    </nav>
+    
     <div class="offset-md-11">
         <input type="submit" class="btn btn-outline-primary mr-xl-5 btn-lg " asp-controller="CreativeWriting" asp-action="UpdateStory" />
     </div>

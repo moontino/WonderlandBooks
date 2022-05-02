@@ -48,10 +48,7 @@
                             </div>
                             <div class="comment-text-sm"><span>@Html.Raw(comment.SanitizedContent)</span></div>
                             <div class="reply-section">
-                                <div class="d-flex flex-row align-items-center voting-icons">
-
-                                    <h6 class="ml-2 mt-1">Reply</h6>
-                                </div>
+                             
                             </div>
                         </div>
                     }
@@ -73,56 +70,7 @@
         </div>
     </form>
 </div>
-<form method="post" id="antiForgeryForm"></form>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="comments">
-                <div class="comment-box">
-                    <span class="commenter-pic">
-                    </span>
-                    <span class="commenter-name">
-                        @Model.Title<span class="comment-time"><i class="fa-solid fa-user"></i> (@Model.UserUserName)     <i class="fa-solid fa-calendar-days"></i>  @Model.CreatedOn </span>
-                    </span>
-                    <p class="comment-txt more">@Html.Raw(Model.SanitizedContent)</p>
-                    <div class="comment-meta">
-                        <button class="comment-like"><i class="fa fa-sort-up fa-2x hit-voting" onclick="sendVote(@Model.Id,true)"></i> </button> <span id="count">@Model.VotesCount</span>
-                        <button class="comment-dislike">
-                            <i class="fa fa-sort-down fa-2x hit-voting" onclick="sendVote(@Model.Id,false)"></i>
-                        </button>
-                        <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                    </div>
-                    <div class="comment-box replied">
-                        <span class="commenter-pic">
 
-                        </span>
-                        <span class="commenter-name">
-                            <a href="#">Happy markuptag</a> <span class="comment-time">2 hours ago</span>
-                        </span>
-                        <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-                        <div class="comment-meta">
-                            <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="comment-box replied" style="display:none">
-    <span class="commenter-pic">
-    </span>
-    <span class="commenter-name">
-        <a href="#">Happy markuptag</a> <span class="comment-time">2 hours ago</span>
-    </span>
-    <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
-    <div class="comment-meta">
-        <button class="comment-like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 99</button>
-        <button class="comment-dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> 149</button>
-        <button class="comment-reply"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</button>
-    </div>
-</div>
 @section Scripts
 {
     <script>

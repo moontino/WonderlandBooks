@@ -39,16 +39,17 @@
                         </div>
                     </div>
                 </div>
-                <ul class="ratings">
-                    <li class="star" data-vote="5"></li>
-                    <li class="star" data-vote="4"></li>
-                    <li class="star" data-vote="3"></li>
-                    <li class="star" data-vote="2"></li>
-                    <li class="star" data-vote="1"></li>
-                </ul>
-                <h1>5 / <span id="averageVoteValue">@Model.Book.VotesAvarege</span></h1>
+
                 @if (this.SignInManager.IsSignedIn(this.User))
                 {
+                    <ul class="ratings">
+                        <li class="star" data-vote="5"></li>
+                        <li class="star" data-vote="4"></li>
+                        <li class="star" data-vote="3"></li>
+                        <li class="star" data-vote="2"></li>
+                        <li class="star" data-vote="1"></li>
+                    </ul>
+                    <h1>5 / <span id="averageVoteValue">@Model.Book.VotesAvarege</span></h1>
                     <div>
                         <button type="button" class="btn btn-primary" id="btn-save-book" title="Click for save the book">Save book</button>
                     </div>

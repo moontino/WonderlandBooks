@@ -106,6 +106,8 @@
                 e.preventDefault();
 
                 let parentElement = e.currentTarget.parentElement.parentElement.parentElement.parentElement;
+
+                let nav = document.getElementsByTagName("nav")[1].remove();
                 let id = parentElement.id;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
                 var data = { id: id };
